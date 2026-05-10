@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FIT AF | Digital Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
+<style>
+  @font-face { font-family:'Termina'; src:local('Termina'); font-weight:100 900; font-display:swap; }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --pink:#F43CE2;--pink-dim:rgba(244,60,226,0.12);--pink-glow:rgba(244,60,226,0.25);
+    --bg:#0B0B12;--card:rgba(18,18,28,0.85);--card-solid:#13131F;
+    --card-border:rgba(255,255,255,0.07);--card-hover:rgba(26,26,40,0.9);
+    --text:#FFF;--text-dim:rgba(255,255,255,0.45);--text-mid:rgba(255,255,255,0.7);
+    --green:#00E676;--red:#FF5252;--blue:#448AFF;--orange:#FF9100;
+    --tiktok:#00F2EA;--facebook:#1877F2;--instagram:#E1306C;--google:#4285F4;
+    --radius:20px;--radius-sm:12px;
+    --font-heading:'Termina','Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    --font-body:'Avenir','Avenir Next','Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    /* location accent colors */
+    --loc-407:#F43CE2;--loc-gnv:#00F2EA;--loc-jax:#448AFF;--loc-850:#FF9100;--loc-af:#00E676;
+  }
+  body{background:var(--bg);color:var(--text);font-family:var(--font-body);line-height:1.6;min-height:100vh;overflow-x:hidden;}
+  h1,h2,h3,h4,h5,h6,.logo-mark,.logo-text span:first-child,.section-label,.metric-value,.platform-stat-value,.ad-metric-value,.chart-title,.nav-tab,.loc-tab{font-family:var(--font-heading);}
+
+  /* HEADER */
+  .header{background:linear-gradient(180deg,rgba(244,60,226,0.06) 0%,transparent 100%);border-bottom:1px solid var(--card-border);padding:20px 40px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);}
+  .logo-area{display:flex;align-items:center;gap:18px;}
+  .logo-svg{height:44px;width:auto;object-fit:contain;}
+  .logo-divider{width:1px;height:36px;background:rgba(255,255,255,0.1);}
+  .logo-text{display:flex;flex-direction:column;}
+  .logo-text span:first-child{font-size:15px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--text);}
+  .logo-text span:last-child{font-size:11px;color:var(--text-dim);letter-spacing:1.5px;text-transform:uppercase;font-family:var(--font-body);}
+  .header-right{display:flex;align-items:center;gap:16px;}
+  .header-date{font-size:13px;color:var(--text-dim);}
+  .header-badge{background:var(--pink-dim);color:var(--pink);font-size:11px;font-weight:600;padding:6px 16px;border-radius:50px;border:1px solid rgba(244,60,226,0.2);letter-spacing:1px;text-transform:uppercase;font-family:var(--font-heading);}
+
+  /* NAV TABS */
+  .nav-tabs{display:flex;gap:6px;padding:14px 40px;border-bottom:1px solid var(--card-border);background:rgba(11,11,18,0.9);backdrop-filter:blur(12px);position:sticky;top:85px;z-index:99;}
+  .nav-tab{padding:10px 24px;font-size:12px;font-weight:600;color:var(--text-dim);background:transparent;border:1px solid var(--card-border);border-radius:50px;cursor:pointer;transition:all 0.25s;letter-spacing:0.8px;text-transform:uppercase;}
+  .nav-tab:hover{color:var(--text-mid);background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.12);}
+  .nav-tab.active{color:#000;background:var(--pink);border-color:var(--pink);font-weight:700;}
+
+  /* LOCATION TABS */
+  .loc-tabs{display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap;}
+  .loc-tab{padding:8px 20px;font-size:11px;font-weight:600;color:var(--text-dim);background:transparent;border:1px solid var(--card-border);border-radius:50px;cursor:pointer;transition:all 0.25s;letter-spacing:0.6px;text-transform:uppercase;}
+  .loc-tab:hover{color:var(--text-mid);background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.12);}
+  .loc-tab.active{color:#000;font-weight:700;}
+
+  /* MONTH TABS */
+  .month-tabs{display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap;}
+  .month-tab{padding:7px 18px;font-size:10px;font-weight:600;color:var(--text-dim);background:transparent;border:1px solid var(--card-border);border-radius:50px;cursor:pointer;transition:all 0.25s;letter-spacing:0.6px;text-transform:uppercase;font-family:var(--font-heading);}
+  .month-tab:hover{color:var(--text-mid);background:rgba(255,255,255,0.04);}
+  .month-tab.active{color:#000;background:var(--pink);border-color:var(--pink);font-weight:700;}
+
+  /* MAIN */
+  .main{padding:28px 40px 60px;max-width:1480px;margin:0 auto;}
+  .section-label{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--text-dim);margin-bottom:16px;margin-top:8px;display:flex;align-items:center;gap:14px;}
+  .section-label::after{content:'';flex:1;height:1px;background:var(--card-border);}
+
+  /* METRIC CARDS */
+  .metrics-row{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:32px;}
+  .metrics-row-4{grid-template-columns:repeat(4,1fr);}
+  .metric-card{background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:24px;transition:all 0.3s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden;backdrop-filter:blur(10px);}
+  .metric-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--pink),rgba(244,60,226,0.3));opacity:0;transition:opacity 0.3s;}
+  .metric-card:hover{background:var(--card-hover);border-color:rgba(244,60,226,0.15);transform:translateY(-3px);box-shadow:0 12px 40px rgba(244,60,226,0.08);}
+  .metric-card:hover::before{opacity:1;}
+  .metric-icon{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:16px;}
+  .metric-label{font-size:11px;color:var(--text-dim);margin-bottom:8px;font-weight:500;letter-spacing:0.8px;text-transform:uppercase;font-family:var(--font-body);}
+  .metric-value{font-size:28px;font-weight:700;color:var(--text);letter-spacing:-1px;line-height:1.1;}
+  .metric-change{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;margin-top:10px;padding:4px 10px;border-radius:50px;font-family:var(--font-body);}
+  .metric-change.up{color:var(--green);background:rgba(0,230,118,0.1);}
+  .metric-change.down{color:var(--red);background:rgba(255,82,82,0.1);}
+  .metric-change.neutral{color:var(--text-dim);background:rgba(255,255,255,0.05);}
+
+  /* LOCATION CARDS */
+  .loc-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:32px;}
+  .loc-card{background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:22px;transition:all 0.3s cubic-bezier(.4,0,.2,1);backdrop-filter:blur(10px);position:relative;overflow:hidden;}
+  .loc-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:0.8;}
+  .loc-card:hover{background:var(--card-hover);transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,0.2);}
+  .loc-card-header{display:flex;align-items:center;gap:10px;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--card-border);}
+  .loc-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+  .loc-card-name{font-size:13px;font-weight:700;font-family:var(--font-heading);letter-spacing:0.5px;}
+  .loc-card-city{font-size:10px;color:var(--text-dim);letter-spacing:0.5px;margin-left:auto;}
+  .loc-stat{margin-bottom:14px;}
+  .loc-stat:last-child{margin-bottom:0;}
+  .loc-stat-label{font-size:9px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;font-family:var(--font-body);}
+  .loc-stat-value{font-size:20px;font-weight:700;letter-spacing:-0.5px;font-family:var(--font-heading);}
+  .loc-stat-sub{font-size:10px;font-weight:600;margin-top:2px;font-family:var(--font-body);}
+
+  /* PLATFORM / INSIGHT CARDS */
+  .platform-card{background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:26px;transition:all 0.3s cubic-bezier(.4,0,.2,1);backdrop-filter:blur(10px);}
+  .platform-card:hover{background:var(--card-hover);transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,0.2);}
+  .platform-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;padding-bottom:16px;border-bottom:1px solid var(--card-border);}
+  .platform-name{display:flex;align-items:center;gap:10px;}
+  .platform-dot{width:10px;height:10px;border-radius:50%;}
+  .platform-name span{font-size:15px;font-weight:700;font-family:var(--font-heading);letter-spacing:0.5px;}
+  .platform-badge{font-size:11px;font-weight:500;padding:5px 12px;border-radius:50px;background:rgba(255,255,255,0.05);color:var(--text-dim);border:1px solid var(--card-border);}
+  .insights-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:32px;}
+
+  /* CHARTS */
+  .charts-grid{display:grid;grid-template-columns:2fr 1fr;gap:14px;margin-bottom:32px;}
+  .chart-card{background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:24px;backdrop-filter:blur(10px);}
+  .chart-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
+  .chart-title{font-size:14px;font-weight:700;letter-spacing:0.3px;}
+  .chart-container{position:relative;height:280px;}
+
+  /* AUDIENCE ROW */
+  .audience-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:32px;}
+  .audience-card{background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:20px;text-align:center;backdrop-filter:blur(10px);}
+  .audience-card-name{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px;font-family:var(--font-heading);}
+  .audience-row{display:flex;justify-content:space-between;margin-bottom:8px;font-size:11px;}
+  .audience-row-label{color:var(--text-dim);}
+  .audience-row-value{color:var(--text);font-weight:600;}
+
+  /* TABLE */
+  .table-card{background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:24px;margin-bottom:32px;overflow:hidden;backdrop-filter:blur(10px);}
+  .table-wrapper{overflow-x:auto;}
+  table{width:100%;border-collapse:collapse;}
+  thead th{text-align:left;font-size:10px;font-weight:700;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;padding:12px 16px;border-bottom:1px solid var(--card-border);font-family:var(--font-heading);}
+  tbody td{padding:14px 16px;font-size:13px;color:var(--text-mid);border-bottom:1px solid rgba(255,255,255,0.03);}
+  tbody tr:hover{background:rgba(255,255,255,0.02);}
+  tbody tr:last-child td{border-bottom:none;}
+
+  /* FOOTER */
+  .footer{border-top:1px solid var(--card-border);padding:24px 40px;display:flex;align-items:center;justify-content:space-between;}
+  .footer-left{font-size:12px;color:var(--text-dim);}
+  .footer-brand{font-size:12px;color:var(--text-dim);display:flex;align-items:center;gap:8px;}
+  .footer-brand a{color:var(--pink);text-decoration:none;font-weight:600;}
+
+  .section{display:none;}
+  .section.active{display:block;}
+
+  /* highlight best metric in green */
+  .best{color:var(--green) !important;}
+
+  @media(max-width:1200px){.loc-grid,.metrics-row,.audience-grid{grid-template-columns:repeat(3,1fr);}.charts-grid{grid-template-columns:1fr;}}
+  @media(max-width:768px){.loc-grid,.metrics-row,.audience-grid{grid-template-columns:repeat(2,1fr);}.main{padding:20px;}.header{padding:16px 20px;}.nav-tabs{padding:12px 20px;overflow-x:auto;}.insights-grid{grid-template-columns:1fr;}}
+  @media(max-width:500px){.loc-grid,.metrics-row,.audience-grid{grid-template-columns:1fr;}.header-right{display:none;}}
+  @media(max-width:600px){.footer{flex-direction:column;text-align:center;gap:6px;padding:18px 20px;}}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="logo-area">
+    <img class="logo-svg" src="data:image/png;base64,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" alt="FIT AF Logo">
+    <div class="logo-divider"></div>
+    <div class="logo-text">
+      <span>FIT AF</span>
+      <span>Digital Dashboard</span>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="header-date" id="currentDate"></div>
+    <div class="header-badge">Live</div>
+  </div>
+</div>
+
+<!-- NAV TABS -->
+<div class="nav-tabs">
+  <button class="nav-tab active" onclick="switchTab('overview',this)">Overview</button>
+  <button class="nav-tab" onclick="switchTab('social',this)">Social Media</button>
+  <button class="nav-tab" onclick="switchTab('insights',this)">Insights</button>
+  <button class="nav-tab" onclick="switchTab('audience',this)">Audience</button>
+</div>
+
+<!-- MAIN -->
+<div class="main" id="mainContent"></div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-left">FIT AF Digital Dashboard &copy; 2026</div>
+  <div class="footer-brand">Powered by <a href="https://brookerogersdesign.com" target="_blank">Howell'n & Partners</a></div>
+</div>
+
+<script>
+// === DATA ===
+const LOCATIONS = [
+  { id:'407', name:'FIT 407', city:'Orlando', color:'#F43CE2' },
+  { id:'gnv', name:'FIT Gainesville', city:'Gainesville', color:'#00F2EA' },
+  { id:'jax', name:'FIT JAX', city:'Jacksonville', color:'#448AFF' },
+  { id:'850', name:'FIT 850', city:'Tallahassee', color:'#FF9100' },
+  { id:'af',  name:'FIT AF', city:'Multi', color:'#00E676' }
+];
+
+const MONTHS = [
+  { id:'apr26', label:'April 2026' },
+  { id:'mar26', label:'March 2026' },
+  { id:'feb26', label:'February 2026' },
+  { id:'jan26', label:'January 2026' }
+];
+
+const DATA = {
+  jan26: {
+    '407': { posts:21, reach:'325K', reachNum:325000, interactions:'4.1K', intNum:4100, engagement:'1.20%', engNum:1.20, newFollowers:743,
+             audience:{ gender:'Women', location:'Orlando', age:"20's-30's (IG) 40's (FB)" },
+             insights:{ worked:'Fun, relatable reels worked. Additionally, building hype around special events (openings, FIT birthday\'s, holidays, etc.) did really well!',
+                        didntWork:'Static, no-hook, there-for-the-aesthetic posts did not do as well as others. However, they still did reasonably well.',
+                        improvements:'Making at least 50% or more of our posts reels would increase engagement by a lot!!',
+                        audienceInsight:'Our audience enjoys relatable content as well as feeling like they\'re a part of the community.' } },
+    'gnv': { posts:11, reach:'3.2K', reachNum:3200, interactions:'377', intNum:377, engagement:'9.65%', engNum:9.65, newFollowers:101,
+             audience:{ gender:'Women', location:'Tallahassee', age:"18-20's" }, insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' } },
+    'jax': { posts:15, reach:'80.4K', reachNum:80400, interactions:'508', intNum:508, engagement:'0.62%', engNum:0.62, newFollowers:149,
+             audience:{ gender:'Women', location:'Tampa', age:"18-20's" }, insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' } },
+    '850': { posts:13, reach:'48.6K', reachNum:48600, interactions:'1.4K', intNum:1400, engagement:'2.51%', engNum:2.51, newFollowers:236,
+             audience:{ gender:'Women', location:'Gainesville', age:"18-20's" }, insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' } },
+    'af':  { posts:15, reach:'51.4K', reachNum:51400, interactions:'460', intNum:460, engagement:'0.91%', engNum:0.91, newFollowers:137,
+             audience:{ gender:'Women', location:'Jacksonville', age:"20's-30's" }, insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' } }
+  },
+  feb26: {
+    '407': { posts:15, reach:'252.2K', reachNum:252200, interactions:'4.5K', intNum:4500, engagement:'1.77%', engNum:1.77, newFollowers:846,
+             audience:{ gender:'Women', location:'Orlando', age:"20's-30's (IG) 40's (FB)" },
+             insights:{ worked:'Fun, relatable reels worked. Additionally, building hype around special events (openings, FIT birthday\'s, holidays, etc.) did really well!',
+                        didntWork:'Static, no-hook, there-for-the-aesthetic posts did not do as well as others. However, they still did reasonably well.',
+                        improvements:'Making at least 50% or more of our posts reels would increase engagement by a lot!!',
+                        audienceInsight:'Our audience enjoys relatable content as well as feeling like they\'re a part of the community.' } },
+    'gnv': { posts:13, reach:'3.4K', reachNum:3400, interactions:'395', intNum:395, engagement:'11.61%', engNum:11.61, newFollowers:57,
+             audience:{ gender:'Women', location:'Tallahassee', age:"18-20's" }, insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' } },
+    'jax': { posts:13, reach:'4.1K', reachNum:4100, interactions:'302', intNum:302, engagement:'7.34%', engNum:7.34, newFollowers:59,
+             audience:{ gender:'Women', location:'Tampa', age:"18-20's" }, insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' } },
+    '850': { posts:13, reach:'51.7K', reachNum:51700, interactions:'2.8K', intNum:2800, engagement:'5.59%', engNum:5.59, newFollowers:251,
+             audience:{ gender:'Women', location:'Gainesville', age:"18-20's" }, insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' } },
+    'af':  { posts:13, reach:'72.2K', reachNum:72200, interactions:'509', intNum:509, engagement:'0.71%', engNum:0.71, newFollowers:115,
+             audience:{ gender:'Women', location:'Jacksonville', age:"20's-30's" }, insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' } }
+  },
+  mar26: {
+    '407': { posts:13, reach:'285.3K', reachNum:285300, interactions:'4.7K', intNum:4700, engagement:'1.51%', engNum:1.51, newFollowers:728,
+             audience:{ gender:'Women', location:'Orlando', age:"20's-30's (IG) 40's (FB)" },
+             insights:{ worked:'Fun, relatable reels worked. Additionally, building hype around special events (openings, FIT birthday\'s, holidays, etc.) did really well!',
+                        didntWork:'Static, no-hook, there-for-the-aesthetic posts did not do as well as others. However, they still did reasonably well.',
+                        improvements:'Making at least 50% or more of our posts reels would increase engagement by a lot!!',
+                        audienceInsight:'Our audience enjoys relatable content as well as feeling like they\'re a part of the community.' } },
+    'gnv': { posts:13, reach:'2.1K', reachNum:2100, interactions:'366', intNum:366, engagement:'16.90%', engNum:16.90, newFollowers:62,
+             audience:{ gender:'Women', location:'Tallahassee', age:"18-20's" }, insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' } },
+    'jax': { posts:13, reach:'4.4K', reachNum:4400, interactions:'819', intNum:819, engagement:'17.02%', engNum:17.02, newFollowers:60,
+             audience:{ gender:'Women', location:'Tampa', age:"18-20's" }, insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' } },
+    '850': { posts:13, reach:'29.4K', reachNum:29400, interactions:'2.7K', intNum:2700, engagement:'8.90%', engNum:8.90, newFollowers:114,
+             audience:{ gender:'Women', location:'Gainesville', age:"18-20's" }, insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' } },
+    'af':  { posts:13, reach:'79K', reachNum:79000, interactions:'1.5K', intNum:1500, engagement:'1.73%', engNum:1.73, newFollowers:125,
+             audience:{ gender:'Women', location:'Jacksonville', age:"20's-30's" }, insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' } }
+  },
+  apr26: {
+    '407': { posts:14, reach:'301.1K', reachNum:301100, interactions:'4.6K', intNum:4600, engagement:'1.53%', engNum:1.53, newFollowers:514,
+             audience:{ gender:'Women', location:'Orlando', age:"20's-30's (IG) 40's (FB)" },
+             insights:{ worked:'Fun, relatable reels worked. Additionally, building hype around special events (openings, FIT birthday\'s, holidays, etc.) did really well!',
+                        didntWork:'Static, no-hook, there-for-the-aesthetic posts did not do as well as others. However, they still did reasonably well.',
+                        improvements:'Making at least 50% or more of our posts reels would increase engagement by a lot!!',
+                        audienceInsight:'Our audience enjoys relatable content as well as feeling like they\'re a part of the community.' } },
+    'gnv': { posts:14, reach:'5.8K', reachNum:5800, interactions:'1.6K', intNum:1600, engagement:'27.57%', engNum:27.57, newFollowers:45,
+             audience:{ gender:'Women', location:'Tallahassee', age:"18-20's" },
+             insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' } },
+    'jax': { posts:14, reach:'7K', reachNum:7000, interactions:'1.2K', intNum:1200, engagement:'16.96%', engNum:16.96, newFollowers:82,
+             audience:{ gender:'Women', location:'Tampa', age:"18-20's" },
+             insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' } },
+    '850': { posts:14, reach:'42.6K', reachNum:42600, interactions:'2.9K', intNum:2900, engagement:'6.83%', engNum:6.83, newFollowers:251,
+             audience:{ gender:'Women', location:'Gainesville', age:"18-20's" },
+             insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' } },
+    'af':  { posts:14, reach:'74.8K', reachNum:74800, interactions:'968', intNum:968, engagement:'1.29%', engNum:1.29, newFollowers:102,
+             audience:{ gender:'Women', location:'Jacksonville', age:"20's-30's" },
+             insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' } }
+  }
+};
+
+// Engagement trend data (all months)
+const ENG_TREND = {
+  '407': [1.20, 1.77, 1.51, 1.53],
+  'gnv': [9.65, 11.61, 16.90, 27.57],
+  'jax': [0.62, 7.34, 17.02, 16.96],
+  '850': [2.51, 5.59, 8.90, 6.83],
+  'af':  [0.91, 0.71, 1.73, 1.29]
+};
+const TREND_LABELS = ['Jan','Feb','Mar','Apr'];
+
+let currentMonth = 'apr26';
+let currentTab = 'overview';
+
+// === DATE ===
+document.getElementById('currentDate').textContent = new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+
+// === HELPERS ===
+function totalMetric(month, key) {
+  const m = DATA[month];
+  if (!m) return 0;
+  return LOCATIONS.reduce((sum,loc) => sum + (m[loc.id] ? m[loc.id][key] || 0 : 0), 0);
+}
+function formatNum(n) {
+  if (n >= 1000000) return (n/1000000).toFixed(1)+'M';
+  if (n >= 1000) return (n/1000).toFixed(1)+'K';
+  return n.toString();
+}
+function bestLoc(month, key) {
+  const m = DATA[month];
+  if (!m) return '';
+  let best = '', bestVal = -1;
+  LOCATIONS.forEach(loc => { if (m[loc.id] && m[loc.id][key] > bestVal) { bestVal = m[loc.id][key]; best = loc.id; } });
+  return best;
+}
+
+// === RENDER ===
+function render() {
+  const main = document.getElementById('mainContent');
+  const md = DATA[currentMonth];
+  const monthLabel = MONTHS.find(m=>m.id===currentMonth)?.label || currentMonth;
+
+  // Month selector HTML
+  const monthHTML = `<div class="month-tabs">${MONTHS.map(m =>
+    `<button class="month-tab ${m.id===currentMonth?'active':''}" onclick="setMonth('${m.id}',this)">${m.label}</button>`
+  ).join('')}</div>`;
+
+  if (currentTab === 'overview') {
+    const totalReach = md ? totalMetric(currentMonth,'reachNum') : 0;
+    const totalInt = md ? totalMetric(currentMonth,'intNum') : 0;
+    const totalFollowers = md ? totalMetric(currentMonth,'newFollowers') : 0;
+    const totalPosts = md ? totalMetric(currentMonth,'posts') : 0;
+    const bestReach = bestLoc(currentMonth,'reachNum');
+    const bestEng = bestLoc(currentMonth,'engNum');
+    const bestGrowth = bestLoc(currentMonth,'newFollowers');
+
+    main.innerHTML = `
+      ${monthHTML}
+      <div class="section-label">Aggregate &mdash; All Locations</div>
+      <div class="metrics-row metrics-row-4">
+        <div class="metric-card">
+          <div class="metric-icon" style="background:var(--pink-dim);color:var(--pink);">&#x1F4F1;</div>
+          <div class="metric-label">Total Posts</div>
+          <div class="metric-value">${md ? totalPosts : '&mdash;'}</div>
+          <div class="metric-change neutral">5 LOCATIONS</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon" style="background:rgba(68,138,255,0.1);color:var(--blue);">&#x1F441;</div>
+          <div class="metric-label">Total Reach</div>
+          <div class="metric-value">${md ? formatNum(totalReach) : '&mdash;'}</div>
+          <div class="metric-change neutral">${monthLabel}</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon" style="background:rgba(0,230,118,0.1);color:var(--green);">&#x1F4CA;</div>
+          <div class="metric-label">Total Interactions</div>
+          <div class="metric-value">${md ? formatNum(totalInt) : '&mdash;'}</div>
+          <div class="metric-change neutral">${monthLabel}</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon" style="background:rgba(255,145,0,0.1);color:var(--orange);">&#x2728;</div>
+          <div class="metric-label">New Followers</div>
+          <div class="metric-value">${md ? formatNum(totalFollowers) : '&mdash;'}</div>
+          <div class="metric-change up">ALL LOCATIONS</div>
+        </div>
+      </div>
+
+      <div class="section-label">By Location &mdash; ${monthLabel}</div>
+      <div class="loc-grid">
+        ${LOCATIONS.map(loc => {
+          const d = md ? md[loc.id] : null;
+          const isBestReach = loc.id === bestReach;
+          const isBestEng = loc.id === bestEng;
+          const isBestGrowth = loc.id === bestGrowth;
+          return `<div class="loc-card">
+            <div style="position:absolute;top:0;left:0;right:0;height:3px;background:${loc.color};opacity:0.8;border-radius:var(--radius) var(--radius) 0 0;"></div>
+            <div class="loc-card-header">
+              <div class="loc-dot" style="background:${loc.color};"></div>
+              <div class="loc-card-name">${loc.name}</div>
+              <div class="loc-card-city">${loc.city}</div>
+            </div>
+            <div class="loc-stat">
+              <div class="loc-stat-label">Posts</div>
+              <div class="loc-stat-value">${d ? d.posts : '&mdash;'}</div>
+            </div>
+            <div class="loc-stat">
+              <div class="loc-stat-label">Profile Reach</div>
+              <div class="loc-stat-value ${isBestReach?'best':''}">${d ? d.reach : '&mdash;'}</div>
+              ${isBestReach?'<div class="loc-stat-sub" style="color:var(--green);">&#9733; HIGHEST</div>':''}
+            </div>
+            <div class="loc-stat">
+              <div class="loc-stat-label">Interactions</div>
+              <div class="loc-stat-value">${d ? d.interactions : '&mdash;'}</div>
+            </div>
+            <div class="loc-stat">
+              <div class="loc-stat-label">Engagement</div>
+              <div class="loc-stat-value ${isBestEng?'best':''}">${d ? d.engagement : '&mdash;'}</div>
+              ${isBestEng?'<div class="loc-stat-sub" style="color:var(--green);">&#9733; HIGHEST</div>':''}
+            </div>
+            <div class="loc-stat">
+              <div class="loc-stat-label">New Followers</div>
+              <div class="loc-stat-value ${isBestGrowth?'best':''}">${d ? d.newFollowers : '&mdash;'}</div>
+              ${isBestGrowth?'<div class="loc-stat-sub" style="color:var(--green);">&#9733; HIGHEST</div>':''}
+            </div>
+          </div>`;
+        }).join('')}
+      </div>
+
+      <div class="section-label">Engagement Rate Trends &mdash; Jan&ndash;Apr 2026</div>
+      <div class="chart-card" style="margin-bottom:32px;">
+        <div class="chart-header"><div class="chart-title">Engagement Rate Over Time (All Locations)</div></div>
+        <div class="chart-container" style="height:320px;"><canvas id="engTrendChart"></canvas></div>
+      </div>
+
+      <div class="section-label">Comparison &mdash; ${monthLabel}</div>
+      <div class="charts-grid">
+        <div class="chart-card">
+          <div class="chart-header"><div class="chart-title">Profile Reach by Location</div></div>
+          <div class="chart-container"><canvas id="reachChart"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-header"><div class="chart-title">Engagement Rate</div></div>
+          <div class="chart-container"><canvas id="engChart"></canvas></div>
+        </div>
+      </div>
+    `;
+    initOverviewCharts();
+
+  } else if (currentTab === 'social') {
+    main.innerHTML = `
+      ${monthHTML}
+      <div class="section-label">Location Performance &mdash; ${monthLabel}</div>
+      <div class="table-card">
+        <div class="chart-header"><div class="chart-title">All Locations Comparison</div></div>
+        <div class="table-wrapper">
+          <table>
+            <thead><tr>
+              <th>Location</th><th>City</th><th>Posts</th><th>Reach</th><th>Interactions</th><th>Engagement</th><th>New Followers</th>
+            </tr></thead>
+            <tbody>
+              ${LOCATIONS.map(loc => {
+                const d = md ? md[loc.id] : null;
+                return `<tr>
+                  <td style="color:var(--text);font-weight:600;"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${loc.color};margin-right:8px;"></span>${loc.name}</td>
+                  <td>${loc.city}</td>
+                  <td>${d ? d.posts : '&mdash;'}</td>
+                  <td style="font-weight:600;color:var(--text);">${d ? d.reach : '&mdash;'}</td>
+                  <td>${d ? d.interactions : '&mdash;'}</td>
+                  <td style="font-weight:600;color:var(--text);">${d ? d.engagement : '&mdash;'}</td>
+                  <td>${d ? d.newFollowers : '&mdash;'}</td>
+                </tr>`;
+              }).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="section-label">Follower Growth by Location</div>
+      <div class="charts-grid">
+        <div class="chart-card">
+          <div class="chart-header"><div class="chart-title">New Followers</div></div>
+          <div class="chart-container"><canvas id="followersChart"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-header"><div class="chart-title">Reach Distribution</div></div>
+          <div class="chart-container"><canvas id="reachDoughnut"></canvas></div>
+        </div>
+      </div>
+    `;
+    initSocialCharts();
+
+  } else if (currentTab === 'insights') {
+    main.innerHTML = `
+      ${monthHTML}
+      <div class="section-label">Content Insights &mdash; ${monthLabel}</div>
+      ${LOCATIONS.map(loc => {
+        const d = md ? md[loc.id] : null;
+        const ins = d ? d.insights : null;
+        const hasData = ins && (ins.worked || ins.didntWork || ins.improvements || ins.audienceInsight);
+        return `<div class="platform-card" style="margin-bottom:14px;">
+          <div class="platform-header">
+            <div class="platform-name">
+              <div class="platform-dot" style="background:${loc.color};"></div>
+              <span>${loc.name}</span>
+            </div>
+            <div class="platform-badge">${loc.city}</div>
+          </div>
+          ${hasData ? `
+            <div class="insights-grid">
+              <div>
+                <div style="font-size:10px;color:var(--green);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;font-weight:700;">What Worked</div>
+                <div style="font-size:13px;color:var(--text-mid);line-height:1.6;">${ins.worked || '&mdash;'}</div>
+              </div>
+              <div>
+                <div style="font-size:10px;color:var(--red);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;font-weight:700;">What Didn't Work</div>
+                <div style="font-size:13px;color:var(--text-mid);line-height:1.6;">${ins.didntWork || '&mdash;'}</div>
+              </div>
+              <div>
+                <div style="font-size:10px;color:var(--pink);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;font-weight:700;">Improvements</div>
+                <div style="font-size:13px;color:var(--text-mid);line-height:1.6;">${ins.improvements || '&mdash;'}</div>
+              </div>
+              <div>
+                <div style="font-size:10px;color:var(--blue);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;font-weight:700;">Audience Insight</div>
+                <div style="font-size:13px;color:var(--text-mid);line-height:1.6;">${ins.audienceInsight || '&mdash;'}</div>
+              </div>
+            </div>
+          ` : `<div style="padding:8px 0;font-size:13px;color:var(--text-dim);line-height:1.7;">Insights pending &mdash; data to be added.</div>`}
+        </div>`;
+      }).join('')}
+    `;
+
+  } else if (currentTab === 'audience') {
+    main.innerHTML = `
+      ${monthHTML}
+      <div class="section-label">Audience Deep Dive &mdash; ${monthLabel}</div>
+      <div class="audience-grid">
+        ${LOCATIONS.map(loc => {
+          const d = md ? md[loc.id] : null;
+          const aud = d ? d.audience : null;
+          return `<div class="audience-card">
+            <div style="height:3px;background:${loc.color};border-radius:4px;margin-bottom:16px;"></div>
+            <div class="audience-card-name" style="color:${loc.color};">${loc.name}</div>
+            <div class="audience-row"><span class="audience-row-label">Gender</span><span class="audience-row-value">${aud ? aud.gender : '&mdash;'}</span></div>
+            <div class="audience-row"><span class="audience-row-label">Location</span><span class="audience-row-value">${aud ? aud.location : '&mdash;'}</span></div>
+            <div class="audience-row"><span class="audience-row-label">Age</span><span class="audience-row-value">${aud ? aud.age : '&mdash;'}</span></div>
+          </div>`;
+        }).join('')}
+      </div>
+
+      <div class="section-label">Demographics Chart</div>
+      <div class="charts-grid">
+        <div class="chart-card">
+          <div class="chart-header"><div class="chart-title">Engagement by Location</div></div>
+          <div class="chart-container"><canvas id="audEngChart"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-header"><div class="chart-title">Followers Split</div></div>
+          <div class="chart-container"><canvas id="audSplitChart"></canvas></div>
+        </div>
+      </div>
+    `;
+    initAudienceCharts();
+  }
+}
+
+// === CHART SETUP ===
+Chart.defaults.color = 'rgba(255,255,255,0.45)';
+Chart.defaults.borderColor = 'rgba(255,255,255,0.06)';
+Chart.defaults.font.family = "'Avenir','Avenir Next','Inter',sans-serif";
+let charts = {};
+function destroyChart(id) { if(charts[id]){charts[id].destroy();delete charts[id];} }
+function getLocColors() { return LOCATIONS.map(l=>l.color); }
+function getLocNames() { return LOCATIONS.map(l=>l.name); }
+function getMetricArray(key) { const md=DATA[currentMonth]; return LOCATIONS.map(l=> md&&md[l.id] ? md[l.id][key] : 0); }
+
+function initOverviewCharts() {
+  destroyChart('reachChart'); destroyChart('engChart'); destroyChart('engTrendChart');
+
+  // Engagement trend line chart
+  const ctxTrend = document.getElementById('engTrendChart')?.getContext('2d');
+  if(ctxTrend) charts['engTrendChart'] = new Chart(ctxTrend, {
+    type:'line',
+    data:{
+      labels: TREND_LABELS,
+      datasets: LOCATIONS.map(loc => ({
+        label: loc.name,
+        data: ENG_TREND[loc.id],
+        borderColor: loc.color,
+        backgroundColor: 'transparent',
+        tension: 0.4,
+        borderWidth: 2.5,
+        pointRadius: 5,
+        pointBackgroundColor: loc.color,
+        pointBorderColor: '#0B0B12',
+        pointBorderWidth: 2
+      }))
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{ position:'top', labels:{ usePointStyle:true, pointStyle:'circle', padding:20, font:{size:11} } } },
+      scales:{
+        y:{ grid:{color:'rgba(255,255,255,0.04)'}, ticks:{callback:v=>v+'%'} },
+        x:{ grid:{display:false} }
+      }
+    }
+  });
+
+  const ctx1 = document.getElementById('reachChart')?.getContext('2d');
+  if(ctx1) charts['reachChart'] = new Chart(ctx1, {
+    type:'bar', data:{ labels:getLocNames(), datasets:[{ label:'Reach', data:getMetricArray('reachNum'), backgroundColor:getLocColors().map(c=>c+'CC'), borderRadius:10, barPercentage:0.6 }] },
+    options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>formatNum(v)}},x:{grid:{display:false}}} }
+  });
+  const ctx2 = document.getElementById('engChart')?.getContext('2d');
+  if(ctx2) charts['engChart'] = new Chart(ctx2, {
+    type:'doughnut', data:{ labels:getLocNames(), datasets:[{ data:getMetricArray('engNum'), backgroundColor:getLocColors(), borderWidth:0, spacing:4 }] },
+    options:{ responsive:true, maintainAspectRatio:false, cutout:'70%', plugins:{legend:{position:'bottom',labels:{usePointStyle:true,pointStyle:'circle',padding:12,font:{size:10}}}} }
+  });
+}
+
+function initSocialCharts() {
+  destroyChart('followersChart'); destroyChart('reachDoughnut');
+  const ctx1 = document.getElementById('followersChart')?.getContext('2d');
+  if(ctx1) charts['followersChart'] = new Chart(ctx1, {
+    type:'bar', data:{ labels:getLocNames(), datasets:[{ label:'New Followers', data:getMetricArray('newFollowers'), backgroundColor:getLocColors().map(c=>c+'CC'), borderRadius:10, barPercentage:0.6 }] },
+    options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{y:{grid:{color:'rgba(255,255,255,0.04)'}},x:{grid:{display:false}}} }
+  });
+  const ctx2 = document.getElementById('reachDoughnut')?.getContext('2d');
+  if(ctx2) charts['reachDoughnut'] = new Chart(ctx2, {
+    type:'doughnut', data:{ labels:getLocNames(), datasets:[{ data:getMetricArray('reachNum'), backgroundColor:getLocColors(), borderWidth:0, spacing:4 }] },
+    options:{ responsive:true, maintainAspectRatio:false, cutout:'70%', plugins:{legend:{position:'bottom',labels:{usePointStyle:true,pointStyle:'circle',padding:12,font:{size:10}}}} }
+  });
+}
+
+function initAudienceCharts() {
+  destroyChart('audEngChart'); destroyChart('audSplitChart');
+  const ctx1 = document.getElementById('audEngChart')?.getContext('2d');
+  if(ctx1) charts['audEngChart'] = new Chart(ctx1, {
+    type:'bar', data:{ labels:getLocNames(), datasets:[{ label:'Engagement %', data:getMetricArray('engNum'), backgroundColor:getLocColors().map(c=>c+'CC'), borderRadius:10, barPercentage:0.6 }] },
+    options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v+'%'}},x:{grid:{display:false}}} }
+  });
+  const ctx2 = document.getElementById('audSplitChart')?.getContext('2d');
+  if(ctx2) charts['audSplitChart'] = new Chart(ctx2, {
+    type:'doughnut', data:{ labels:getLocNames(), datasets:[{ data:getMetricArray('newFollowers'), backgroundColor:getLocColors(), borderWidth:0, spacing:4 }] },
+    options:{ responsive:true, maintainAspectRatio:false, cutout:'70%', plugins:{legend:{position:'bottom',labels:{usePointStyle:true,pointStyle:'circle',padding:12,font:{size:10}}}} }
+  });
+}
+
+// === NAV ===
+function switchTab(tab, btn) {
+  document.querySelectorAll('.nav-tabs .nav-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  currentTab = tab;
+  render();
+}
+function setMonth(month) {
+  currentMonth = month;
+  render();
+}
+
+// Init
+render();
+</script>
+</body>
+</html>
