@@ -21,7 +21,7 @@
     --font-heading:'Termina','Inter',-apple-system,BlinkMacSystemFont,sans-serif;
     --font-body:'Avenir','Avenir Next','Inter',-apple-system,BlinkMacSystemFont,sans-serif;
     /* location accent colors */
-    --loc-407:#F43CE2;--loc-gnv:#00F2EA;--loc-jax:#448AFF;--loc-850:#FF9100;--loc-af:#00E676;
+    --loc-407:#F43CE2;--loc-gnv:#00F2EA;--loc-jax:#448AFF;--loc-850:#FF9100;--loc-af:#00E676;--loc-corp:#7C4DFF;
   }
   body{background:var(--bg);color:var(--text);font-family:var(--font-body);line-height:1.6;min-height:100vh;overflow-x:hidden;}
   h1,h2,h3,h4,h5,h6,.logo-mark,.logo-text span:first-child,.section-label,.metric-value,.platform-stat-value,.ad-metric-value,.chart-title,.nav-tab,.loc-tab{font-family:var(--font-heading);}
@@ -77,7 +77,7 @@
   .metric-change.neutral{color:var(--text-dim);background:rgba(255,255,255,0.05);}
 
   /* LOCATION CARDS */
-  .loc-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:32px;}
+  .loc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:32px;}
   .loc-card{background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:22px;transition:all 0.3s cubic-bezier(.4,0,.2,1);backdrop-filter:blur(10px);position:relative;overflow:hidden;}
   .loc-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:0.8;}
   .loc-card:hover{background:var(--card-hover);transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,0.2);}
@@ -109,7 +109,7 @@
   .chart-container{position:relative;height:280px;}
 
   /* AUDIENCE ROW */
-  .audience-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:32px;}
+  .audience-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:32px;}
   .audience-card{background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:20px;text-align:center;backdrop-filter:blur(10px);}
   .audience-card-name{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px;font-family:var(--font-heading);}
   .audience-row{display:flex;justify-content:space-between;margin-bottom:8px;font-size:11px;}
@@ -137,7 +137,21 @@
   /* highlight best metric in green */
   .best{color:var(--green) !important;}
 
-  @media(max-width:1200px){.loc-grid,.metrics-row,.audience-grid{grid-template-columns:repeat(3,1fr);}.charts-grid{grid-template-columns:1fr;}}
+  /* TOP POSTS */
+  .posts-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:32px;}
+  .post-card{background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:20px;transition:all 0.3s cubic-bezier(.4,0,.2,1);backdrop-filter:blur(10px);position:relative;overflow:hidden;}
+  .post-card:hover{background:var(--card-hover);transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,0.2);}
+  .post-card-header{display:flex;align-items:center;gap:8px;margin-bottom:14px;}
+  .post-platform-icon{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;}
+  .post-type-badge{font-size:9px;font-weight:700;padding:3px 10px;border-radius:50px;text-transform:uppercase;letter-spacing:0.8px;font-family:var(--font-heading);}
+  .post-rank{margin-left:auto;font-size:11px;color:var(--text-dim);font-weight:600;font-family:var(--font-heading);}
+  .post-caption{font-size:12px;color:var(--text-mid);line-height:1.6;margin-bottom:14px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+  .post-stats{display:flex;gap:16px;padding-top:12px;border-top:1px solid var(--card-border);}
+  .post-stat{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text-dim);}
+  .post-stat-value{color:var(--text);font-weight:600;}
+  .post-eng{margin-left:auto;font-size:12px;font-weight:700;color:var(--pink);font-family:var(--font-heading);}
+
+  @media(max-width:1200px){.loc-grid,.metrics-row,.audience-grid{grid-template-columns:repeat(2,1fr);}.charts-grid{grid-template-columns:1fr;}}
   @media(max-width:768px){.loc-grid,.metrics-row,.audience-grid{grid-template-columns:repeat(2,1fr);}.main{padding:20px;}.header{padding:16px 20px;}.nav-tabs{padding:12px 20px;overflow-x:auto;}.insights-grid{grid-template-columns:1fr;}}
   @media(max-width:500px){.loc-grid,.metrics-row,.audience-grid{grid-template-columns:1fr;}.header-right{display:none;}}
   @media(max-width:600px){.footer{flex-direction:column;text-align:center;gap:6px;padding:18px 20px;}}
@@ -185,7 +199,8 @@ const LOCATIONS = [
   { id:'gnv', name:'FIT Gainesville', city:'Gainesville', color:'#00F2EA' },
   { id:'jax', name:'FIT JAX', city:'Jacksonville', color:'#448AFF' },
   { id:'850', name:'FIT 850', city:'Tallahassee', color:'#FF9100' },
-  { id:'af',  name:'FIT AF', city:'Multi', color:'#00E676' }
+  { id:'af',  name:'FIT AF', city:'Multi', color:'#00E676' },
+  { id:'corp', name:'@FITasFIRE', city:'Corporate', color:'#7C4DFF' }
 ];
 
 const MONTHS = [
@@ -210,7 +225,11 @@ const DATA = {
     '850': { posts:13, reach:'48.6K', reachNum:48600, interactions:'1.4K', intNum:1400, engagement:'2.51%', engNum:2.51, newFollowers:236,
              audience:{ gender:'Women', location:'Gainesville', age:"18-20's" }, insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' } },
     'af':  { posts:15, reach:'51.4K', reachNum:51400, interactions:'460', intNum:460, engagement:'0.91%', engNum:0.91, newFollowers:137,
-             audience:{ gender:'Women', location:'Jacksonville', age:"20's-30's" }, insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' } }
+             audience:{ gender:'Women', location:'Jacksonville', age:"20's-30's" }, insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    'corp': { posts:0, reach:'—', reachNum:0, interactions:'—', intNum:0, engagement:'—', engNum:0, newFollowers:0,
+              audience:{ gender:'—', location:'—', age:'—' }, insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' },
+              workingNow:[], needsAttention:[], bestNextMove:'' }
   },
   feb26: {
     '407': { posts:15, reach:'252.2K', reachNum:252200, interactions:'4.5K', intNum:4500, engagement:'1.77%', engNum:1.77, newFollowers:846,
@@ -226,7 +245,11 @@ const DATA = {
     '850': { posts:13, reach:'51.7K', reachNum:51700, interactions:'2.8K', intNum:2800, engagement:'5.59%', engNum:5.59, newFollowers:251,
              audience:{ gender:'Women', location:'Gainesville', age:"18-20's" }, insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' } },
     'af':  { posts:13, reach:'72.2K', reachNum:72200, interactions:'509', intNum:509, engagement:'0.71%', engNum:0.71, newFollowers:115,
-             audience:{ gender:'Women', location:'Jacksonville', age:"20's-30's" }, insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' } }
+             audience:{ gender:'Women', location:'Jacksonville', age:"20's-30's" }, insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    'corp': { posts:0, reach:'—', reachNum:0, interactions:'—', intNum:0, engagement:'—', engNum:0, newFollowers:0,
+              audience:{ gender:'—', location:'—', age:'—' }, insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' },
+              workingNow:[], needsAttention:[], bestNextMove:'' }
   },
   mar26: {
     '407': { posts:13, reach:'285.3K', reachNum:285300, interactions:'4.7K', intNum:4700, engagement:'1.51%', engNum:1.51, newFollowers:728,
@@ -242,7 +265,11 @@ const DATA = {
     '850': { posts:13, reach:'29.4K', reachNum:29400, interactions:'2.7K', intNum:2700, engagement:'8.90%', engNum:8.90, newFollowers:114,
              audience:{ gender:'Women', location:'Gainesville', age:"18-20's" }, insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' } },
     'af':  { posts:13, reach:'79K', reachNum:79000, interactions:'1.5K', intNum:1500, engagement:'1.73%', engNum:1.73, newFollowers:125,
-             audience:{ gender:'Women', location:'Jacksonville', age:"20's-30's" }, insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' } }
+             audience:{ gender:'Women', location:'Jacksonville', age:"20's-30's" }, insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    'corp': { posts:0, reach:'—', reachNum:0, interactions:'—', intNum:0, engagement:'—', engNum:0, newFollowers:0,
+              audience:{ gender:'—', location:'—', age:'—' }, insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' },
+              workingNow:[], needsAttention:[], bestNextMove:'' }
   },
   apr26: {
     '407': { posts:14, reach:'301.1K', reachNum:301100, interactions:'4.6K', intNum:4600, engagement:'1.53%', engNum:1.53, newFollowers:514,
@@ -250,19 +277,37 @@ const DATA = {
              insights:{ worked:'Fun, relatable reels worked. Additionally, building hype around special events (openings, FIT birthday\'s, holidays, etc.) did really well!',
                         didntWork:'Static, no-hook, there-for-the-aesthetic posts did not do as well as others. However, they still did reasonably well.',
                         improvements:'Making at least 50% or more of our posts reels would increase engagement by a lot!!',
-                        audienceInsight:'Our audience enjoys relatable content as well as feeling like they\'re a part of the community.' } },
+                        audienceInsight:'Our audience enjoys relatable content as well as feeling like they\'re a part of the community.' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
     'gnv': { posts:14, reach:'5.8K', reachNum:5800, interactions:'1.6K', intNum:1600, engagement:'27.57%', engNum:27.57, newFollowers:45,
              audience:{ gender:'Women', location:'Tallahassee', age:"18-20's" },
-             insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' } },
+             insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
     'jax': { posts:14, reach:'7K', reachNum:7000, interactions:'1.2K', intNum:1200, engagement:'16.96%', engNum:16.96, newFollowers:82,
              audience:{ gender:'Women', location:'Tampa', age:"18-20's" },
-             insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' } },
+             insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
     '850': { posts:14, reach:'42.6K', reachNum:42600, interactions:'2.9K', intNum:2900, engagement:'6.83%', engNum:6.83, newFollowers:251,
              audience:{ gender:'Women', location:'Gainesville', age:"18-20's" },
-             insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' } },
+             insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
     'af':  { posts:14, reach:'74.8K', reachNum:74800, interactions:'968', intNum:968, engagement:'1.29%', engNum:1.29, newFollowers:102,
              audience:{ gender:'Women', location:'Jacksonville', age:"20's-30's" },
-             insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' } }
+             insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    'corp': { posts:20, reach:'24.5K', reachNum:24452, interactions:'1.1K', intNum:1059, engagement:'12.10%', engNum:12.10, newFollowers:151,
+              audience:{ gender:'Women', location:'Multi', age:"20's-30's" },
+              insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' },
+              workingNow:[
+                {title:'Community-centric messaging drives visibility', detail:'Posts emphasizing the \'FIT Fam\' and supportive studio environment secured the top spots for views, with the top Instagram image reaching 2,587 views.'},
+                {title:'Educational content is driving saves', detail:'Instagram saves increased by 333% (13 vs 3), indicating that the audience is finding value in instructional content like the \'FIVE Hot Mat moves\' breakdown.'},
+                {title:'Facebook profile visibility is growing', detail:'Facebook profile views increased by 316% (50 vs 12) and total media views grew by 28.5% (649 vs 505) compared to the previous period.'}
+              ],
+              needsAttention:[
+                {title:'Instagram reach and follower growth have slowed', detail:'Instagram reach decreased by 53.4% (4,469 vs 9,594) and views dropped by 47.2%, correlating with a 62.1% decline in new followers gained (148 vs 391).'},
+                {title:'Facebook standard posts are underperforming', detail:'Five out of six standard Facebook posts underperformed their baseline, contributing to a 28.9% decrease in the platform\'s overall engagement rate.'}
+              ],
+              bestNextMove:'Expand educational and community-focused formats — Prioritize Instagram Carousels and Reels that highlight the supportive studio environment or break down the \'FIT Method\' using bulleted lists with emojis. Test adapting these top-performing formats for Facebook to replace standard posts.' }
   }
 };
 
@@ -272,12 +317,32 @@ const ENG_TREND = {
   'gnv': [9.65, 11.61, 16.90, 27.57],
   'jax': [0.62, 7.34, 17.02, 16.96],
   '850': [2.51, 5.59, 8.90, 6.83],
-  'af':  [0.91, 0.71, 1.73, 1.29]
+  'af':  [0.91, 0.71, 1.73, 1.29],
+  'corp': [0, 0, 0, 12.10]
 };
 const TREND_LABELS = ['Jan','Feb','Mar','Apr'];
 
+// Top performing posts by location and month
+const TOP_POSTS = {
+  apr26: {
+    'corp': [
+      { platform:'Instagram', type:'IMAGE', caption:'The best part of FIT isn\'t just what happens on the reform and mat... It\'s what happens around it 💕...', views:2600, likes:143, comments:9, engagement:12.8, url:'https://www.instagram.com/p/DXpB3dWFP3P/' },
+      { platform:'Instagram', type:'REEL', caption:'Who said Pilates was just for the girls? 🔥 The strength, control, and stability you build in Pilates carry over in...', views:2200, likes:83, comments:3, engagement:10.2, url:'https://www.instagram.com/p/DXmc-WZD7Pq/' },
+      { platform:'Instagram', type:'CAROUSEL', caption:'Picture this: A room where everyone wants you to win 💕 Energy that lifts you, coaching that guides you,...', views:2100, likes:83, comments:1, engagement:11.3, url:'https://www.instagram.com/reel/DXhMlQ3FJIS/' },
+      { platform:'Instagram', type:'REEL', caption:'FIVE Hot Mat moves we love (and why they stay in the rotation): 💕 Weighted squats: lower-body strength +...', views:1900, likes:100, comments:1, engagement:8.5, url:'https://www.instagram.com/reel/DXPLAgwEu-W/' },
+      { platform:'Instagram', type:'CAROUSEL', caption:'The best part of FIT is the way the FAM shows up for you 💕 Comment your city + tag your home studio,...', views:1900, likes:78, comments:1, engagement:10.4, url:'https://www.instagram.com/p/DXE3xY8DeRO/' },
+      { platform:'Instagram', type:'IMAGE', caption:'There\'s a reason the room feels different the second you walk in... 💜 Dim lighting & this neon glow makes...', views:1900, likes:88, comments:0, engagement:9.5, url:'https://www.instagram.com/p/DW9Jbs9jd5j/' },
+      { platform:'Instagram', type:'REEL', caption:'Not sure which one to choose? 🧐 You don\'t have to! At FIT, you can have the best of BOTH worlds! 💕...', views:1700, likes:75, comments:0, engagement:7.2, url:'https://www.instagram.com/reel/DW3_yDHjetI/' },
+      { platform:'Instagram', type:'IMAGE', caption:'Your nervous system matters too 💚 A few minutes of breathing and longer stretches at the end of class ca...', views:1500, likes:71, comments:0, engagement:10.2, url:'https://www.instagram.com/p/DWy2NXblFgc/' },
+      { platform:'Instagram', type:'REEL', caption:'We asked: "Describe FIT in one word" & YOU answered. That\'s the FIT culture in a sentence:...', views:1500, likes:59, comments:0, engagement:5.8, url:'https://www.instagram.com/reel/DWrH0LkEbae/' },
+      { platform:'Instagram', type:'IMAGE', caption:'This is what "FIT AF" actually means. Slow and controlled strength, coached movement, and...', views:1200, likes:40, comments:2, engagement:7.3, url:'https://www.instagram.com/p/DWl-PGUlN3j/' }
+    ]
+  }
+};
+
 let currentMonth = 'apr26';
 let currentTab = 'overview';
+let currentInsightLoc = 'corp';
 
 // === DATE ===
 document.getElementById('currentDate').textContent = new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
@@ -299,6 +364,99 @@ function bestLoc(month, key) {
   let best = '', bestVal = -1;
   LOCATIONS.forEach(loc => { if (m[loc.id] && m[loc.id][key] > bestVal) { bestVal = m[loc.id][key]; best = loc.id; } });
   return best;
+}
+
+// === TOP POSTS HELPERS ===
+function getTopPosts(month) {
+  const mp = TOP_POSTS[month];
+  if (!mp) return [];
+  // Merge all locations' posts into one array, sorted by views
+  let all = [];
+  LOCATIONS.forEach(loc => {
+    if (mp[loc.id]) {
+      mp[loc.id].forEach((p,i) => all.push({...p, locId:loc.id, locName:loc.name, locColor:loc.color}));
+    }
+  });
+  all.sort((a,b) => b.views - a.views);
+  return all;
+}
+
+function platformIcon(platform) {
+  if (platform === 'Instagram') return '<div class="post-platform-icon" style="background:var(--instagram);">&#x1F4F7;</div>';
+  if (platform === 'Facebook') return '<div class="post-platform-icon" style="background:var(--facebook);">&#x1F44D;</div>';
+  return '<div class="post-platform-icon" style="background:var(--text-dim);">&#x1F4F1;</div>';
+}
+
+function typeBadgeColor(type) {
+  const t = type.toUpperCase();
+  if (t === 'REEL') return 'background:rgba(244,60,226,0.15);color:var(--pink);';
+  if (t === 'CAROUSEL') return 'background:rgba(68,138,255,0.15);color:var(--blue);';
+  if (t === 'IMAGE') return 'background:rgba(0,230,118,0.15);color:var(--green);';
+  if (t === 'POST') return 'background:rgba(255,145,0,0.15);color:var(--orange);';
+  return 'background:rgba(255,255,255,0.08);color:var(--text-dim);';
+}
+
+function renderTopPostsCards(month) {
+  const posts = getTopPosts(month);
+  if (posts.length === 0) return '';
+  // Show top 6 on overview
+  const show = posts.slice(0, 6);
+  return `
+    <div class="section-label">Top Performing Posts &mdash; ${MONTHS.find(m=>m.id===month)?.label || month}</div>
+    <div class="posts-grid">
+      ${show.map((p,i) => `
+        <div class="post-card" style="cursor:${p.url?'pointer':'default'};" ${p.url?`onclick="window.open('${p.url}','_blank')"`:''}>
+          <div class="post-card-header">
+            ${platformIcon(p.platform)}
+            <span style="font-size:12px;font-weight:600;color:var(--text);">${p.platform}</span>
+            <span class="post-type-badge" style="${typeBadgeColor(p.type)}">${p.type}</span>
+            <span style="font-size:10px;color:${p.locColor};font-weight:600;margin-left:4px;">${p.locName}</span>
+            <span class="post-rank">#${i+1}</span>
+          </div>
+          <div class="post-caption">${p.caption}</div>
+          <div class="post-stats">
+            <div class="post-stat">&#x1F441; <span class="post-stat-value">${formatNum(p.views)}</span></div>
+            <div class="post-stat">&#x2764; <span class="post-stat-value">${p.likes}</span></div>
+            <div class="post-stat">&#x1F4AC; <span class="post-stat-value">${p.comments}</span></div>
+            ${p.url ? '<a href="'+p.url+'" target="_blank" style="font-size:10px;color:var(--pink);text-decoration:none;font-weight:600;margin-left:auto;display:flex;align-items:center;gap:4px;" onclick="event.stopPropagation();">View Post &#x2197;</a>' : ''}
+            <div class="post-eng">${p.engagement}%</div>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function renderTopPostsTable(month) {
+  const posts = getTopPosts(month);
+  if (posts.length === 0) return '';
+  return `
+    <div class="section-label">Top Performing Posts &mdash; ${MONTHS.find(m=>m.id===month)?.label || month}</div>
+    <div class="table-card">
+      <div class="chart-header"><div class="chart-title">All Posts Ranked by Views</div></div>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr>
+            <th>#</th><th>Platform</th><th>Type</th><th>Location</th><th>Caption</th><th>Views</th><th>Likes</th><th>Comments</th><th>Engagement</th><th></th>
+          </tr></thead>
+          <tbody>
+            ${posts.map((p,i) => `<tr>
+              <td style="font-weight:700;color:var(--text);">${i+1}</td>
+              <td><span style="display:inline-flex;align-items:center;gap:6px;">${platformIcon(p.platform)} ${p.platform}</span></td>
+              <td><span class="post-type-badge" style="${typeBadgeColor(p.type)}">${p.type}</span></td>
+              <td style="color:${p.locColor};font-weight:600;">${p.locName}</td>
+              <td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${p.caption}</td>
+              <td style="font-weight:600;color:var(--text);">${formatNum(p.views)}</td>
+              <td>${p.likes}</td>
+              <td>${p.comments}</td>
+              <td style="font-weight:700;color:var(--pink);">${p.engagement}%</td>
+              <td>${p.url ? '<a href="'+p.url+'" target="_blank" style="color:var(--pink);text-decoration:none;font-size:11px;font-weight:600;white-space:nowrap;">View Post &#x2197;</a>' : ''}</td>
+            </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  `;
 }
 
 // === RENDER ===
@@ -329,7 +487,7 @@ function render() {
           <div class="metric-icon" style="background:var(--pink-dim);color:var(--pink);">&#x1F4F1;</div>
           <div class="metric-label">Total Posts</div>
           <div class="metric-value">${md ? totalPosts : '&mdash;'}</div>
-          <div class="metric-change neutral">5 LOCATIONS</div>
+          <div class="metric-change neutral">6 LOCATIONS</div>
         </div>
         <div class="metric-card">
           <div class="metric-icon" style="background:rgba(68,138,255,0.1);color:var(--blue);">&#x1F441;</div>
@@ -409,6 +567,8 @@ function render() {
           <div class="chart-container"><canvas id="engChart"></canvas></div>
         </div>
       </div>
+
+      ${renderTopPostsCards(currentMonth)}
     `;
     initOverviewCharts();
 
@@ -452,47 +612,108 @@ function render() {
           <div class="chart-container"><canvas id="reachDoughnut"></canvas></div>
         </div>
       </div>
+
+      ${renderTopPostsTable(currentMonth)}
     `;
     initSocialCharts();
 
   } else if (currentTab === 'insights') {
+    // Location tabs for insights
+    const locTabsHTML = `<div class="loc-tabs">${LOCATIONS.map(loc =>
+      `<button class="loc-tab ${loc.id===currentInsightLoc?'active':''}" style="${loc.id===currentInsightLoc?'background:'+loc.color+';border-color:'+loc.color+';':''}color:${loc.id===currentInsightLoc?'#000':'var(--text-dim)'};" onclick="setInsightLoc('${loc.id}')">${loc.name}</button>`
+    ).join('')}</div>`;
+
+    const loc = LOCATIONS.find(l=>l.id===currentInsightLoc);
+    const d = md ? md[currentInsightLoc] : null;
+    const ins = d ? d.insights : null;
+    const hasContentInsights = ins && (ins.worked || ins.didntWork || ins.improvements || ins.audienceInsight);
+    const wn = d && d.workingNow ? d.workingNow : [];
+    const na = d && d.needsAttention ? d.needsAttention : [];
+    const bnm = d && d.bestNextMove ? d.bestNextMove : '';
+
+    const hasAnalysis = wn.length > 0 || na.length > 0 || bnm;
+
     main.innerHTML = `
       ${monthHTML}
-      <div class="section-label">Content Insights &mdash; ${monthLabel}</div>
-      ${LOCATIONS.map(loc => {
-        const d = md ? md[loc.id] : null;
-        const ins = d ? d.insights : null;
-        const hasData = ins && (ins.worked || ins.didntWork || ins.improvements || ins.audienceInsight);
-        return `<div class="platform-card" style="margin-bottom:14px;">
-          <div class="platform-header">
-            <div class="platform-name">
-              <div class="platform-dot" style="background:${loc.color};"></div>
-              <span>${loc.name}</span>
+      ${locTabsHTML}
+
+      ${hasAnalysis ? `
+      <div class="section-label">Performance Analysis &mdash; ${loc.name} &mdash; ${monthLabel}</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;">
+        <div class="platform-card" style="border-top:3px solid var(--green);">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+            <div style="font-size:20px;">&#x1F4C8;</div>
+            <div>
+              <div style="font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;font-family:var(--font-heading);color:var(--green);">Working Now</div>
+              <div style="font-size:10px;color:var(--text-dim);margin-top:2px;">Signals in this report that are helping performance.</div>
             </div>
-            <div class="platform-badge">${loc.city}</div>
           </div>
-          ${hasData ? `
-            <div class="insights-grid">
-              <div>
-                <div style="font-size:10px;color:var(--green);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;font-weight:700;">What Worked</div>
-                <div style="font-size:13px;color:var(--text-mid);line-height:1.6;">${ins.worked || '&mdash;'}</div>
-              </div>
-              <div>
-                <div style="font-size:10px;color:var(--red);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;font-weight:700;">What Didn't Work</div>
-                <div style="font-size:13px;color:var(--text-mid);line-height:1.6;">${ins.didntWork || '&mdash;'}</div>
-              </div>
-              <div>
-                <div style="font-size:10px;color:var(--pink);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;font-weight:700;">Improvements</div>
-                <div style="font-size:13px;color:var(--text-mid);line-height:1.6;">${ins.improvements || '&mdash;'}</div>
-              </div>
-              <div>
-                <div style="font-size:10px;color:var(--blue);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;font-weight:700;">Audience Insight</div>
-                <div style="font-size:13px;color:var(--text-mid);line-height:1.6;">${ins.audienceInsight || '&mdash;'}</div>
-              </div>
+          ${wn.length > 0 ? wn.map(item => `
+            <div style="margin-bottom:16px;padding-left:14px;border-left:2px solid var(--green);">
+              <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;">${item.title}</div>
+              <div style="font-size:12px;color:var(--text-mid);line-height:1.6;">${item.detail}</div>
             </div>
-          ` : `<div style="padding:8px 0;font-size:13px;color:var(--text-dim);line-height:1.7;">Insights pending &mdash; data to be added.</div>`}
-        </div>`;
-      }).join('')}
+          `).join('') : '<div style="font-size:12px;color:var(--text-dim);padding:8px 0;">No data yet.</div>'}
+        </div>
+        <div class="platform-card" style="border-top:3px solid var(--orange);">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+            <div style="font-size:20px;">&#x26A0;</div>
+            <div>
+              <div style="font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;font-family:var(--font-heading);color:var(--orange);">Needs Attention</div>
+              <div style="font-size:10px;color:var(--text-dim);margin-top:2px;">Patterns worth adjusting before the next reporting cycle.</div>
+            </div>
+          </div>
+          ${na.length > 0 ? na.map(item => `
+            <div style="margin-bottom:16px;padding-left:14px;border-left:2px solid var(--orange);">
+              <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;">${item.title}</div>
+              <div style="font-size:12px;color:var(--text-mid);line-height:1.6;">${item.detail}</div>
+            </div>
+          `).join('') : '<div style="font-size:12px;color:var(--text-dim);padding:8px 0;">No data yet.</div>'}
+        </div>
+      </div>
+      ${bnm ? `
+      <div class="platform-card" style="margin-bottom:20px;border-top:3px solid var(--pink);">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+          <div style="font-size:20px;">&#x1F3AF;</div>
+          <div>
+            <div style="font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;font-family:var(--font-heading);color:var(--pink);">Best Next Move</div>
+            <div style="font-size:10px;color:var(--text-dim);margin-top:2px;">The clearest action to take from this report.</div>
+          </div>
+        </div>
+        <div style="font-size:13px;color:var(--text-mid);line-height:1.7;padding-left:14px;border-left:2px solid var(--pink);">${bnm}</div>
+      </div>` : ''}
+      ` : ''}
+
+      <div class="section-label">Content Insights &mdash; ${loc.name} &mdash; ${monthLabel}</div>
+      <div class="platform-card" style="margin-bottom:14px;">
+        <div class="platform-header">
+          <div class="platform-name">
+            <div class="platform-dot" style="background:${loc.color};"></div>
+            <span>${loc.name}</span>
+          </div>
+          <div class="platform-badge">${loc.city}</div>
+        </div>
+        ${hasContentInsights ? `
+          <div class="insights-grid">
+            <div>
+              <div style="font-size:10px;color:var(--green);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;font-weight:700;">What Worked</div>
+              <div style="font-size:13px;color:var(--text-mid);line-height:1.6;">${ins.worked || '&mdash;'}</div>
+            </div>
+            <div>
+              <div style="font-size:10px;color:var(--red);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;font-weight:700;">What Didn't Work</div>
+              <div style="font-size:13px;color:var(--text-mid);line-height:1.6;">${ins.didntWork || '&mdash;'}</div>
+            </div>
+            <div>
+              <div style="font-size:10px;color:var(--pink);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;font-weight:700;">Improvements</div>
+              <div style="font-size:13px;color:var(--text-mid);line-height:1.6;">${ins.improvements || '&mdash;'}</div>
+            </div>
+            <div>
+              <div style="font-size:10px;color:var(--blue);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;font-weight:700;">Audience Insight</div>
+              <div style="font-size:13px;color:var(--text-mid);line-height:1.6;">${ins.audienceInsight || '&mdash;'}</div>
+            </div>
+          </div>
+        ` : `<div style="padding:8px 0;font-size:13px;color:var(--text-dim);line-height:1.7;">Insights pending &mdash; data to be added.</div>`}
+      </div>
     `;
 
   } else if (currentTab === 'audience') {
@@ -620,6 +841,10 @@ function switchTab(tab, btn) {
 }
 function setMonth(month) {
   currentMonth = month;
+  render();
+}
+function setInsightLoc(locId) {
+  currentInsightLoc = locId;
   render();
 }
 
