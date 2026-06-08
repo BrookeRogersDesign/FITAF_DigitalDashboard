@@ -204,6 +204,7 @@ const LOCATIONS = [
 ];
 
 const MONTHS = [
+  { id:'may26', label:'May 2026' },
   { id:'apr26', label:'April 2026' },
   { id:'mar26', label:'March 2026' },
   { id:'feb26', label:'February 2026' },
@@ -308,19 +309,47 @@ const DATA = {
                 {title:'Facebook standard posts are underperforming', detail:'Five out of six standard Facebook posts underperformed their baseline, contributing to a 28.9% decrease in the platform\'s overall engagement rate.'}
               ],
               bestNextMove:'Expand educational and community-focused formats — Prioritize Instagram Carousels and Reels that highlight the supportive studio environment or break down the \'FIT Method\' using bulleted lists with emojis. Test adapting these top-performing formats for Facebook to replace standard posts.' }
+  },
+  may26: {
+    '407': { posts:14, reach:'325K', reachNum:325000, interactions:'6.5K', intNum:6500, engagement:'1.84%', engNum:1.84, newFollowers:624,
+             audience:{ gender:'Women', location:'Orlando', age:"20's-30's (IG) 40's (FB)" },
+             insights:{ worked:'Fun, relatable reels worked. Additionally, building hype around special events (openings, FIT birthday\'s, holidays, etc.) did really well!',
+                        didntWork:'Static, no-hook, there-for-the-aesthetic posts did not do as well as others. However, they still did reasonably well.',
+                        improvements:'Making at least 50% or more of our posts reels would increase engagement by a lot!!',
+                        audienceInsight:'Our audience enjoys relatable content as well as feeling like they\'re a part of the community.' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    'gnv': { posts:14, reach:'14K', reachNum:14000, interactions:'1.8K', intNum:1800, engagement:'11.82%', engNum:11.82, newFollowers:112,
+             audience:{ gender:'Women', location:'Tallahassee', age:"18-20's" },
+             insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    'jax': { posts:14, reach:'45.4K', reachNum:45400, interactions:'2.6K', intNum:2600, engagement:'5.31%', engNum:5.31, newFollowers:154,
+             audience:{ gender:'Women', location:'Tampa', age:"18-20's" },
+             insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    '850': { posts:14, reach:'52.2K', reachNum:52200, interactions:'3.8K', intNum:3800, engagement:'6.55%', engNum:6.55, newFollowers:173,
+             audience:{ gender:'Women', location:'Gainesville', age:"18-20's" },
+             insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    'af':  { posts:14, reach:'89.5K', reachNum:89500, interactions:'1.8K', intNum:1800, engagement:'1.84%', engNum:1.84, newFollowers:108,
+             audience:{ gender:'Women', location:'Jacksonville', age:"20's-30's" },
+             insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    'corp': { posts:0, reach:'—', reachNum:0, interactions:'—', intNum:0, engagement:'—', engNum:0, newFollowers:0,
+              audience:{ gender:'—', location:'—', age:'—' }, insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' },
+              workingNow:[], needsAttention:[], bestNextMove:'' }
   }
 };
 
 // Engagement trend data (all months)
 const ENG_TREND = {
-  '407': [1.20, 1.77, 1.51, 1.53],
-  'gnv': [9.65, 11.61, 16.90, 27.57],
-  'jax': [0.62, 7.34, 17.02, 16.96],
-  '850': [2.51, 5.59, 8.90, 6.83],
-  'af':  [0.91, 0.71, 1.73, 1.29],
-  'corp': [0, 0, 0, 12.10]
+  '407': [1.20, 1.77, 1.51, 1.53, 1.84],
+  'gnv': [9.65, 11.61, 16.90, 27.57, 11.82],
+  'jax': [0.62, 7.34, 17.02, 16.96, 5.31],
+  '850': [2.51, 5.59, 8.90, 6.83, 6.55],
+  'af':  [0.91, 0.71, 1.73, 1.29, 1.84],
+  'corp': [0, 0, 0, 12.10, 0]
 };
-const TREND_LABELS = ['Jan','Feb','Mar','Apr'];
+const TREND_LABELS = ['Jan','Feb','Mar','Apr','May'];
 
 // Top performing posts by location and month
 const TOP_POSTS = {
@@ -337,10 +366,68 @@ const TOP_POSTS = {
       { platform:'Instagram', type:'REEL', caption:'We asked: "Describe FIT in one word" & YOU answered. That\'s the FIT culture in a sentence:...', views:1500, likes:59, comments:0, engagement:5.8, url:'https://www.instagram.com/reel/DWrH0LkEbae/' },
       { platform:'Instagram', type:'IMAGE', caption:'This is what "FIT AF" actually means. Slow and controlled strength, coached movement, and...', views:1200, likes:40, comments:2, engagement:7.3, url:'https://www.instagram.com/p/DWl-PGUlN3j/' }
     ]
+  },
+  may26: {
+    '407': [
+      { platform:'Instagram', type:'POST', caption:'Top Performing Post #1 — FIT 407', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/p/DY7bO8WFuM3/' },
+      { platform:'Instagram', type:'POST', caption:'Top Performing Post #2 — FIT 407', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/p/DYSOfDsFrAm/' },
+      { platform:'Instagram', type:'REEL', caption:'Top Performing Post #3 — FIT 407', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/reels/DYW8n1oASud/' }
+    ],
+    'gnv': [
+      { platform:'Instagram', type:'POST', caption:'Top Performing Post #1 — FIT Gainesville', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/p/DYm1AhzlkRO/' },
+      { platform:'Instagram', type:'POST', caption:'Top Performing Post #2 — FIT Gainesville', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/p/DYXYFy-lshi/' },
+      { platform:'Instagram', type:'REEL', caption:'Top Performing Post #3 — FIT Gainesville', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/reels/DX2amR1omeS/' }
+    ],
+    'jax': [
+      { platform:'Instagram', type:'POST', caption:'Top Performing Post #1 — FIT JAX', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/p/DYXYFy-lshi/' },
+      { platform:'Instagram', type:'REEL', caption:'Top Performing Post #2 — FIT JAX', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/reels/DYW8n1oASud/' },
+      { platform:'Instagram', type:'REEL', caption:'Top Performing Post #3 — FIT JAX', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/reels/DX2amR1omeS/' }
+    ],
+    '850': [
+      { platform:'Instagram', type:'POST', caption:'Top Performing Post #1 — FIT 850', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/p/DYXYFy-lshi/' },
+      { platform:'Instagram', type:'REEL', caption:'Top Performing Post #2 — FIT 850', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/reels/DYW8n1oASud/' },
+      { platform:'Instagram', type:'REEL', caption:'Top Performing Post #3 — FIT 850', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/reels/DX2amR1omeS/' }
+    ],
+    'af': [
+      { platform:'Instagram', type:'POST', caption:'Top Performing Post #1 — FIT AF', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/p/DYKgHogjk3n/' },
+      { platform:'Instagram', type:'POST', caption:'Top Performing Post #2 — FIT AF', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/p/DYXYFy-lshi/' },
+      { platform:'Instagram', type:'REEL', caption:'Top Performing Post #3 — FIT AF', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/reels/DX2amR1omeS/' }
+    ]
   }
 };
 
-let currentMonth = 'apr26';
+// Lowest performing posts by location and month
+const LOW_POSTS = {
+  may26: {
+    '407': [
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #1 — FIT 407', url:'https://www.instagram.com/p/DYpZtUkFj2F/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #2 — FIT 407', url:'https://www.instagram.com/p/DYSOfDsFrAm/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #3 — FIT 407', url:'https://www.instagram.com/p/DYNE_53Dt4J/' }
+    ],
+    'gnv': [
+      { platform:'Instagram', type:'REEL', caption:'Lowest Performing #1 — FIT Gainesville', url:'https://www.instagram.com/reels/DYANKsrgsN5/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #2 — FIT Gainesville', url:'https://www.instagram.com/p/DYpZv-vFnZf/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #3 — FIT Gainesville', url:'https://www.instagram.com/p/DYNE-CJjhew/' }
+    ],
+    'jax': [
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #1 — FIT JAX', url:'https://www.instagram.com/p/DYpZwC5lvo-/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #2 — FIT JAX', url:'https://www.instagram.com/p/DYSOfZhlizL/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #3 — FIT JAX', url:'https://www.instagram.com/p/DYSOfZhlizL/' }
+    ],
+    '850': [
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #1 — FIT 850', url:'https://www.instagram.com/p/DYKgG4CjqaW/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #2 — FIT 850', url:'https://www.instagram.com/p/DYSOh25FvUW/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #3 — FIT 850', url:'https://www.instagram.com/p/DYpZv66FgcZ/' }
+    ],
+    'af': [
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #1 — FIT AF', url:'https://www.instagram.com/p/DYNE9zKjq54/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #2 — FIT AF', url:'https://www.instagram.com/p/DYSOh13FvuM/' },
+      { platform:'Instagram', type:'REEL', caption:'Lowest Performing #3 — FIT AF', url:'https://www.instagram.com/reels/DYANGR0FJv0/' }
+    ]
+  }
+};
+
+let currentMonth = 'may26';
 let currentTab = 'overview';
 let currentInsightLoc = 'corp';
 
@@ -415,11 +502,11 @@ function renderTopPostsCards(month) {
           </div>
           <div class="post-caption">${p.caption}</div>
           <div class="post-stats">
-            <div class="post-stat">&#x1F441; <span class="post-stat-value">${formatNum(p.views)}</span></div>
-            <div class="post-stat">&#x2764; <span class="post-stat-value">${p.likes}</span></div>
-            <div class="post-stat">&#x1F4AC; <span class="post-stat-value">${p.comments}</span></div>
-            ${p.url ? '<a href="'+p.url+'" target="_blank" style="font-size:10px;color:var(--pink);text-decoration:none;font-weight:600;margin-left:auto;display:flex;align-items:center;gap:4px;" onclick="event.stopPropagation();">View Post &#x2197;</a>' : ''}
-            <div class="post-eng">${p.engagement}%</div>
+            ${p.views > 0 ? '<div class="post-stat">&#x1F441; <span class="post-stat-value">'+formatNum(p.views)+'</span></div>' : ''}
+            ${p.likes > 0 ? '<div class="post-stat">&#x2764; <span class="post-stat-value">'+p.likes+'</span></div>' : ''}
+            ${p.comments > 0 ? '<div class="post-stat">&#x1F4AC; <span class="post-stat-value">'+p.comments+'</span></div>' : ''}
+            ${p.url ? '<a href="'+p.url+'" target="_blank" style="font-size:11px;color:var(--pink);text-decoration:none;font-weight:600;margin-left:auto;display:flex;align-items:center;gap:4px;" onclick="event.stopPropagation();">View Post &#x2197;</a>' : ''}
+            ${p.engagement > 0 ? '<div class="post-eng">'+p.engagement+'%</div>' : ''}
           </div>
         </div>
       `).join('')}
@@ -446,11 +533,50 @@ function renderTopPostsTable(month) {
               <td><span class="post-type-badge" style="${typeBadgeColor(p.type)}">${p.type}</span></td>
               <td style="color:${p.locColor};font-weight:600;">${p.locName}</td>
               <td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${p.caption}</td>
-              <td style="font-weight:600;color:var(--text);">${formatNum(p.views)}</td>
-              <td>${p.likes}</td>
-              <td>${p.comments}</td>
-              <td style="font-weight:700;color:var(--pink);">${p.engagement}%</td>
+              <td style="font-weight:600;color:var(--text);">${p.views > 0 ? formatNum(p.views) : '&mdash;'}</td>
+              <td>${p.likes > 0 ? p.likes : '&mdash;'}</td>
+              <td>${p.comments > 0 ? p.comments : '&mdash;'}</td>
+              <td style="font-weight:700;color:var(--pink);">${p.engagement > 0 ? p.engagement+'%' : '&mdash;'}</td>
               <td>${p.url ? '<a href="'+p.url+'" target="_blank" style="color:var(--pink);text-decoration:none;font-size:11px;font-weight:600;white-space:nowrap;">View Post &#x2197;</a>' : ''}</td>
+            </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  `;
+}
+
+function getLowPosts(month) {
+  const mp = LOW_POSTS[month];
+  if (!mp) return [];
+  let all = [];
+  LOCATIONS.forEach(loc => {
+    if (mp[loc.id]) {
+      mp[loc.id].forEach(p => all.push({...p, locId:loc.id, locName:loc.name, locColor:loc.color}));
+    }
+  });
+  return all;
+}
+
+function renderLowPostsTable(month) {
+  const posts = getLowPosts(month);
+  if (posts.length === 0) return '';
+  return `
+    <div class="section-label" style="margin-top:12px;">Lowest Performing Posts &mdash; ${MONTHS.find(m=>m.id===month)?.label || month}</div>
+    <div class="table-card">
+      <div class="chart-header"><div class="chart-title" style="color:var(--red);">Lowest Performing on Instagram</div></div>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr>
+            <th>#</th><th>Platform</th><th>Type</th><th>Location</th><th></th>
+          </tr></thead>
+          <tbody>
+            ${posts.map((p,i) => `<tr>
+              <td style="font-weight:700;color:var(--text);">${i+1}</td>
+              <td><span style="display:inline-flex;align-items:center;gap:6px;">${platformIcon(p.platform)} ${p.platform}</span></td>
+              <td><span class="post-type-badge" style="${typeBadgeColor(p.type)}">${p.type}</span></td>
+              <td style="color:${p.locColor};font-weight:600;">${p.locName}</td>
+              <td>${p.url ? '<a href="'+p.url+'" target="_blank" style="color:var(--red);text-decoration:none;font-size:11px;font-weight:600;white-space:nowrap;">View Post &#x2197;</a>' : ''}</td>
             </tr>`).join('')}
           </tbody>
         </table>
@@ -614,6 +740,7 @@ function render() {
       </div>
 
       ${renderTopPostsTable(currentMonth)}
+      ${renderLowPostsTable(currentMonth)}
     `;
     initSocialCharts();
 
