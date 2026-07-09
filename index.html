@@ -204,6 +204,7 @@ const LOCATIONS = [
 ];
 
 const MONTHS = [
+  { id:'jun26', label:'June 2026' },
   { id:'may26', label:'May 2026' },
   { id:'apr26', label:'April 2026' },
   { id:'mar26', label:'March 2026' },
@@ -212,6 +213,38 @@ const MONTHS = [
 ];
 
 const DATA = {
+  jun26: {
+    '407': { posts:18, reach:'257.6K', reachNum:257600, interactions:'4.6K', intNum:4600, engagement:'1.77%', engNum:1.77, newFollowers:589,
+             audience:{ gender:'Women', location:'Orlando', age:"20's-30's (IG) 40's (FB)" },
+             insights:{ worked:'Fun, relatable reels worked. Additionally, building hype around special events (openings, FIT birthday\'s, holidays, etc.) did really well!',
+                        didntWork:'Static, no-hook, there-for-the-aesthetic posts did not do as well as others. However, they still did reasonably well.',
+                        improvements:'Making at least 50% or more of our posts reels would increase engagement by a lot!!',
+                        audienceInsight:'Our audience enjoys relatable content as well as feeling like they\'re a part of the community.' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    'gnv': { posts:10, reach:'20.4K', reachNum:20400, interactions:'890', intNum:890, engagement:'4.37%', engNum:4.37, newFollowers:82,
+             audience:{ gender:'Women', location:'Tallahassee', age:"18-20's" },
+             insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    'jax': { posts:15, reach:'53.6K', reachNum:53600, interactions:'1.5K', intNum:1500, engagement:'2.80%', engNum:2.80, newFollowers:146,
+             audience:{ gender:'Women', location:'Tampa', age:"18-20's" },
+             insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    '850': { posts:15, reach:'32.4K', reachNum:32400, interactions:'1.6K', intNum:1600, engagement:'5.03%', engNum:5.03, newFollowers:198,
+             audience:{ gender:'Women', location:'Gainesville', age:"18-20's" },
+             insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    'af':  { posts:10, reach:'57.1K', reachNum:57100, interactions:'886', intNum:886, engagement:'1.55%', engNum:1.55, newFollowers:124,
+             audience:{ gender:'Women', location:'Jacksonville', age:"20's-30's" },
+             insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    'corp': { posts:9, reach:'10.9K', reachNum:10900, interactions:'801', intNum:801, engagement:'7.35%', engNum:7.35, newFollowers:116,
+              audience:{ gender:'Women', location:'Tallahassee', age:"18-20's" },
+              insights:{ worked:'Fun, relatable reels worked. Additionally, building hype around special events (openings, FIT birthday\'s, holidays, etc.) did really well!',
+                         didntWork:'Static, no-hook, there-for-the-aesthetic posts did not do as well as others. However, they still did reasonably well.',
+                         improvements:'Making at least 50% or more of our posts reels would increase engagement by a lot!!',
+                         audienceInsight:'Our audience enjoys relatable content as well as feeling like they\'re a part of the community.' },
+              workingNow:[], needsAttention:[], bestNextMove:'' }
+  },
   jan26: {
     '407': { posts:21, reach:'325K', reachNum:325000, interactions:'4.1K', intNum:4100, engagement:'1.20%', engNum:1.20, newFollowers:743,
              audience:{ gender:'Women', location:'Orlando', age:"20's-30's (IG) 40's (FB)" },
@@ -345,17 +378,49 @@ const DATA = {
 
 // Engagement trend data (all months)
 const ENG_TREND = {
-  '407': [1.20, 1.77, 1.51, 1.53, 1.84],
-  'gnv': [9.65, 11.61, 16.90, 27.57, 11.82],
-  'jax': [0.62, 7.34, 17.02, 16.96, 5.31],
-  '850': [2.51, 5.59, 8.90, 6.83, 6.55],
-  'af':  [0.91, 0.71, 1.73, 1.29, 13.11],
-  'corp': [0, 0, 0, 12.10, 0]
+  '407': [1.20, 1.77, 1.51, 1.53, 1.84, 1.77],
+  'gnv': [9.65, 11.61, 16.90, 27.57, 11.82, 4.37],
+  'jax': [0.62, 7.34, 17.02, 16.96, 5.31, 2.80],
+  '850': [2.51, 5.59, 8.90, 6.83, 6.55, 5.03],
+  'af':  [0.91, 0.71, 1.73, 1.29, 13.11, 1.55],
+  'corp': [0, 0, 0, 12.10, 0, 7.35]
 };
-const TREND_LABELS = ['Jan','Feb','Mar','Apr','May'];
+const TREND_LABELS = ['Jan','Feb','Mar','Apr','May','Jun'];
 
 // Top performing posts by location and month
 const TOP_POSTS = {
+  jun26: {
+    '407': [
+      { platform:'Instagram', type:'REEL', caption:'Top Performing Post #1 — FIT 407', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/reels/DZN4bXIl7yz/' },
+      { platform:'Instagram', type:'REEL', caption:'Top Performing Post #2 — FIT 407', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/reels/DZaVA2qEToJ/' },
+      { platform:'Instagram', type:'POST', caption:'Top Performing Post #3 — FIT 407', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/p/DaEXyctpqK1/' }
+    ],
+    'gnv': [
+      { platform:'Instagram', type:'POST', caption:'Top Performing Post #1 — FIT Gainesville', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/p/DZxgCHpls_9/' },
+      { platform:'Instagram', type:'POST', caption:'Top Performing Post #2 — FIT Gainesville', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/p/DZ8SnmUjyoF/' },
+      { platform:'Instagram', type:'REEL', caption:'Top Performing Post #3 — FIT Gainesville', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/reels/DZN4bXIl7yz/' }
+    ],
+    'jax': [
+      { platform:'Instagram', type:'REEL', caption:'Top Performing Post #1 — FIT JAX', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/reels/DZaVBg2Dn5g/' },
+      { platform:'Instagram', type:'REEL', caption:'Top Performing Post #2 — FIT JAX', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/reels/DZN4bXIl7yz/' },
+      { platform:'Instagram', type:'POST', caption:'Top Performing Post #3 — FIT JAX', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/p/DZDvDGtkch4/' }
+    ],
+    '850': [
+      { platform:'Instagram', type:'POST', caption:'Top Performing Post #1 — FIT 850', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/p/DZ8T3agn9Nv/' },
+      { platform:'Instagram', type:'POST', caption:'Top Performing Post #2 — FIT 850', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/p/DZk1swHn5XN/' },
+      { platform:'Instagram', type:'REEL', caption:'Top Performing Post #3 — FIT 850', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/reels/DZN4bXIl7yz/' }
+    ],
+    'af': [
+      { platform:'Instagram', type:'POST', caption:'Top Performing Post #1 — FIT AF', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/p/DZxgEI5lnQm/' },
+      { platform:'Instagram', type:'POST', caption:'Top Performing Post #2 — FIT AF', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/p/DZ8ToC_GTtt/' },
+      { platform:'Instagram', type:'REEL', caption:'Top Performing Post #3 — FIT AF', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/reels/DZN4bXIl7yz/' }
+    ],
+    'corp': [
+      { platform:'Instagram', type:'POST', caption:'Top Performing Post #1 — @FITasFIRE', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/p/DZvWnKgFFg2/' },
+      { platform:'Instagram', type:'REEL', caption:'Top Performing Post #2 — @FITasFIRE', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/reels/DZ7zUfQAkmJ/' },
+      { platform:'Instagram', type:'POST', caption:'Top Performing Post #3 — @FITasFIRE', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/p/DZK4DkylrTY/' }
+    ]
+  },
   apr26: {
     'corp': [
       { platform:'Instagram', type:'IMAGE', caption:'The best part of FIT isn\'t just what happens on the reform and mat... It\'s what happens around it 💕...', views:2600, likes:143, comments:9, engagement:12.8, url:'https://www.instagram.com/p/DXpB3dWFP3P/' },
@@ -401,6 +466,38 @@ const TOP_POSTS = {
 
 // Lowest performing posts by location and month
 const LOW_POSTS = {
+  jun26: {
+    '407': [
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #1 — FIT 407', url:'https://www.instagram.com/p/DZc5ufgFwhR/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #2 — FIT 407', url:'https://www.instagram.com/p/DZ5OX7uFslm/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #3 — FIT 407', url:'https://www.instagram.com/p/DaDhgK-luEU/' }
+    ],
+    'gnv': [
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #1 — FIT Gainesville', url:'https://www.instagram.com/p/DZsWh4JljGD/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #2 — FIT Gainesville', url:'https://www.instagram.com/p/DaDhfBqFlQ7/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #3 — FIT Gainesville', url:'https://www.instagram.com/p/DaLc4eZxOzE/' }
+    ],
+    'jax': [
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #1 — FIT JAX', url:'https://www.instagram.com/p/DZ5OeAulvMT/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #2 — FIT JAX', url:'https://www.instagram.com/p/DZc5vGelo8U/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #3 — FIT JAX', url:'https://www.instagram.com/p/DaLehq3xmbD/' }
+    ],
+    '850': [
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #1 — FIT 850', url:'https://www.instagram.com/p/DaDhaoglqfa/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #2 — FIT 850', url:'https://www.instagram.com/p/DaLcgGPJ2If/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #3 — FIT 850', url:'https://www.instagram.com/p/DZ5OXoflsTZ/' }
+    ],
+    'af': [
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #1 — FIT AF', url:'https://www.instagram.com/p/DZc5voglpWv/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #2 — FIT AF', url:'https://www.instagram.com/p/DZsWhE-lqha/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #3 — FIT AF', url:'https://www.instagram.com/p/DaDhZBSFnta/' }
+    ],
+    'corp': [
+      { platform:'Instagram', type:'REEL', caption:'Lowest Performing #1 — @FITasFIRE', url:'https://www.instagram.com/reels/DaLP5K7HMJP/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #2 — @FITasFIRE', url:'https://www.instagram.com/p/DZ-X16UlhVi/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #3 — @FITasFIRE', url:'https://www.instagram.com/p/DaDhapUFngf/' }
+    ]
+  },
   may26: {
     '407': [
       { platform:'Instagram', type:'POST', caption:'Lowest Performing #1 — FIT 407', url:'https://www.instagram.com/p/DYpZtUkFj2F/' },
@@ -430,7 +527,7 @@ const LOW_POSTS = {
   }
 };
 
-let currentMonth = 'may26';
+let currentMonth = 'jun26';
 let currentTab = 'overview';
 let currentInsightLoc = 'corp';
 
