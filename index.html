@@ -204,6 +204,7 @@ const LOCATIONS = [
 ];
 
 const MONTHS = [
+  { id:'jul26', label:'July 2026' },
   { id:'jun26', label:'June 2026' },
   { id:'may26', label:'May 2026' },
   { id:'apr26', label:'April 2026' },
@@ -213,6 +214,47 @@ const MONTHS = [
 ];
 
 const DATA = {
+  jul26: {
+    '407': { posts:18, reach:'67K', reachNum:67034, interactions:'3K', intNum:2996, engagement:'4.52%', engNum:4.52, newFollowers:374,
+             audience:{ gender:'Women', location:'Orlando', age:"20's-30's (IG) 40's (FB)" },
+             insights:{ worked:'Event-driven content won the month. The Lake Mary launch combined urgency, a giveaway, and a clear participation mechanic. Community recap content performed because it showed real people in real moments. Posts with a \'why now\' reason consistently outperformed everything else.',
+                        didntWork:'Evergreen and educational content fell flat. Low-stakes CTAs like \'tag someone\' didn\'t give people a strong enough reason to stop scrolling. Content without a clear emotional hook or timely angle got skipped.',
+                        improvements:'Attach a participation mechanic to more posts (tag, share, book). Add a real face or personal quote to educational content instead of just tips. Give every post a \'why now\' angle to create urgency.',
+                        audienceInsight:'This audience responds to community proof, not just community messaging. They share content that reflects their identity as part of the FIT Fam. Local relevance is a major growth lever. They want to belong to something, not just work out somewhere.' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    'gnv': { posts:14, reach:'11.5K', reachNum:11519, interactions:'357', intNum:357, engagement:'3.00%', engNum:3.00, newFollowers:66,
+             audience:{ gender:'Women', location:'Tallahassee', age:"18-20's" },
+             insights:{ worked:'Carousels dominated the top performers because they give the audience something to do — swipe, discover, react. Content with a clear purpose or real stakes (trainer recruitment, milestones, relatable moments) consistently outperformed anything purely aesthetic.',
+                        didntWork:'Static images claimed all 3 bottom spots — especially when paired with no CTA or community tie-in. Comments were nearly nonexistent across the entire month with only 2 total.',
+                        improvements:'Sharpen the comment CTAs — they\'re too generic right now and not converting. Move educational content out of static images and into carousels or Reels where it can actually breathe.',
+                        audienceInsight:'This audience is warm and loyal but passive by default — they\'ll like freely, but they need a specific, low-friction reason to comment or share. They respond to content that reflects their FIT Fam identity, not general fitness messaging.' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    'jax': { posts:16, reach:'17.4K', reachNum:17351, interactions:'927', intNum:927, engagement:'5.34%', engNum:5.34, newFollowers:119,
+             audience:{ gender:'Women', location:'Tampa', age:"18-20's" },
+             insights:{ worked:'Announcement and community-driven content dominated. The San Marco teaser, Jax Beach anniversary giveaway, and groupchat collab all gave people a reason to act — whether that was sharing, tagging, or entering to win.',
+                        didntWork:'Informational and educational posts fell flat. The cool down post, Main Stage announcement, and \'Okay your turn\' reel all had zero comments and zero shares.',
+                        improvements:'Pair any educational content with a challenge or question hook to give the audience something to do with the information. For reels, add a text overlay in the first second to stop the scroll.',
+                        audienceInsight:'This audience engages for community, not content. They show up when they feel personally included in something — a milestone, a local announcement, a reason to tag a friend.' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    '850': { posts:14, reach:'19.8K', reachNum:19792, interactions:'807', intNum:807, engagement:'3.88%', engNum:3.88, newFollowers:29,
+             audience:{ gender:'Women', location:'Gainesville', age:"18-20's" },
+             insights:{ worked:'Carousels won every metric because they demanded interaction. The top posts all had a clear prompt (\'tell us your why,\' \'comment your favorite memory\') that gave the audience something to do.',
+                        didntWork:'Static images with no call to action fell flat across the board. Without a reason to engage, the algorithm had no signal to push the content further.',
+                        improvements:'Add an engagement prompt to every post, even static images. For Reels, tighten the hook in the first two seconds and include a CTA within the video.',
+                        audienceInsight:'This community responds to content that reflects them back to themselves — milestones, shared memories, a sense of belonging. They\'re not just fitness followers, they\'re FIT loyalists.' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    'af':  { posts:14, reach:'9.2K', reachNum:9188, interactions:'403', intNum:403, engagement:'4.44%', engNum:4.44, newFollowers:34,
+             audience:{ gender:'Women', location:'Jacksonville', age:"20's-30's" },
+             insights:{ worked:'Community-first content dominated. The top post (tag-a-friend) hit the highest reach, and the milestone carousel had the best ER at 8.07% — both worked because they made the audience feel seen and gave them a reason to act.',
+                        didntWork:'Static images with no CTA consistently landed at the bottom. When the caption didn\'t invite engagement, the audience didn\'t give it.',
+                        improvements:'Add a low-friction prompt to every post — a question, a tag ask, a \'comment below.\' Also worth leaning into more carousels, which showed up twice in the top 3.',
+                        audienceInsight:'This audience responds to people and connection over workouts and schedules. Content that makes followers feel like insiders consistently outperforms content that just informs.' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    'corp': { posts:0, reach:'—', reachNum:0, interactions:'—', intNum:0, engagement:'—', engNum:0, newFollowers:0,
+              audience:{ gender:'—', location:'—', age:'—' },
+              insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' },
+              workingNow:[], needsAttention:[], bestNextMove:'' }
+  },
   jun26: {
     '407': { posts:18, reach:'257.6K', reachNum:257600, interactions:'4.6K', intNum:4600, engagement:'1.77%', engNum:1.77, newFollowers:589,
              audience:{ gender:'Women', location:'Orlando', age:"20's-30's (IG) 40's (FB)" },
@@ -378,17 +420,44 @@ const DATA = {
 
 // Engagement trend data (all months)
 const ENG_TREND = {
-  '407': [1.20, 1.77, 1.51, 1.53, 1.84, 1.77],
-  'gnv': [9.65, 11.61, 16.90, 27.57, 11.82, 4.37],
-  'jax': [0.62, 7.34, 17.02, 16.96, 5.31, 2.80],
-  '850': [2.51, 5.59, 8.90, 6.83, 6.55, 5.03],
-  'af':  [0.91, 0.71, 1.73, 1.29, 13.11, 1.55],
-  'corp': [0, 0, 0, 12.10, 0, 7.35]
+  '407': [1.20, 1.77, 1.51, 1.53, 1.84, 1.77, 4.52],
+  'gnv': [9.65, 11.61, 16.90, 27.57, 11.82, 4.37, 3.00],
+  'jax': [0.62, 7.34, 17.02, 16.96, 5.31, 2.80, 5.34],
+  '850': [2.51, 5.59, 8.90, 6.83, 6.55, 5.03, 3.88],
+  'af':  [0.91, 0.71, 1.73, 1.29, 13.11, 1.55, 4.44],
+  'corp': [0, 0, 0, 12.10, 0, 7.35, 0]
 };
-const TREND_LABELS = ['Jan','Feb','Mar','Apr','May','Jun'];
+const TREND_LABELS = ['Jan','Feb','Mar','Apr','May','Jun','Jul'];
 
 // Top performing posts by location and month
 const TOP_POSTS = {
+  jul26: {
+    '407': [
+      { platform:'Instagram', type:'POST', caption:'Lake Mary Grand Opening — FIT 407', views:10326, likes:260, comments:95, engagement:5.06, url:'https://www.instagram.com/p/Da0iyqLER39/' },
+      { platform:'Instagram', type:'REEL', caption:'FIT Social Club — FIT 407', views:5587, likes:257, comments:14, engagement:5.32, url:'https://www.instagram.com/reels/Da-6KtdJRUY/' },
+      { platform:'Instagram', type:'REEL', caption:'FIT Social Club Summer Edition — FIT 407', views:4451, likes:199, comments:17, engagement:6.31, url:'https://www.instagram.com/reels/DaTxACBIBBT/' }
+    ],
+    'gnv': [
+      { platform:'Instagram', type:'CAROUSEL', caption:'SRT Instructor Training — FIT Gainesville', views:879, likes:53, comments:0, engagement:7.28, url:'https://www.instagram.com/p/DbWEW_Dn40K/' },
+      { platform:'Instagram', type:'POST', caption:'When the workout makes it out of the groupchat! — FIT Gainesville', views:1454, likes:39, comments:1, engagement:2.75, url:'https://www.instagram.com/p/DaivgfXlDLn/' },
+      { platform:'Instagram', type:'CAROUSEL', caption:'Milestones — FIT Gainesville', views:707, likes:34, comments:0, engagement:4.95, url:'https://www.instagram.com/p/DbTWG0eDnX6/' }
+    ],
+    'jax': [
+      { platform:'Instagram', type:'POST', caption:'San Marco is heating up! — FIT JAX', views:2542, likes:203, comments:20, engagement:10.39, url:'https://www.instagram.com/p/DbWWRdZoFgW/' },
+      { platform:'Instagram', type:'CAROUSEL', caption:'Celebrate ONE YEAR of Jax Beach — FIT JAX', views:3216, likes:169, comments:5, engagement:5.91, url:'https://www.instagram.com/p/DbGgNcLn3qA/' },
+      { platform:'Instagram', type:'POST', caption:'When the workout makes it out of the groupchat! — FIT JAX', views:3028, likes:120, comments:53, engagement:6.21, url:'https://www.instagram.com/p/Daivg4NlOKr/' }
+    ],
+    '850': [
+      { platform:'Instagram', type:'CAROUSEL', caption:'That\'s My Why — FIT 850', views:2152, likes:96, comments:9, engagement:5.25, url:'https://www.instagram.com/p/DavS6P4kswn/' },
+      { platform:'Instagram', type:'CAROUSEL', caption:'SRT Instructor Training — FIT 850', views:1803, likes:87, comments:0, engagement:5.88, url:'https://www.instagram.com/p/DbWEp8iH4IC/' },
+      { platform:'Instagram', type:'CAROUSEL', caption:'#FITPHOTODUMP — FIT 850', views:1468, likes:83, comments:2, engagement:6.20, url:'https://www.instagram.com/p/DbLnpt2GTQe/' }
+    ],
+    'af': [
+      { platform:'Instagram', type:'POST', caption:'When the workout makes it out of the groupchat! — FIT AF', views:1231, likes:49, comments:2, engagement:4.22, url:'https://www.instagram.com/p/DaivgN7FPwV/' },
+      { platform:'Instagram', type:'CAROUSEL', caption:'Milestones — FIT AF', views:595, likes:46, comments:1, engagement:8.07, url:'https://www.instagram.com/p/DbTWJbQEulB/' },
+      { platform:'Instagram', type:'REEL', caption:'Progress > Perfection — FIT AF', views:931, likes:34, comments:0, engagement:3.87, url:'https://www.instagram.com/reels/DaVi8eADPYb/' }
+    ]
+  },
   jun26: {
     '407': [
       { platform:'Instagram', type:'REEL', caption:'Top Performing Post #1 — FIT 407', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/reels/DZN4bXIl7yz/' },
@@ -466,6 +535,33 @@ const TOP_POSTS = {
 
 // Lowest performing posts by location and month
 const LOW_POSTS = {
+  jul26: {
+    '407': [
+      { platform:'Instagram', type:'POST', caption:'Post Mat Pilates Stretch — FIT 407', views:1806, likes:54, comments:0, engagement:3.32, url:'https://www.instagram.com/p/DbGeHcAGdnS/' },
+      { platform:'Instagram', type:'REEL', caption:'Tag someone you\'ve met during class — FIT 407', views:2811, likes:57, comments:0, engagement:2.17, url:'https://www.instagram.com/reels/DbdpM3iib4O/' },
+      { platform:'Instagram', type:'REEL', caption:'FIT Girl Summer — FIT 407', views:2187, likes:72, comments:0, engagement:3.89, url:'https://www.instagram.com/reels/Da0clcklCko/' }
+    ],
+    'gnv': [
+      { platform:'Instagram', type:'REEL', caption:'Okay, your turn — FIT Gainesville', views:699, likes:9, comments:0, engagement:1.43, url:'https://www.instagram.com/reels/DbdpN6TlTWM/' },
+      { platform:'Instagram', type:'POST', caption:'Just you, the reformer, and the work — FIT Gainesville', views:525, likes:9, comments:0, engagement:1.71, url:'https://www.instagram.com/p/DaQZfC9lkrz/' },
+      { platform:'Instagram', type:'POST', caption:'Post Pilates Stretch — FIT Gainesville', views:513, likes:8, comments:0, engagement:1.56, url:'https://www.instagram.com/p/DbGeHQHmWRv/' }
+    ],
+    'jax': [
+      { platform:'Instagram', type:'POST', caption:'Post Mat Pilates Stretch — FIT JAX', views:581, likes:14, comments:0, engagement:2.41, url:'https://www.instagram.com/p/DbGeGy8EjyA/' },
+      { platform:'Instagram', type:'POST', caption:'Meet Us At The Main Stage — FIT JAX', views:428, likes:13, comments:0, engagement:3.27, url:'https://www.instagram.com/p/DaTCEgTutLV/' },
+      { platform:'Instagram', type:'REEL', caption:'Okay, your turn — FIT JAX', views:681, likes:14, comments:0, engagement:2.20, url:'https://www.instagram.com/reels/DbdpNOsIJap/' }
+    ],
+    '850': [
+      { platform:'Instagram', type:'POST', caption:'Just you, the reformer, and the work — FIT 850', views:727, likes:19, comments:1, engagement:2.75, url:'https://www.instagram.com/p/DaQZh96kmE2/' },
+      { platform:'Instagram', type:'POST', caption:'Meet Us At The Main Stage — FIT 850', views:854, likes:21, comments:0, engagement:2.58, url:'https://www.instagram.com/p/DaTBv35AZdd/' },
+      { platform:'Instagram', type:'POST', caption:'Post Mat Pilates Stretch — FIT 850', views:727, likes:23, comments:0, engagement:3.16, url:'https://www.instagram.com/p/DbGeIAsGU2v/' }
+    ],
+    'af': [
+      { platform:'Instagram', type:'POST', caption:'Just you, the reformer, and the work — FIT AF', views:461, likes:19, comments:0, engagement:4.12, url:'https://www.instagram.com/p/DaQZbKals5u/' },
+      { platform:'Instagram', type:'POST', caption:'Meet Us At The Main Stage — FIT AF', views:475, likes:16, comments:1, engagement:3.58, url:'https://www.instagram.com/p/DaTCZejxQc4/' },
+      { platform:'Instagram', type:'POST', caption:'Post Pilates Stretch — FIT AF', views:440, likes:11, comments:0, engagement:2.50, url:'https://www.instagram.com/p/DbGeHYeklY2/' }
+    ]
+  },
   jun26: {
     '407': [
       { platform:'Instagram', type:'POST', caption:'Lowest Performing #1 — FIT 407', url:'https://www.instagram.com/p/DZc5ufgFwhR/' },
@@ -527,9 +623,9 @@ const LOW_POSTS = {
   }
 };
 
-let currentMonth = 'jun26';
+let currentMonth = 'jul26';
 let currentTab = 'overview';
-let currentInsightLoc = 'corp';
+let currentInsightLoc = '407';
 
 // === DATE ===
 document.getElementById('currentDate').textContent = new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
