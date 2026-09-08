@@ -3,661 +3,158 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BBz | Digital Dashboard</title>
-<meta property="og:title" content="BBz | Digital Dashboard">
-<meta property="og:description" content="Booty Babez Tampa — Web + Digital Performance Dashboard">
-<meta property="og:image" content="https://brookerogersdesign.github.io/BBz-DigitalDashboard/thumbnail.jpg">
-<meta property="og:url" content="https://brookerogersdesign.github.io/BBz-DigitalDashboard/">
-<meta property="og:type" content="website">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://brookerogersdesign.github.io/BBz-DigitalDashboard/thumbnail.jpg">
+<title>FIT AF | Digital Dashboard</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
 <style>
-  @font-face {
-    font-family: 'Termina';
-    src: local('Termina');
-    font-weight: 100 900;
-    font-display: swap;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  :root {
-    --pink: #F43CE2;
-    --pink-dim: rgba(244, 60, 226, 0.12);
-    --pink-glow: rgba(244, 60, 226, 0.25);
-    --bg: #0B0B12;
-    --card: rgba(18, 18, 28, 0.85);
-    --card-solid: #13131F;
-    --card-border: rgba(255,255,255,0.07);
-    --card-hover: rgba(26, 26, 40, 0.9);
-    --text: #FFFFFF;
-    --text-dim: rgba(255,255,255,0.45);
-    --text-mid: rgba(255,255,255,0.7);
-    --green: #00E676;
-    --red: #FF5252;
-    --blue: #448AFF;
-    --orange: #FF9100;
-    --tiktok: #00F2EA;
-    --facebook: #1877F2;
-    --instagram: #E1306C;
-    --google: #4285F4;
-    --radius: 20px;
-    --radius-sm: 12px;
-    --font-heading: 'Termina', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    --font-body: 'Avenir', 'Avenir Next', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--font-body);
-    line-height: 1.6;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-
-  h1, h2, h3, h4, h5, h6,
-  .logo-mark, .logo-text span:first-child,
-  .section-label, .metric-value, .platform-stat-value,
-  .ad-metric-value, .chart-title, .nav-tab {
-    font-family: var(--font-heading);
-  }
-
-  /* === HEADER === */
-  .header {
-    background: linear-gradient(180deg, rgba(244,60,226,0.06) 0%, transparent 100%);
-    border-bottom: 1px solid var(--card-border);
-    padding: 20px 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-  }
-
-  .logo-area {
-    display: flex;
-    align-items: center;
-    gap: 18px;
-  }
-
-  .logo-svg {
-    height: 44px;
-    width: auto;
-    object-fit: contain;
-  }
-
-  .logo-divider {
-    width: 1px;
-    height: 36px;
-    background: rgba(255,255,255,0.1);
-  }
-
-  .logo-text {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .logo-text span:first-child {
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--text);
-  }
-
-  .logo-text span:last-child {
-    font-size: 11px;
-    color: var(--text-dim);
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    font-family: var(--font-body);
-  }
-
-  .header-right {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .header-date {
-    font-size: 13px;
-    color: var(--text-dim);
-  }
-
-  .header-badge {
-    background: var(--pink-dim);
-    color: var(--pink);
-    font-size: 11px;
-    font-weight: 600;
-    padding: 6px 16px;
-    border-radius: 50px;
-    border: 1px solid rgba(244,60,226,0.2);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    font-family: var(--font-heading);
-  }
-
-  /* === NAV TABS (pill style from inspo) === */
-  .nav-tabs {
-    display: flex;
-    gap: 6px;
-    padding: 14px 40px;
-    border-bottom: 1px solid var(--card-border);
-    background: rgba(11,11,18,0.9);
-    backdrop-filter: blur(12px);
-    position: sticky;
-    top: 85px;
-    z-index: 99;
-  }
-
-  .nav-tab {
-    padding: 10px 24px;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--text-dim);
-    background: transparent;
-    border: 1px solid var(--card-border);
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.25s;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-  }
-
-  .nav-tab:hover {
-    color: var(--text-mid);
-    background: rgba(255,255,255,0.04);
-    border-color: rgba(255,255,255,0.12);
-  }
-
-  .nav-tab.active {
-    color: #000;
-    background: var(--pink);
-    border-color: var(--pink);
-    font-weight: 700;
-  }
-
-  /* === MAIN CONTENT === */
-  .main {
-    padding: 28px 40px 60px;
-    max-width: 1480px;
-    margin: 0 auto;
-  }
-
-  .section-label {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--text-dim);
-    margin-bottom: 16px;
-    margin-top: 8px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-
-  .section-label::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--card-border);
-  }
-
-  /* === METRIC CARDS (top row) === */
-  .metrics-row {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 14px;
-    margin-bottom: 32px;
-  }
-
-  .metric-card {
-    background: var(--card);
-    border: 1px solid var(--card-border);
-    border-radius: var(--radius);
-    padding: 24px;
-    transition: all 0.3s cubic-bezier(.4,0,.2,1);
-    position: relative;
-    overflow: hidden;
-    backdrop-filter: blur(10px);
-  }
-
-  .metric-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--pink), rgba(244,60,226,0.3));
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-
-  .metric-card:hover {
-    background: var(--card-hover);
-    border-color: rgba(244,60,226,0.15);
-    transform: translateY(-3px);
-    box-shadow: 0 12px 40px rgba(244,60,226,0.08);
-  }
-
-  .metric-card:hover::before { opacity: 1; }
-
-  .metric-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    margin-bottom: 16px;
-  }
-
-  .metric-label {
-    font-size: 11px;
-    color: var(--text-dim);
-    margin-bottom: 8px;
-    font-weight: 500;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-    font-family: var(--font-body);
-  }
-
-  .metric-value {
-    font-size: 30px;
-    font-weight: 700;
-    color: var(--text);
-    letter-spacing: -1px;
-    line-height: 1.1;
-  }
-
-  .metric-change {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 11px;
-    font-weight: 600;
-    margin-top: 10px;
-    padding: 4px 10px;
-    border-radius: 50px;
-    font-family: var(--font-body);
-  }
-
-  .metric-change.up { color: var(--green); background: rgba(0,230,118,0.1); }
-  .metric-change.down { color: var(--red); background: rgba(255,82,82,0.1); }
-
-  /* === PLATFORM CARDS === */
-  .platforms-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
-    margin-bottom: 32px;
-  }
-
-  .platform-card {
-    background: var(--card);
-    border: 1px solid var(--card-border);
-    border-radius: var(--radius);
-    padding: 26px;
-    transition: all 0.3s cubic-bezier(.4,0,.2,1);
-    backdrop-filter: blur(10px);
-  }
-
-  .platform-card:hover {
-    background: var(--card-hover);
-    transform: translateY(-3px);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.2);
-  }
-
-  .platform-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 22px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid var(--card-border);
-  }
-
-  .platform-name {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .platform-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-  }
-
-  .platform-name span {
-    font-size: 15px;
-    font-weight: 700;
-    font-family: var(--font-heading);
-    letter-spacing: 0.5px;
-  }
-
-  .platform-badge {
-    font-size: 11px;
-    font-weight: 500;
-    padding: 5px 12px;
-    border-radius: 50px;
-    background: rgba(255,255,255,0.05);
-    color: var(--text-dim);
-    border: 1px solid var(--card-border);
-  }
-
-  .platform-stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 18px;
-  }
-
-  .platform-stat-label {
-    font-size: 10px;
-    color: var(--text-dim);
-    margin-bottom: 4px;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    font-family: var(--font-body);
-  }
-
-  .platform-stat-value {
-    font-size: 22px;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-  }
-
-  .platform-stat-change {
-    font-size: 11px;
-    font-weight: 600;
-    margin-top: 3px;
-    font-family: var(--font-body);
-  }
-
-  /* === CHART SECTIONS === */
-  .charts-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 14px;
-    margin-bottom: 32px;
-  }
-
-  .chart-card {
-    background: var(--card);
-    border: 1px solid var(--card-border);
-    border-radius: var(--radius);
-    padding: 24px;
-    backdrop-filter: blur(10px);
-  }
-
-  .chart-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
-  }
-
-  .chart-title {
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 0.3px;
-  }
-
-  .chart-period {
-    display: flex;
-    gap: 4px;
-  }
-
-  .chart-period button {
-    padding: 6px 14px;
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--text-dim);
-    background: transparent;
-    border: 1px solid var(--card-border);
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.2s;
-    font-family: var(--font-heading);
-    letter-spacing: 0.5px;
-  }
-
-  .chart-period button.active {
-    color: #000;
-    background: var(--pink);
-    border-color: var(--pink);
-  }
-
-  .chart-container {
-    position: relative;
-    height: 260px;
-  }
-
-  /* === AD PERFORMANCE === */
-  .ads-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
-    margin-bottom: 32px;
-  }
-
-  .ad-card {
-    background: var(--card);
-    border: 1px solid var(--card-border);
-    border-radius: var(--radius);
-    padding: 24px;
-    transition: all 0.3s cubic-bezier(.4,0,.2,1);
-    backdrop-filter: blur(10px);
-  }
-
-  .ad-card:hover {
-    background: var(--card-hover);
-    transform: translateY(-3px);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.2);
-  }
-
-  .ad-card-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid var(--card-border);
-  }
-
-  .ad-platform {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .ad-platform-icon {
-    width: 38px;
-    height: 38px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    font-weight: 800;
-    font-family: var(--font-heading);
-  }
-
-  .ad-platform-name {
-    font-size: 14px;
-    font-weight: 700;
-    font-family: var(--font-heading);
-  }
-
-  .ad-status {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 11px;
-    color: var(--green);
-    font-weight: 500;
-  }
-
-  .ad-status-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--green);
-    animation: pulse 2s infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
-  }
-
-  .ad-metrics {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-
-  .ad-metric {
-    padding: 14px;
-    background: rgba(255,255,255,0.02);
-    border-radius: var(--radius-sm);
-    border: 1px solid rgba(255,255,255,0.04);
-  }
-
-  .ad-metric-label {
-    font-size: 9px;
-    color: var(--text-dim);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 6px;
-    font-family: var(--font-body);
-  }
-
-  .ad-metric-value {
-    font-size: 18px;
-    font-weight: 700;
-    letter-spacing: -0.3px;
-  }
-
-  /* === CONTENT TABLE === */
-  .table-card {
-    background: var(--card);
-    border: 1px solid var(--card-border);
-    border-radius: var(--radius);
-    padding: 24px;
-    margin-bottom: 32px;
-    overflow: hidden;
-    backdrop-filter: blur(10px);
-  }
-
-  .table-wrapper { overflow-x: auto; }
-
-  table { width: 100%; border-collapse: collapse; }
-
-  thead th {
-    text-align: left;
-    font-size: 10px;
-    font-weight: 700;
-    color: var(--text-dim);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding: 12px 16px;
-    border-bottom: 1px solid var(--card-border);
-    font-family: var(--font-heading);
-  }
-
-  tbody td {
-    padding: 14px 16px;
-    font-size: 13px;
-    color: var(--text-mid);
-    border-bottom: 1px solid rgba(255,255,255,0.03);
-  }
-
-  tbody tr:hover { background: rgba(255,255,255,0.02); }
-  tbody tr:last-child td { border-bottom: none; }
-
-  .post-type-badge {
-    display: inline-block;
-    padding: 4px 12px;
-    border-radius: 50px;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    font-family: var(--font-heading);
-  }
-
-  .post-type-badge.reel { background: rgba(244,60,226,0.12); color: var(--pink); }
-  .post-type-badge.story { background: rgba(68,138,255,0.12); color: var(--blue); }
-  .post-type-badge.post { background: rgba(0,242,234,0.12); color: var(--tiktok); }
-  .post-type-badge.video { background: rgba(255,145,0,0.12); color: var(--orange); }
-
-  /* === FOOTER === */
-  .footer {
-    border-top: 1px solid var(--card-border);
-    padding: 24px 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .footer-left {
-    font-size: 12px;
-    color: var(--text-dim);
-  }
-
-  .footer-brand {
-    font-size: 12px;
-    color: var(--text-dim);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .footer-brand a {
-    color: var(--pink);
-    text-decoration: none;
-    font-weight: 600;
-  }
-
-  @media (max-width: 600px) {
-    .footer {
-      flex-direction: column;
-      text-align: center;
-      gap: 6px;
-      padding: 18px 20px;
-    }
-  }
-
-  /* === SECTIONS VISIBILITY === */
-  .section { display: none; }
-  .section.active { display: block; }
-
-  /* === RESPONSIVE === */
-  @media (max-width: 1024px) {
-    .metrics-row { grid-template-columns: repeat(2, 1fr); }
-    .platforms-grid { grid-template-columns: 1fr; }
-    .charts-grid { grid-template-columns: 1fr; }
-    .ads-grid { grid-template-columns: 1fr; }
-    .main { padding: 20px; }
-    .header { padding: 16px 20px; }
-    .nav-tabs { padding: 12px 20px; overflow-x: auto; }
-  }
-
-  @media (max-width: 640px) {
-    .metrics-row { grid-template-columns: 1fr; }
-    .header-right { display: none; }
-  }
+  @font-face { font-family:'Termina'; src:local('Termina'); font-weight:100 900; font-display:swap; }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --pink:#F43CE2;--pink-dim:rgba(244,60,226,0.12);--pink-glow:rgba(244,60,226,0.25);
+    --bg:#0B0B12;--card:rgba(18,18,28,0.85);--card-solid:#13131F;
+    --card-border:rgba(255,255,255,0.07);--card-hover:rgba(26,26,40,0.9);
+    --text:#FFF;--text-dim:rgba(255,255,255,0.45);--text-mid:rgba(255,255,255,0.7);
+    --green:#00E676;--red:#FF5252;--blue:#448AFF;--orange:#FF9100;
+    --tiktok:#00F2EA;--facebook:#1877F2;--instagram:#E1306C;--google:#4285F4;
+    --radius:20px;--radius-sm:12px;
+    --font-heading:'Termina','Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    --font-body:'Avenir','Avenir Next','Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    /* location accent colors */
+    --loc-407:#F43CE2;--loc-gnv:#00F2EA;--loc-jax:#448AFF;--loc-850:#FF9100;--loc-af:#00E676;--loc-corp:#7C4DFF;
+  }
+  body{background:var(--bg);color:var(--text);font-family:var(--font-body);line-height:1.6;min-height:100vh;overflow-x:hidden;}
+  h1,h2,h3,h4,h5,h6,.logo-mark,.logo-text span:first-child,.section-label,.metric-value,.platform-stat-value,.ad-metric-value,.chart-title,.nav-tab,.loc-tab{font-family:var(--font-heading);}
+
+  /* HEADER */
+  .header{background:linear-gradient(180deg,rgba(244,60,226,0.06) 0%,transparent 100%);border-bottom:1px solid var(--card-border);padding:20px 40px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);}
+  .logo-area{display:flex;align-items:center;gap:18px;}
+  .logo-svg{height:44px;width:auto;object-fit:contain;}
+  .logo-divider{width:1px;height:36px;background:rgba(255,255,255,0.1);}
+  .logo-text{display:flex;flex-direction:column;}
+  .logo-text span:first-child{font-size:15px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--text);}
+  .logo-text span:last-child{font-size:11px;color:var(--text-dim);letter-spacing:1.5px;text-transform:uppercase;font-family:var(--font-body);}
+  .header-right{display:flex;align-items:center;gap:16px;}
+  .header-date{font-size:13px;color:var(--text-dim);}
+  .header-badge{background:var(--pink-dim);color:var(--pink);font-size:11px;font-weight:600;padding:6px 16px;border-radius:50px;border:1px solid rgba(244,60,226,0.2);letter-spacing:1px;text-transform:uppercase;font-family:var(--font-heading);}
+
+  /* NAV TABS */
+  .nav-tabs{display:flex;gap:6px;padding:14px 40px;border-bottom:1px solid var(--card-border);background:rgba(11,11,18,0.9);backdrop-filter:blur(12px);position:sticky;top:85px;z-index:99;}
+  .nav-tab{padding:10px 24px;font-size:12px;font-weight:600;color:var(--text-dim);background:transparent;border:1px solid var(--card-border);border-radius:50px;cursor:pointer;transition:all 0.25s;letter-spacing:0.8px;text-transform:uppercase;}
+  .nav-tab:hover{color:var(--text-mid);background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.12);}
+  .nav-tab.active{color:#000;background:var(--pink);border-color:var(--pink);font-weight:700;}
+
+  /* LOCATION TABS */
+  .loc-tabs{display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap;}
+  .loc-tab{padding:8px 20px;font-size:11px;font-weight:600;color:var(--text-dim);background:transparent;border:1px solid var(--card-border);border-radius:50px;cursor:pointer;transition:all 0.25s;letter-spacing:0.6px;text-transform:uppercase;}
+  .loc-tab:hover{color:var(--text-mid);background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.12);}
+  .loc-tab.active{color:#000;font-weight:700;}
+
+  /* MONTH TABS */
+  .month-tabs{display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap;}
+  .month-tab{padding:7px 18px;font-size:10px;font-weight:600;color:var(--text-dim);background:transparent;border:1px solid var(--card-border);border-radius:50px;cursor:pointer;transition:all 0.25s;letter-spacing:0.6px;text-transform:uppercase;font-family:var(--font-heading);}
+  .month-tab:hover{color:var(--text-mid);background:rgba(255,255,255,0.04);}
+  .month-tab.active{color:#000;background:var(--pink);border-color:var(--pink);font-weight:700;}
+
+  /* MAIN */
+  .main{padding:28px 40px 60px;max-width:1480px;margin:0 auto;}
+  .section-label{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--text-dim);margin-bottom:16px;margin-top:8px;display:flex;align-items:center;gap:14px;}
+  .section-label::after{content:'';flex:1;height:1px;background:var(--card-border);}
+
+  /* METRIC CARDS */
+  .metrics-row{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:32px;}
+  .metrics-row-4{grid-template-columns:repeat(4,1fr);}
+  .metric-card{background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:24px;transition:all 0.3s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden;backdrop-filter:blur(10px);}
+  .metric-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--pink),rgba(244,60,226,0.3));opacity:0;transition:opacity 0.3s;}
+  .metric-card:hover{background:var(--card-hover);border-color:rgba(244,60,226,0.15);transform:translateY(-3px);box-shadow:0 12px 40px rgba(244,60,226,0.08);}
+  .metric-card:hover::before{opacity:1;}
+  .metric-icon{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:16px;}
+  .metric-label{font-size:11px;color:var(--text-dim);margin-bottom:8px;font-weight:500;letter-spacing:0.8px;text-transform:uppercase;font-family:var(--font-body);}
+  .metric-value{font-size:28px;font-weight:700;color:var(--text);letter-spacing:-1px;line-height:1.1;}
+  .metric-change{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;margin-top:10px;padding:4px 10px;border-radius:50px;font-family:var(--font-body);}
+  .metric-change.up{color:var(--green);background:rgba(0,230,118,0.1);}
+  .metric-change.down{color:var(--red);background:rgba(255,82,82,0.1);}
+  .metric-change.neutral{color:var(--text-dim);background:rgba(255,255,255,0.05);}
+
+  /* LOCATION CARDS */
+  .loc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:32px;}
+  .loc-card{background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:22px;transition:all 0.3s cubic-bezier(.4,0,.2,1);backdrop-filter:blur(10px);position:relative;overflow:hidden;}
+  .loc-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:0.8;}
+  .loc-card:hover{background:var(--card-hover);transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,0.2);}
+  .loc-card-header{display:flex;align-items:center;gap:10px;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--card-border);}
+  .loc-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+  .loc-card-name{font-size:13px;font-weight:700;font-family:var(--font-heading);letter-spacing:0.5px;}
+  .loc-card-city{font-size:10px;color:var(--text-dim);letter-spacing:0.5px;margin-left:auto;}
+  .loc-stat{margin-bottom:14px;}
+  .loc-stat:last-child{margin-bottom:0;}
+  .loc-stat-label{font-size:9px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;font-family:var(--font-body);}
+  .loc-stat-value{font-size:20px;font-weight:700;letter-spacing:-0.5px;font-family:var(--font-heading);}
+  .loc-stat-sub{font-size:10px;font-weight:600;margin-top:2px;font-family:var(--font-body);}
+
+  /* PLATFORM / INSIGHT CARDS */
+  .platform-card{background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:26px;transition:all 0.3s cubic-bezier(.4,0,.2,1);backdrop-filter:blur(10px);}
+  .platform-card:hover{background:var(--card-hover);transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,0.2);}
+  .platform-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;padding-bottom:16px;border-bottom:1px solid var(--card-border);}
+  .platform-name{display:flex;align-items:center;gap:10px;}
+  .platform-dot{width:10px;height:10px;border-radius:50%;}
+  .platform-name span{font-size:15px;font-weight:700;font-family:var(--font-heading);letter-spacing:0.5px;}
+  .platform-badge{font-size:11px;font-weight:500;padding:5px 12px;border-radius:50px;background:rgba(255,255,255,0.05);color:var(--text-dim);border:1px solid var(--card-border);}
+  .insights-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:32px;}
+
+  /* CHARTS */
+  .charts-grid{display:grid;grid-template-columns:2fr 1fr;gap:14px;margin-bottom:32px;}
+  .chart-card{background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:24px;backdrop-filter:blur(10px);}
+  .chart-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
+  .chart-title{font-size:14px;font-weight:700;letter-spacing:0.3px;}
+  .chart-container{position:relative;height:280px;}
+
+  /* AUDIENCE ROW */
+  .audience-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:32px;}
+  .audience-card{background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:20px;text-align:center;backdrop-filter:blur(10px);}
+  .audience-card-name{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px;font-family:var(--font-heading);}
+  .audience-row{display:flex;justify-content:space-between;margin-bottom:8px;font-size:11px;}
+  .audience-row-label{color:var(--text-dim);}
+  .audience-row-value{color:var(--text);font-weight:600;}
+
+  /* TABLE */
+  .table-card{background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:24px;margin-bottom:32px;overflow:hidden;backdrop-filter:blur(10px);}
+  .table-wrapper{overflow-x:auto;}
+  table{width:100%;border-collapse:collapse;}
+  thead th{text-align:left;font-size:10px;font-weight:700;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;padding:12px 16px;border-bottom:1px solid var(--card-border);font-family:var(--font-heading);}
+  tbody td{padding:14px 16px;font-size:13px;color:var(--text-mid);border-bottom:1px solid rgba(255,255,255,0.03);}
+  tbody tr:hover{background:rgba(255,255,255,0.02);}
+  tbody tr:last-child td{border-bottom:none;}
+
+  /* FOOTER */
+  .footer{border-top:1px solid var(--card-border);padding:24px 40px;display:flex;align-items:center;justify-content:space-between;}
+  .footer-left{font-size:12px;color:var(--text-dim);}
+  .footer-brand{font-size:12px;color:var(--text-dim);display:flex;align-items:center;gap:8px;}
+  .footer-brand a{color:var(--pink);text-decoration:none;font-weight:600;}
+
+  .section{display:none;}
+  .section.active{display:block;}
+
+  /* highlight best metric in green */
+  .best{color:var(--green) !important;}
+
+  /* TOP POSTS */
+  .posts-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:32px;}
+  .post-card{background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:20px;transition:all 0.3s cubic-bezier(.4,0,.2,1);backdrop-filter:blur(10px);position:relative;overflow:hidden;}
+  .post-card:hover{background:var(--card-hover);transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,0.2);}
+  .post-card-header{display:flex;align-items:center;gap:8px;margin-bottom:14px;}
+  .post-platform-icon{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;}
+  .post-type-badge{font-size:9px;font-weight:700;padding:3px 10px;border-radius:50px;text-transform:uppercase;letter-spacing:0.8px;font-family:var(--font-heading);}
+  .post-rank{margin-left:auto;font-size:11px;color:var(--text-dim);font-weight:600;font-family:var(--font-heading);}
+  .post-caption{font-size:12px;color:var(--text-mid);line-height:1.6;margin-bottom:14px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+  .post-stats{display:flex;gap:16px;padding-top:12px;border-top:1px solid var(--card-border);}
+  .post-stat{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text-dim);}
+  .post-stat-value{color:var(--text);font-weight:600;}
+  .post-eng{margin-left:auto;font-size:12px;font-weight:700;color:var(--pink);font-family:var(--font-heading);}
+
+  @media(max-width:1200px){.loc-grid,.metrics-row,.audience-grid{grid-template-columns:repeat(2,1fr);}.charts-grid{grid-template-columns:1fr;}}
+  @media(max-width:768px){.loc-grid,.metrics-row,.audience-grid{grid-template-columns:repeat(2,1fr);}.main{padding:20px;}.header{padding:16px 20px;}.nav-tabs{padding:12px 20px;overflow-x:auto;}.insights-grid{grid-template-columns:1fr;}}
+  @media(max-width:500px){.loc-grid,.metrics-row,.audience-grid{grid-template-columns:1fr;}.header-right{display:none;}}
+  @media(max-width:600px){.footer{flex-direction:column;text-align:center;gap:6px;padding:18px 20px;}}
 </style>
 </head>
 <body>
@@ -665,10 +162,10 @@
 <!-- HEADER -->
 <div class="header">
   <div class="logo-area">
-    <svg class="logo-svg" viewBox="0 0 832.38 414.9" xmlns="http://www.w3.org/2000/svg"><path fill="#f43ce1" d="M394.58,276.19c-1.7-27.28-2.6-59.33-20.79-81.41-12.14-14.75-30.77-22.71-49.44-26.51-18.06-3.66-36.64-5.37-55.39-6.08-29.32-1.11-59.04.19-87.72.19H.78v250.45c2.98.21,5.18.48,7.36.48,75.49.04,150.97.29,226.44-.08,25.11-.13,50.44-.12,75.25-3.34,31.95-4.14,59.67-18.55,74.46-48.9,12.33-25.28,11.98-57.39,10.28-84.81ZM302.4,283.98c-1.91,15.23-10.68,22.85-27.62,22.96-31.17.23-62.33.08-93.5.08h-84.63v-55.55c2.62-.31,5.03-.81,7.43-.81,56.29-.04,112.57-.13,168.86.02,22.27.06,32.17,11.53,29.45,33.3ZM259.47,107.84c.42,0,.84,0,1.24.02l-1.24-.02Z"/><path fill="#f43ce1" d="M76.45,0L0,107.84l632.26-.46c-.78.9-1.74,2.09-2.79,3.18-64.12,66.26-128.24,132.49-192.35,198.77-11.18,11.55-18.16,25.34-20.99,41.17-6.42,36.06,13.23,62.69,46.88,62.77,27.5.06,55.01.08,82.51.06l210.41,1.57,76.45-107.84h-253.24c.44-.63.78-1.13,1.19-1.57,64.96-67.66,130.14-135.1,194.6-203.24,8.01-8.46,14.24-19.95,17.68-31.15C802.43,39.27,790.51-.27,740.64.02l-664.19-.02Z"/></svg>
+    <img class="logo-svg" src="logo.png" alt="FIT AF Logo">
     <div class="logo-divider"></div>
     <div class="logo-text">
-      <span>Booty Babez</span>
+      <span>FIT AF</span>
       <span>Digital Dashboard</span>
     </div>
   </div>
@@ -680,1447 +177,1002 @@
 
 <!-- NAV TABS -->
 <div class="nav-tabs">
-  <button class="nav-tab active" onclick="switchTab('overview', this)">Overview</button>
-  <button class="nav-tab" onclick="switchTab('social', this)">Social Media</button>
-  <button class="nav-tab" onclick="switchTab('ads', this)">Paid Ads</button>
-  <button class="nav-tab" onclick="switchTab('content', this)">Top Content</button>
-  <button class="nav-tab" onclick="switchTab('google', this)">Google Business</button>
+  <button class="nav-tab active" onclick="switchTab('overview',this)">Overview</button>
+  <button class="nav-tab" onclick="switchTab('social',this)">Social Media</button>
+  <button class="nav-tab" onclick="switchTab('insights',this)">Insights</button>
+  <button class="nav-tab" onclick="switchTab('audience',this)">Audience</button>
 </div>
 
 <!-- MAIN -->
-<div class="main">
+<div class="main" id="mainContent"></div>
 
-  <!-- ==================== OVERVIEW TAB ==================== -->
-  <div class="section active" id="tab-overview">
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-left">FIT AF Digital Dashboard &copy; 2026</div>
+  <div class="footer-brand">Powered by <a href="https://brookerogersdesign.com" target="_blank">Howell'n & Partners</a></div>
+</div>
 
-    <div class="section-label">Key Metrics</div>
-    <div class="metrics-row">
-      <div class="metric-card">
-        <div class="metric-icon" style="background: var(--pink-dim); color: var(--pink);">&#x1F465;</div>
-        <div class="metric-label">Total Followers</div>
-        <div class="metric-value">5,002</div>
-        <div class="metric-change up">ALL PLATFORMS</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-icon" style="background: rgba(0,230,118,0.1); color: var(--green);">&#x1F4C8;</div>
-        <div class="metric-label">Engagement Rate</div>
-        <div class="metric-value">29.40%</div>
-        <div class="metric-change up">AUG 2026</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-icon" style="background: rgba(68,138,255,0.1); color: var(--blue);">&#x2728;</div>
-        <div class="metric-label">Growth</div>
-        <div class="metric-value">+299</div>
-        <div class="metric-change up">AUG 2026</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-icon" style="background: rgba(255,145,0,0.1); color: var(--orange);">&#x1F4B0;</div>
-        <div class="metric-label">Total Ad Spend</div>
-        <div class="metric-value">$149.53</div>
-        <div class="metric-change up">META &bull; 5 DAYS</div>
-      </div>
+<script>
+// === DATA ===
+const LOCATIONS = [
+  { id:'407', name:'FIT 407', city:'Orlando', color:'#F43CE2' },
+  { id:'gnv', name:'FIT Gainesville', city:'Gainesville', color:'#00F2EA' },
+  { id:'jax', name:'FIT JAX', city:'Jacksonville', color:'#448AFF' },
+  { id:'850', name:'FIT 850', city:'Tallahassee', color:'#FF9100' },
+  { id:'af',  name:'FIT AF', city:'Multi', color:'#00E676' },
+  { id:'corp', name:'@FITasFIRE', city:'Corporate', color:'#7C4DFF' }
+];
+
+const MONTHS = [
+  { id:'jul26', label:'July 2026' },
+  { id:'jun26', label:'June 2026' },
+  { id:'may26', label:'May 2026' },
+  { id:'apr26', label:'April 2026' },
+  { id:'mar26', label:'March 2026' },
+  { id:'feb26', label:'February 2026' },
+  { id:'jan26', label:'January 2026' }
+];
+
+const DATA = {
+  jul26: {
+    '407': { posts:18, reach:'67K', reachNum:67034, interactions:'3K', intNum:2996, engagement:'4.52%', engNum:4.52, newFollowers:374,
+             audience:{ gender:'Women', location:'Orlando', age:"20's-30's (IG) 40's (FB)" },
+             insights:{ worked:'Event-driven content won the month. The Lake Mary launch combined urgency, a giveaway, and a clear participation mechanic. Community recap content performed because it showed real people in real moments. Posts with a \'why now\' reason consistently outperformed everything else.',
+                        didntWork:'Evergreen and educational content fell flat. Low-stakes CTAs like \'tag someone\' didn\'t give people a strong enough reason to stop scrolling. Content without a clear emotional hook or timely angle got skipped.',
+                        improvements:'Attach a participation mechanic to more posts (tag, share, book). Add a real face or personal quote to educational content instead of just tips. Give every post a \'why now\' angle to create urgency.',
+                        audienceInsight:'This audience responds to community proof, not just community messaging. They share content that reflects their identity as part of the FIT Fam. Local relevance is a major growth lever. They want to belong to something, not just work out somewhere.' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    'gnv': { posts:14, reach:'11.5K', reachNum:11519, interactions:'357', intNum:357, engagement:'3.00%', engNum:3.00, newFollowers:66,
+             audience:{ gender:'Women', location:'Tallahassee', age:"18-20's" },
+             insights:{ worked:'Carousels dominated the top performers because they give the audience something to do — swipe, discover, react. Content with a clear purpose or real stakes (trainer recruitment, milestones, relatable moments) consistently outperformed anything purely aesthetic.',
+                        didntWork:'Static images claimed all 3 bottom spots — especially when paired with no CTA or community tie-in. Comments were nearly nonexistent across the entire month with only 2 total.',
+                        improvements:'Sharpen the comment CTAs — they\'re too generic right now and not converting. Move educational content out of static images and into carousels or Reels where it can actually breathe.',
+                        audienceInsight:'This audience is warm and loyal but passive by default — they\'ll like freely, but they need a specific, low-friction reason to comment or share. They respond to content that reflects their FIT Fam identity, not general fitness messaging.' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    'jax': { posts:16, reach:'17.4K', reachNum:17351, interactions:'927', intNum:927, engagement:'5.34%', engNum:5.34, newFollowers:119,
+             audience:{ gender:'Women', location:'Tampa', age:"18-20's" },
+             insights:{ worked:'Announcement and community-driven content dominated. The San Marco teaser, Jax Beach anniversary giveaway, and groupchat collab all gave people a reason to act — whether that was sharing, tagging, or entering to win.',
+                        didntWork:'Informational and educational posts fell flat. The cool down post, Main Stage announcement, and \'Okay your turn\' reel all had zero comments and zero shares.',
+                        improvements:'Pair any educational content with a challenge or question hook to give the audience something to do with the information. For reels, add a text overlay in the first second to stop the scroll.',
+                        audienceInsight:'This audience engages for community, not content. They show up when they feel personally included in something — a milestone, a local announcement, a reason to tag a friend.' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    '850': { posts:14, reach:'19.8K', reachNum:19792, interactions:'807', intNum:807, engagement:'3.88%', engNum:3.88, newFollowers:29,
+             audience:{ gender:'Women', location:'Gainesville', age:"18-20's" },
+             insights:{ worked:'Carousels won every metric because they demanded interaction. The top posts all had a clear prompt (\'tell us your why,\' \'comment your favorite memory\') that gave the audience something to do.',
+                        didntWork:'Static images with no call to action fell flat across the board. Without a reason to engage, the algorithm had no signal to push the content further.',
+                        improvements:'Add an engagement prompt to every post, even static images. For Reels, tighten the hook in the first two seconds and include a CTA within the video.',
+                        audienceInsight:'This community responds to content that reflects them back to themselves — milestones, shared memories, a sense of belonging. They\'re not just fitness followers, they\'re FIT loyalists.' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    'af':  { posts:14, reach:'9.2K', reachNum:9188, interactions:'403', intNum:403, engagement:'4.44%', engNum:4.44, newFollowers:34,
+             audience:{ gender:'Women', location:'Jacksonville', age:"20's-30's" },
+             insights:{ worked:'Community-first content dominated. The top post (tag-a-friend) hit the highest reach, and the milestone carousel had the best ER at 8.07% — both worked because they made the audience feel seen and gave them a reason to act.',
+                        didntWork:'Static images with no CTA consistently landed at the bottom. When the caption didn\'t invite engagement, the audience didn\'t give it.',
+                        improvements:'Add a low-friction prompt to every post — a question, a tag ask, a \'comment below.\' Also worth leaning into more carousels, which showed up twice in the top 3.',
+                        audienceInsight:'This audience responds to people and connection over workouts and schedules. Content that makes followers feel like insiders consistently outperforms content that just informs.' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    'corp': { posts:0, reach:'—', reachNum:0, interactions:'—', intNum:0, engagement:'—', engNum:0, newFollowers:0,
+              audience:{ gender:'—', location:'—', age:'—' },
+              insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' },
+              workingNow:[], needsAttention:[], bestNextMove:'' }
+  },
+  jun26: {
+    '407': { posts:18, reach:'257.6K', reachNum:257600, interactions:'4.6K', intNum:4600, engagement:'1.77%', engNum:1.77, newFollowers:589,
+             audience:{ gender:'Women', location:'Orlando', age:"20's-30's (IG) 40's (FB)" },
+             insights:{ worked:'Fun, relatable reels worked. Additionally, building hype around special events (openings, FIT birthday\'s, holidays, etc.) did really well!',
+                        didntWork:'Static, no-hook, there-for-the-aesthetic posts did not do as well as others. However, they still did reasonably well.',
+                        improvements:'Making at least 50% or more of our posts reels would increase engagement by a lot!!',
+                        audienceInsight:'Our audience enjoys relatable content as well as feeling like they\'re a part of the community.' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    'gnv': { posts:10, reach:'20.4K', reachNum:20400, interactions:'890', intNum:890, engagement:'4.37%', engNum:4.37, newFollowers:82,
+             audience:{ gender:'Women', location:'Tallahassee', age:"18-20's" },
+             insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    'jax': { posts:15, reach:'53.6K', reachNum:53600, interactions:'1.5K', intNum:1500, engagement:'2.80%', engNum:2.80, newFollowers:146,
+             audience:{ gender:'Women', location:'Tampa', age:"18-20's" },
+             insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    '850': { posts:15, reach:'32.4K', reachNum:32400, interactions:'1.6K', intNum:1600, engagement:'5.03%', engNum:5.03, newFollowers:198,
+             audience:{ gender:'Women', location:'Gainesville', age:"18-20's" },
+             insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    'af':  { posts:10, reach:'57.1K', reachNum:57100, interactions:'886', intNum:886, engagement:'1.55%', engNum:1.55, newFollowers:124,
+             audience:{ gender:'Women', location:'Jacksonville', age:"20's-30's" },
+             insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    'corp': { posts:9, reach:'10.9K', reachNum:10900, interactions:'801', intNum:801, engagement:'7.35%', engNum:7.35, newFollowers:116,
+              audience:{ gender:'Women', location:'Tallahassee', age:"18-20's" },
+              insights:{ worked:'Fun, relatable reels worked. Additionally, building hype around special events (openings, FIT birthday\'s, holidays, etc.) did really well!',
+                         didntWork:'Static, no-hook, there-for-the-aesthetic posts did not do as well as others. However, they still did reasonably well.',
+                         improvements:'Making at least 50% or more of our posts reels would increase engagement by a lot!!',
+                         audienceInsight:'Our audience enjoys relatable content as well as feeling like they\'re a part of the community.' },
+              workingNow:[], needsAttention:[], bestNextMove:'' }
+  },
+  jan26: {
+    '407': { posts:21, reach:'325K', reachNum:325000, interactions:'4.1K', intNum:4100, engagement:'1.20%', engNum:1.20, newFollowers:743,
+             audience:{ gender:'Women', location:'Orlando', age:"20's-30's (IG) 40's (FB)" },
+             insights:{ worked:'Fun, relatable reels worked. Additionally, building hype around special events (openings, FIT birthday\'s, holidays, etc.) did really well!',
+                        didntWork:'Static, no-hook, there-for-the-aesthetic posts did not do as well as others. However, they still did reasonably well.',
+                        improvements:'Making at least 50% or more of our posts reels would increase engagement by a lot!!',
+                        audienceInsight:'Our audience enjoys relatable content as well as feeling like they\'re a part of the community.' } },
+    'gnv': { posts:11, reach:'3.2K', reachNum:3200, interactions:'377', intNum:377, engagement:'9.65%', engNum:9.65, newFollowers:101,
+             audience:{ gender:'Women', location:'Tallahassee', age:"18-20's" }, insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' } },
+    'jax': { posts:15, reach:'80.4K', reachNum:80400, interactions:'508', intNum:508, engagement:'0.62%', engNum:0.62, newFollowers:149,
+             audience:{ gender:'Women', location:'Tampa', age:"18-20's" }, insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' } },
+    '850': { posts:13, reach:'48.6K', reachNum:48600, interactions:'1.4K', intNum:1400, engagement:'2.51%', engNum:2.51, newFollowers:236,
+             audience:{ gender:'Women', location:'Gainesville', age:"18-20's" }, insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' } },
+    'af':  { posts:15, reach:'51.4K', reachNum:51400, interactions:'460', intNum:460, engagement:'0.91%', engNum:0.91, newFollowers:137,
+             audience:{ gender:'Women', location:'Jacksonville', age:"20's-30's" }, insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    'corp': { posts:0, reach:'—', reachNum:0, interactions:'—', intNum:0, engagement:'—', engNum:0, newFollowers:0,
+              audience:{ gender:'—', location:'—', age:'—' }, insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' },
+              workingNow:[], needsAttention:[], bestNextMove:'' }
+  },
+  feb26: {
+    '407': { posts:15, reach:'252.2K', reachNum:252200, interactions:'4.5K', intNum:4500, engagement:'1.77%', engNum:1.77, newFollowers:846,
+             audience:{ gender:'Women', location:'Orlando', age:"20's-30's (IG) 40's (FB)" },
+             insights:{ worked:'Fun, relatable reels worked. Additionally, building hype around special events (openings, FIT birthday\'s, holidays, etc.) did really well!',
+                        didntWork:'Static, no-hook, there-for-the-aesthetic posts did not do as well as others. However, they still did reasonably well.',
+                        improvements:'Making at least 50% or more of our posts reels would increase engagement by a lot!!',
+                        audienceInsight:'Our audience enjoys relatable content as well as feeling like they\'re a part of the community.' } },
+    'gnv': { posts:13, reach:'3.4K', reachNum:3400, interactions:'395', intNum:395, engagement:'11.61%', engNum:11.61, newFollowers:57,
+             audience:{ gender:'Women', location:'Tallahassee', age:"18-20's" }, insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' } },
+    'jax': { posts:13, reach:'4.1K', reachNum:4100, interactions:'302', intNum:302, engagement:'7.34%', engNum:7.34, newFollowers:59,
+             audience:{ gender:'Women', location:'Tampa', age:"18-20's" }, insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' } },
+    '850': { posts:13, reach:'51.7K', reachNum:51700, interactions:'2.8K', intNum:2800, engagement:'5.59%', engNum:5.59, newFollowers:251,
+             audience:{ gender:'Women', location:'Gainesville', age:"18-20's" }, insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' } },
+    'af':  { posts:13, reach:'72.2K', reachNum:72200, interactions:'509', intNum:509, engagement:'0.71%', engNum:0.71, newFollowers:115,
+             audience:{ gender:'Women', location:'Jacksonville', age:"20's-30's" }, insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    'corp': { posts:0, reach:'—', reachNum:0, interactions:'—', intNum:0, engagement:'—', engNum:0, newFollowers:0,
+              audience:{ gender:'—', location:'—', age:'—' }, insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' },
+              workingNow:[], needsAttention:[], bestNextMove:'' }
+  },
+  mar26: {
+    '407': { posts:13, reach:'285.3K', reachNum:285300, interactions:'4.7K', intNum:4700, engagement:'1.51%', engNum:1.51, newFollowers:728,
+             audience:{ gender:'Women', location:'Orlando', age:"20's-30's (IG) 40's (FB)" },
+             insights:{ worked:'Fun, relatable reels worked. Additionally, building hype around special events (openings, FIT birthday\'s, holidays, etc.) did really well!',
+                        didntWork:'Static, no-hook, there-for-the-aesthetic posts did not do as well as others. However, they still did reasonably well.',
+                        improvements:'Making at least 50% or more of our posts reels would increase engagement by a lot!!',
+                        audienceInsight:'Our audience enjoys relatable content as well as feeling like they\'re a part of the community.' } },
+    'gnv': { posts:13, reach:'2.1K', reachNum:2100, interactions:'366', intNum:366, engagement:'16.90%', engNum:16.90, newFollowers:62,
+             audience:{ gender:'Women', location:'Tallahassee', age:"18-20's" }, insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' } },
+    'jax': { posts:13, reach:'4.4K', reachNum:4400, interactions:'819', intNum:819, engagement:'17.02%', engNum:17.02, newFollowers:60,
+             audience:{ gender:'Women', location:'Tampa', age:"18-20's" }, insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' } },
+    '850': { posts:13, reach:'29.4K', reachNum:29400, interactions:'2.7K', intNum:2700, engagement:'8.90%', engNum:8.90, newFollowers:114,
+             audience:{ gender:'Women', location:'Gainesville', age:"18-20's" }, insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' } },
+    'af':  { posts:13, reach:'79K', reachNum:79000, interactions:'1.5K', intNum:1500, engagement:'1.73%', engNum:1.73, newFollowers:125,
+             audience:{ gender:'Women', location:'Jacksonville', age:"20's-30's" }, insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    'corp': { posts:0, reach:'—', reachNum:0, interactions:'—', intNum:0, engagement:'—', engNum:0, newFollowers:0,
+              audience:{ gender:'—', location:'—', age:'—' }, insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' },
+              workingNow:[], needsAttention:[], bestNextMove:'' }
+  },
+  apr26: {
+    '407': { posts:14, reach:'301.1K', reachNum:301100, interactions:'4.6K', intNum:4600, engagement:'1.53%', engNum:1.53, newFollowers:514,
+             audience:{ gender:'Women', location:'Orlando', age:"20's-30's (IG) 40's (FB)" },
+             insights:{ worked:'Fun, relatable reels worked. Additionally, building hype around special events (openings, FIT birthday\'s, holidays, etc.) did really well!',
+                        didntWork:'Static, no-hook, there-for-the-aesthetic posts did not do as well as others. However, they still did reasonably well.',
+                        improvements:'Making at least 50% or more of our posts reels would increase engagement by a lot!!',
+                        audienceInsight:'Our audience enjoys relatable content as well as feeling like they\'re a part of the community.' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    'gnv': { posts:14, reach:'5.8K', reachNum:5800, interactions:'1.6K', intNum:1600, engagement:'27.57%', engNum:27.57, newFollowers:45,
+             audience:{ gender:'Women', location:'Tallahassee', age:"18-20's" },
+             insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    'jax': { posts:14, reach:'7K', reachNum:7000, interactions:'1.2K', intNum:1200, engagement:'16.96%', engNum:16.96, newFollowers:82,
+             audience:{ gender:'Women', location:'Tampa', age:"18-20's" },
+             insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    '850': { posts:14, reach:'42.6K', reachNum:42600, interactions:'2.9K', intNum:2900, engagement:'6.83%', engNum:6.83, newFollowers:251,
+             audience:{ gender:'Women', location:'Gainesville', age:"18-20's" },
+             insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    'af':  { posts:14, reach:'74.8K', reachNum:74800, interactions:'968', intNum:968, engagement:'1.29%', engNum:1.29, newFollowers:102,
+             audience:{ gender:'Women', location:'Jacksonville', age:"20's-30's" },
+             insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    'corp': { posts:20, reach:'24.5K', reachNum:24452, interactions:'1.1K', intNum:1059, engagement:'12.10%', engNum:12.10, newFollowers:151,
+              audience:{ gender:'Women', location:'Multi', age:"20's-30's" },
+              insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' },
+              workingNow:[
+                {title:'Community-centric messaging drives visibility', detail:'Posts emphasizing the \'FIT Fam\' and supportive studio environment secured the top spots for views, with the top Instagram image reaching 2,587 views.'},
+                {title:'Educational content is driving saves', detail:'Instagram saves increased by 333% (13 vs 3), indicating that the audience is finding value in instructional content like the \'FIVE Hot Mat moves\' breakdown.'},
+                {title:'Facebook profile visibility is growing', detail:'Facebook profile views increased by 316% (50 vs 12) and total media views grew by 28.5% (649 vs 505) compared to the previous period.'}
+              ],
+              needsAttention:[
+                {title:'Instagram reach and follower growth have slowed', detail:'Instagram reach decreased by 53.4% (4,469 vs 9,594) and views dropped by 47.2%, correlating with a 62.1% decline in new followers gained (148 vs 391).'},
+                {title:'Facebook standard posts are underperforming', detail:'Five out of six standard Facebook posts underperformed their baseline, contributing to a 28.9% decrease in the platform\'s overall engagement rate.'}
+              ],
+              bestNextMove:'Expand educational and community-focused formats — Prioritize Instagram Carousels and Reels that highlight the supportive studio environment or break down the \'FIT Method\' using bulleted lists with emojis. Test adapting these top-performing formats for Facebook to replace standard posts.' }
+  },
+  may26: {
+    '407': { posts:14, reach:'325K', reachNum:325000, interactions:'6.5K', intNum:6500, engagement:'1.84%', engNum:1.84, newFollowers:624,
+             audience:{ gender:'Women', location:'Orlando', age:"20's-30's (IG) 40's (FB)" },
+             insights:{ worked:'Fun, relatable reels worked. Additionally, building hype around special events (openings, FIT birthday\'s, holidays, etc.) did really well!',
+                        didntWork:'Static, no-hook, there-for-the-aesthetic posts did not do as well as others. However, they still did reasonably well.',
+                        improvements:'Making at least 50% or more of our posts reels would increase engagement by a lot!!',
+                        audienceInsight:'Our audience enjoys relatable content as well as feeling like they\'re a part of the community.' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    'gnv': { posts:14, reach:'14K', reachNum:14000, interactions:'1.8K', intNum:1800, engagement:'11.82%', engNum:11.82, newFollowers:112,
+             audience:{ gender:'Women', location:'Tallahassee', age:"18-20's" },
+             insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    'jax': { posts:14, reach:'45.4K', reachNum:45400, interactions:'2.6K', intNum:2600, engagement:'5.31%', engNum:5.31, newFollowers:154,
+             audience:{ gender:'Women', location:'Tampa', age:"18-20's" },
+             insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    '850': { posts:14, reach:'52.2K', reachNum:52200, interactions:'3.8K', intNum:3800, engagement:'6.55%', engNum:6.55, newFollowers:173,
+             audience:{ gender:'Women', location:'Gainesville', age:"18-20's" },
+             insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    'af':  { posts:16, reach:'15K', reachNum:15000, interactions:'2K', intNum:2000, engagement:'13.11%', engNum:13.11, newFollowers:126,
+             audience:{ gender:'Women', location:'Tallahassee', age:"18-20's" },
+             insights:{ worked:'Fun, relatable reels worked. Additionally, building hype around special events (openings, FIT birthday\'s, holidays, etc.) did really well!',
+                        didntWork:'Static, no-hook, there-for-the-aesthetic posts did not do as well as others. However, they still did reasonably well.',
+                        improvements:'Making at least 50% or more of our posts reels would increase engagement by a lot!!',
+                        audienceInsight:'Our audience enjoys relatable content as well as feeling like they\'re a part of the community.' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    'corp': { posts:0, reach:'—', reachNum:0, interactions:'—', intNum:0, engagement:'—', engNum:0, newFollowers:0,
+              audience:{ gender:'—', location:'—', age:'—' }, insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' },
+              workingNow:[], needsAttention:[], bestNextMove:'' }
+  }
+};
+
+// Engagement trend data (all months)
+const ENG_TREND = {
+  '407': [1.20, 1.77, 1.51, 1.53, 1.84, 1.77, 4.52],
+  'gnv': [9.65, 11.61, 16.90, 27.57, 11.82, 4.37, 3.00],
+  'jax': [0.62, 7.34, 17.02, 16.96, 5.31, 2.80, 5.34],
+  '850': [2.51, 5.59, 8.90, 6.83, 6.55, 5.03, 3.88],
+  'af':  [0.91, 0.71, 1.73, 1.29, 13.11, 1.55, 4.44],
+  'corp': [0, 0, 0, 12.10, 0, 7.35, 0]
+};
+const TREND_LABELS = ['Jan','Feb','Mar','Apr','May','Jun','Jul'];
+
+// Top performing posts by location and month
+const TOP_POSTS = {
+  jul26: {
+    '407': [
+      { platform:'Instagram', type:'POST', caption:'Lake Mary Grand Opening — FIT 407', views:10326, likes:260, comments:95, engagement:5.06, url:'https://www.instagram.com/p/Da0iyqLER39/' },
+      { platform:'Instagram', type:'REEL', caption:'FIT Social Club — FIT 407', views:5587, likes:257, comments:14, engagement:5.32, url:'https://www.instagram.com/reels/Da-6KtdJRUY/' },
+      { platform:'Instagram', type:'REEL', caption:'FIT Social Club Summer Edition — FIT 407', views:4451, likes:199, comments:17, engagement:6.31, url:'https://www.instagram.com/reels/DaTxACBIBBT/' }
+    ],
+    'gnv': [
+      { platform:'Instagram', type:'CAROUSEL', caption:'SRT Instructor Training — FIT Gainesville', views:879, likes:53, comments:0, engagement:7.28, url:'https://www.instagram.com/p/DbWEW_Dn40K/' },
+      { platform:'Instagram', type:'POST', caption:'When the workout makes it out of the groupchat! — FIT Gainesville', views:1454, likes:39, comments:1, engagement:2.75, url:'https://www.instagram.com/p/DaivgfXlDLn/' },
+      { platform:'Instagram', type:'CAROUSEL', caption:'Milestones — FIT Gainesville', views:707, likes:34, comments:0, engagement:4.95, url:'https://www.instagram.com/p/DbTWG0eDnX6/' }
+    ],
+    'jax': [
+      { platform:'Instagram', type:'POST', caption:'San Marco is heating up! — FIT JAX', views:2542, likes:203, comments:20, engagement:10.39, url:'https://www.instagram.com/p/DbWWRdZoFgW/' },
+      { platform:'Instagram', type:'CAROUSEL', caption:'Celebrate ONE YEAR of Jax Beach — FIT JAX', views:3216, likes:169, comments:5, engagement:5.91, url:'https://www.instagram.com/p/DbGgNcLn3qA/' },
+      { platform:'Instagram', type:'POST', caption:'When the workout makes it out of the groupchat! — FIT JAX', views:3028, likes:120, comments:53, engagement:6.21, url:'https://www.instagram.com/p/Daivg4NlOKr/' }
+    ],
+    '850': [
+      { platform:'Instagram', type:'CAROUSEL', caption:'That\'s My Why — FIT 850', views:2152, likes:96, comments:9, engagement:5.25, url:'https://www.instagram.com/p/DavS6P4kswn/' },
+      { platform:'Instagram', type:'CAROUSEL', caption:'SRT Instructor Training — FIT 850', views:1803, likes:87, comments:0, engagement:5.88, url:'https://www.instagram.com/p/DbWEp8iH4IC/' },
+      { platform:'Instagram', type:'CAROUSEL', caption:'#FITPHOTODUMP — FIT 850', views:1468, likes:83, comments:2, engagement:6.20, url:'https://www.instagram.com/p/DbLnpt2GTQe/' }
+    ],
+    'af': [
+      { platform:'Instagram', type:'POST', caption:'When the workout makes it out of the groupchat! — FIT AF', views:1231, likes:49, comments:2, engagement:4.22, url:'https://www.instagram.com/p/DaivgN7FPwV/' },
+      { platform:'Instagram', type:'CAROUSEL', caption:'Milestones — FIT AF', views:595, likes:46, comments:1, engagement:8.07, url:'https://www.instagram.com/p/DbTWJbQEulB/' },
+      { platform:'Instagram', type:'REEL', caption:'Progress > Perfection — FIT AF', views:931, likes:34, comments:0, engagement:3.87, url:'https://www.instagram.com/reels/DaVi8eADPYb/' }
+    ]
+  },
+  jun26: {
+    '407': [
+      { platform:'Instagram', type:'REEL', caption:'Top Performing Post #1 — FIT 407', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/reels/DZN4bXIl7yz/' },
+      { platform:'Instagram', type:'REEL', caption:'Top Performing Post #2 — FIT 407', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/reels/DZaVA2qEToJ/' },
+      { platform:'Instagram', type:'POST', caption:'Top Performing Post #3 — FIT 407', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/p/DaEXyctpqK1/' }
+    ],
+    'gnv': [
+      { platform:'Instagram', type:'POST', caption:'Top Performing Post #1 — FIT Gainesville', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/p/DZxgCHpls_9/' },
+      { platform:'Instagram', type:'POST', caption:'Top Performing Post #2 — FIT Gainesville', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/p/DZ8SnmUjyoF/' },
+      { platform:'Instagram', type:'REEL', caption:'Top Performing Post #3 — FIT Gainesville', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/reels/DZN4bXIl7yz/' }
+    ],
+    'jax': [
+      { platform:'Instagram', type:'REEL', caption:'Top Performing Post #1 — FIT JAX', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/reels/DZaVBg2Dn5g/' },
+      { platform:'Instagram', type:'REEL', caption:'Top Performing Post #2 — FIT JAX', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/reels/DZN4bXIl7yz/' },
+      { platform:'Instagram', type:'POST', caption:'Top Performing Post #3 — FIT JAX', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/p/DZDvDGtkch4/' }
+    ],
+    '850': [
+      { platform:'Instagram', type:'POST', caption:'Top Performing Post #1 — FIT 850', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/p/DZ8T3agn9Nv/' },
+      { platform:'Instagram', type:'POST', caption:'Top Performing Post #2 — FIT 850', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/p/DZk1swHn5XN/' },
+      { platform:'Instagram', type:'REEL', caption:'Top Performing Post #3 — FIT 850', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/reels/DZN4bXIl7yz/' }
+    ],
+    'af': [
+      { platform:'Instagram', type:'POST', caption:'Top Performing Post #1 — FIT AF', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/p/DZxgEI5lnQm/' },
+      { platform:'Instagram', type:'POST', caption:'Top Performing Post #2 — FIT AF', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/p/DZ8ToC_GTtt/' },
+      { platform:'Instagram', type:'REEL', caption:'Top Performing Post #3 — FIT AF', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/reels/DZN4bXIl7yz/' }
+    ],
+    'corp': [
+      { platform:'Instagram', type:'POST', caption:'Top Performing Post #1 — @FITasFIRE', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/p/DZvWnKgFFg2/' },
+      { platform:'Instagram', type:'REEL', caption:'Top Performing Post #2 — @FITasFIRE', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/reels/DZ7zUfQAkmJ/' },
+      { platform:'Instagram', type:'POST', caption:'Top Performing Post #3 — @FITasFIRE', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/p/DZK4DkylrTY/' }
+    ]
+  },
+  apr26: {
+    'corp': [
+      { platform:'Instagram', type:'IMAGE', caption:'The best part of FIT isn\'t just what happens on the reform and mat... It\'s what happens around it 💕...', views:2600, likes:143, comments:9, engagement:12.8, url:'https://www.instagram.com/p/DXpB3dWFP3P/' },
+      { platform:'Instagram', type:'REEL', caption:'Who said Pilates was just for the girls? 🔥 The strength, control, and stability you build in Pilates carry over in...', views:2200, likes:83, comments:3, engagement:10.2, url:'https://www.instagram.com/p/DXmc-WZD7Pq/' },
+      { platform:'Instagram', type:'CAROUSEL', caption:'Picture this: A room where everyone wants you to win 💕 Energy that lifts you, coaching that guides you,...', views:2100, likes:83, comments:1, engagement:11.3, url:'https://www.instagram.com/reel/DXhMlQ3FJIS/' },
+      { platform:'Instagram', type:'REEL', caption:'FIVE Hot Mat moves we love (and why they stay in the rotation): 💕 Weighted squats: lower-body strength +...', views:1900, likes:100, comments:1, engagement:8.5, url:'https://www.instagram.com/reel/DXPLAgwEu-W/' },
+      { platform:'Instagram', type:'CAROUSEL', caption:'The best part of FIT is the way the FAM shows up for you 💕 Comment your city + tag your home studio,...', views:1900, likes:78, comments:1, engagement:10.4, url:'https://www.instagram.com/p/DXE3xY8DeRO/' },
+      { platform:'Instagram', type:'IMAGE', caption:'There\'s a reason the room feels different the second you walk in... 💜 Dim lighting & this neon glow makes...', views:1900, likes:88, comments:0, engagement:9.5, url:'https://www.instagram.com/p/DW9Jbs9jd5j/' },
+      { platform:'Instagram', type:'REEL', caption:'Not sure which one to choose? 🧐 You don\'t have to! At FIT, you can have the best of BOTH worlds! 💕...', views:1700, likes:75, comments:0, engagement:7.2, url:'https://www.instagram.com/reel/DW3_yDHjetI/' },
+      { platform:'Instagram', type:'IMAGE', caption:'Your nervous system matters too 💚 A few minutes of breathing and longer stretches at the end of class ca...', views:1500, likes:71, comments:0, engagement:10.2, url:'https://www.instagram.com/p/DWy2NXblFgc/' },
+      { platform:'Instagram', type:'REEL', caption:'We asked: "Describe FIT in one word" & YOU answered. That\'s the FIT culture in a sentence:...', views:1500, likes:59, comments:0, engagement:5.8, url:'https://www.instagram.com/reel/DWrH0LkEbae/' },
+      { platform:'Instagram', type:'IMAGE', caption:'This is what "FIT AF" actually means. Slow and controlled strength, coached movement, and...', views:1200, likes:40, comments:2, engagement:7.3, url:'https://www.instagram.com/p/DWl-PGUlN3j/' }
+    ]
+  },
+  may26: {
+    '407': [
+      { platform:'Instagram', type:'POST', caption:'Top Performing Post #1 — FIT 407', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/p/DY7bO8WFuM3/' },
+      { platform:'Instagram', type:'POST', caption:'Top Performing Post #2 — FIT 407', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/p/DYSOfDsFrAm/' },
+      { platform:'Instagram', type:'REEL', caption:'Top Performing Post #3 — FIT 407', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/reels/DYW8n1oASud/' }
+    ],
+    'gnv': [
+      { platform:'Instagram', type:'POST', caption:'Top Performing Post #1 — FIT Gainesville', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/p/DYm1AhzlkRO/' },
+      { platform:'Instagram', type:'POST', caption:'Top Performing Post #2 — FIT Gainesville', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/p/DYXYFy-lshi/' },
+      { platform:'Instagram', type:'REEL', caption:'Top Performing Post #3 — FIT Gainesville', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/reels/DX2amR1omeS/' }
+    ],
+    'jax': [
+      { platform:'Instagram', type:'POST', caption:'Top Performing Post #1 — FIT JAX', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/p/DYXYFy-lshi/' },
+      { platform:'Instagram', type:'REEL', caption:'Top Performing Post #2 — FIT JAX', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/reels/DYW8n1oASud/' },
+      { platform:'Instagram', type:'REEL', caption:'Top Performing Post #3 — FIT JAX', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/reels/DX2amR1omeS/' }
+    ],
+    '850': [
+      { platform:'Instagram', type:'POST', caption:'Top Performing Post #1 — FIT 850', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/p/DYXYFy-lshi/' },
+      { platform:'Instagram', type:'REEL', caption:'Top Performing Post #2 — FIT 850', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/reels/DYW8n1oASud/' },
+      { platform:'Instagram', type:'REEL', caption:'Top Performing Post #3 — FIT 850', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/reels/DX2amR1omeS/' }
+    ],
+    'af': [
+      { platform:'Instagram', type:'REEL', caption:'Top Performing Post #1 — FIT AF', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/reels/DX9oReQAumR/' },
+      { platform:'Instagram', type:'REEL', caption:'Top Performing Post #2 — FIT AF', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/reels/DYSOpgkEpcs/' },
+      { platform:'Instagram', type:'POST', caption:'Top Performing Post #3 — FIT AF', views:0, likes:0, comments:0, engagement:0, url:'https://www.instagram.com/p/DYXYFy-lshi/' }
+    ]
+  }
+};
+
+// Lowest performing posts by location and month
+const LOW_POSTS = {
+  jul26: {
+    '407': [
+      { platform:'Instagram', type:'POST', caption:'Post Mat Pilates Stretch — FIT 407', views:1806, likes:54, comments:0, engagement:3.32, url:'https://www.instagram.com/p/DbGeHcAGdnS/' },
+      { platform:'Instagram', type:'REEL', caption:'Tag someone you\'ve met during class — FIT 407', views:2811, likes:57, comments:0, engagement:2.17, url:'https://www.instagram.com/reels/DbdpM3iib4O/' },
+      { platform:'Instagram', type:'REEL', caption:'FIT Girl Summer — FIT 407', views:2187, likes:72, comments:0, engagement:3.89, url:'https://www.instagram.com/reels/Da0clcklCko/' }
+    ],
+    'gnv': [
+      { platform:'Instagram', type:'REEL', caption:'Okay, your turn — FIT Gainesville', views:699, likes:9, comments:0, engagement:1.43, url:'https://www.instagram.com/reels/DbdpN6TlTWM/' },
+      { platform:'Instagram', type:'POST', caption:'Just you, the reformer, and the work — FIT Gainesville', views:525, likes:9, comments:0, engagement:1.71, url:'https://www.instagram.com/p/DaQZfC9lkrz/' },
+      { platform:'Instagram', type:'POST', caption:'Post Pilates Stretch — FIT Gainesville', views:513, likes:8, comments:0, engagement:1.56, url:'https://www.instagram.com/p/DbGeHQHmWRv/' }
+    ],
+    'jax': [
+      { platform:'Instagram', type:'POST', caption:'Post Mat Pilates Stretch — FIT JAX', views:581, likes:14, comments:0, engagement:2.41, url:'https://www.instagram.com/p/DbGeGy8EjyA/' },
+      { platform:'Instagram', type:'POST', caption:'Meet Us At The Main Stage — FIT JAX', views:428, likes:13, comments:0, engagement:3.27, url:'https://www.instagram.com/p/DaTCEgTutLV/' },
+      { platform:'Instagram', type:'REEL', caption:'Okay, your turn — FIT JAX', views:681, likes:14, comments:0, engagement:2.20, url:'https://www.instagram.com/reels/DbdpNOsIJap/' }
+    ],
+    '850': [
+      { platform:'Instagram', type:'POST', caption:'Just you, the reformer, and the work — FIT 850', views:727, likes:19, comments:1, engagement:2.75, url:'https://www.instagram.com/p/DaQZh96kmE2/' },
+      { platform:'Instagram', type:'POST', caption:'Meet Us At The Main Stage — FIT 850', views:854, likes:21, comments:0, engagement:2.58, url:'https://www.instagram.com/p/DaTBv35AZdd/' },
+      { platform:'Instagram', type:'POST', caption:'Post Mat Pilates Stretch — FIT 850', views:727, likes:23, comments:0, engagement:3.16, url:'https://www.instagram.com/p/DbGeIAsGU2v/' }
+    ],
+    'af': [
+      { platform:'Instagram', type:'POST', caption:'Just you, the reformer, and the work — FIT AF', views:461, likes:19, comments:0, engagement:4.12, url:'https://www.instagram.com/p/DaQZbKals5u/' },
+      { platform:'Instagram', type:'POST', caption:'Meet Us At The Main Stage — FIT AF', views:475, likes:16, comments:1, engagement:3.58, url:'https://www.instagram.com/p/DaTCZejxQc4/' },
+      { platform:'Instagram', type:'POST', caption:'Post Pilates Stretch — FIT AF', views:440, likes:11, comments:0, engagement:2.50, url:'https://www.instagram.com/p/DbGeHYeklY2/' }
+    ]
+  },
+  jun26: {
+    '407': [
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #1 — FIT 407', url:'https://www.instagram.com/p/DZc5ufgFwhR/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #2 — FIT 407', url:'https://www.instagram.com/p/DZ5OX7uFslm/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #3 — FIT 407', url:'https://www.instagram.com/p/DaDhgK-luEU/' }
+    ],
+    'gnv': [
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #1 — FIT Gainesville', url:'https://www.instagram.com/p/DZsWh4JljGD/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #2 — FIT Gainesville', url:'https://www.instagram.com/p/DaDhfBqFlQ7/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #3 — FIT Gainesville', url:'https://www.instagram.com/p/DaLc4eZxOzE/' }
+    ],
+    'jax': [
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #1 — FIT JAX', url:'https://www.instagram.com/p/DZ5OeAulvMT/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #2 — FIT JAX', url:'https://www.instagram.com/p/DZc5vGelo8U/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #3 — FIT JAX', url:'https://www.instagram.com/p/DaLehq3xmbD/' }
+    ],
+    '850': [
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #1 — FIT 850', url:'https://www.instagram.com/p/DaDhaoglqfa/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #2 — FIT 850', url:'https://www.instagram.com/p/DaLcgGPJ2If/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #3 — FIT 850', url:'https://www.instagram.com/p/DZ5OXoflsTZ/' }
+    ],
+    'af': [
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #1 — FIT AF', url:'https://www.instagram.com/p/DZc5voglpWv/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #2 — FIT AF', url:'https://www.instagram.com/p/DZsWhE-lqha/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #3 — FIT AF', url:'https://www.instagram.com/p/DaDhZBSFnta/' }
+    ],
+    'corp': [
+      { platform:'Instagram', type:'REEL', caption:'Lowest Performing #1 — @FITasFIRE', url:'https://www.instagram.com/reels/DaLP5K7HMJP/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #2 — @FITasFIRE', url:'https://www.instagram.com/p/DZ-X16UlhVi/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #3 — @FITasFIRE', url:'https://www.instagram.com/p/DaDhapUFngf/' }
+    ]
+  },
+  may26: {
+    '407': [
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #1 — FIT 407', url:'https://www.instagram.com/p/DYpZtUkFj2F/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #2 — FIT 407', url:'https://www.instagram.com/p/DYSOfDsFrAm/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #3 — FIT 407', url:'https://www.instagram.com/p/DYNE_53Dt4J/' }
+    ],
+    'gnv': [
+      { platform:'Instagram', type:'REEL', caption:'Lowest Performing #1 — FIT Gainesville', url:'https://www.instagram.com/reels/DYANKsrgsN5/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #2 — FIT Gainesville', url:'https://www.instagram.com/p/DYpZv-vFnZf/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #3 — FIT Gainesville', url:'https://www.instagram.com/p/DYNE-CJjhew/' }
+    ],
+    'jax': [
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #1 — FIT JAX', url:'https://www.instagram.com/p/DYpZwC5lvo-/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #2 — FIT JAX', url:'https://www.instagram.com/p/DYSOfZhlizL/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #3 — FIT JAX', url:'https://www.instagram.com/p/DYSOfZhlizL/' }
+    ],
+    '850': [
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #1 — FIT 850', url:'https://www.instagram.com/p/DYKgG4CjqaW/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #2 — FIT 850', url:'https://www.instagram.com/p/DYSOh25FvUW/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #3 — FIT 850', url:'https://www.instagram.com/p/DYpZv66FgcZ/' }
+    ],
+    'af': [
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #1 — FIT AF', url:'https://www.instagram.com/p/DYkQMYVIAEx/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #2 — FIT AF', url:'https://www.instagram.com/p/DX7KNEpDuX_/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #3 — FIT AF', url:'https://www.instagram.com/p/DYNFAAajmHy/' }
+    ]
+  }
+};
+
+let currentMonth = 'jul26';
+let currentTab = 'overview';
+let currentInsightLoc = '407';
+
+// === DATE ===
+document.getElementById('currentDate').textContent = new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+
+// === HELPERS ===
+function totalMetric(month, key) {
+  const m = DATA[month];
+  if (!m) return 0;
+  return LOCATIONS.reduce((sum,loc) => sum + (m[loc.id] ? m[loc.id][key] || 0 : 0), 0);
+}
+function formatNum(n) {
+  if (n >= 1000000) return (n/1000000).toFixed(1)+'M';
+  if (n >= 1000) return (n/1000).toFixed(1)+'K';
+  return n.toString();
+}
+function bestLoc(month, key) {
+  const m = DATA[month];
+  if (!m) return '';
+  let best = '', bestVal = -1;
+  LOCATIONS.forEach(loc => { if (m[loc.id] && m[loc.id][key] > bestVal) { bestVal = m[loc.id][key]; best = loc.id; } });
+  return best;
+}
+
+// === TOP POSTS HELPERS ===
+function getTopPosts(month) {
+  const mp = TOP_POSTS[month];
+  if (!mp) return [];
+  // Merge all locations' posts into one array, sorted by views
+  let all = [];
+  LOCATIONS.forEach(loc => {
+    if (mp[loc.id]) {
+      mp[loc.id].forEach((p,i) => all.push({...p, locId:loc.id, locName:loc.name, locColor:loc.color}));
+    }
+  });
+  all.sort((a,b) => b.views - a.views);
+  return all;
+}
+
+function platformIcon(platform) {
+  if (platform === 'Instagram') return '<div class="post-platform-icon" style="background:var(--instagram);">&#x1F4F7;</div>';
+  if (platform === 'Facebook') return '<div class="post-platform-icon" style="background:var(--facebook);">&#x1F44D;</div>';
+  return '<div class="post-platform-icon" style="background:var(--text-dim);">&#x1F4F1;</div>';
+}
+
+function typeBadgeColor(type) {
+  const t = type.toUpperCase();
+  if (t === 'REEL') return 'background:rgba(244,60,226,0.15);color:var(--pink);';
+  if (t === 'CAROUSEL') return 'background:rgba(68,138,255,0.15);color:var(--blue);';
+  if (t === 'IMAGE') return 'background:rgba(0,230,118,0.15);color:var(--green);';
+  if (t === 'POST') return 'background:rgba(255,145,0,0.15);color:var(--orange);';
+  return 'background:rgba(255,255,255,0.08);color:var(--text-dim);';
+}
+
+function renderTopPostsCards(month) {
+  const posts = getTopPosts(month);
+  if (posts.length === 0) return '';
+  // Show top 6 on overview
+  const show = posts.slice(0, 6);
+  return `
+    <div class="section-label">Top Performing Posts &mdash; ${MONTHS.find(m=>m.id===month)?.label || month}</div>
+    <div class="posts-grid">
+      ${show.map((p,i) => `
+        <div class="post-card" style="cursor:${p.url?'pointer':'default'};" ${p.url?`onclick="window.open('${p.url}','_blank')"`:''}>
+          <div class="post-card-header">
+            ${platformIcon(p.platform)}
+            <span style="font-size:12px;font-weight:600;color:var(--text);">${p.platform}</span>
+            <span class="post-type-badge" style="${typeBadgeColor(p.type)}">${p.type}</span>
+            <span style="font-size:10px;color:${p.locColor};font-weight:600;margin-left:4px;">${p.locName}</span>
+            <span class="post-rank">#${i+1}</span>
+          </div>
+          <div class="post-caption">${p.caption}</div>
+          <div class="post-stats">
+            ${p.views > 0 ? '<div class="post-stat">&#x1F441; <span class="post-stat-value">'+formatNum(p.views)+'</span></div>' : ''}
+            ${p.likes > 0 ? '<div class="post-stat">&#x2764; <span class="post-stat-value">'+p.likes+'</span></div>' : ''}
+            ${p.comments > 0 ? '<div class="post-stat">&#x1F4AC; <span class="post-stat-value">'+p.comments+'</span></div>' : ''}
+            ${p.url ? '<a href="'+p.url+'" target="_blank" style="font-size:11px;color:var(--pink);text-decoration:none;font-weight:600;margin-left:auto;display:flex;align-items:center;gap:4px;" onclick="event.stopPropagation();">View Post &#x2197;</a>' : ''}
+            ${p.engagement > 0 ? '<div class="post-eng">'+p.engagement+'%</div>' : ''}
+          </div>
+        </div>
+      `).join('')}
     </div>
+  `;
+}
 
-    <div class="metrics-row">
-      <div class="metric-card">
-        <div class="metric-icon" style="background: rgba(68,138,255,0.1); color: var(--blue);">&#x1F441;</div>
-        <div class="metric-label">Total Views</div>
-        <div class="metric-value">24.8K</div>
-        <div class="metric-change up">INSTAGRAM</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-icon" style="background: var(--pink-dim); color: var(--pink);">&#x1F4F1;</div>
-        <div class="metric-label">Accounts Reached</div>
-        <div class="metric-value">12.3K</div>
-        <div class="metric-change up">PROFILE REACH</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-icon" style="background: rgba(0,230,118,0.1); color: var(--green);">&#x1F4DD;</div>
-        <div class="metric-label">Posts Published</div>
-        <div class="metric-value">16</div>
-        <div class="metric-change up">AUG 2026</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-icon" style="background: rgba(255,145,0,0.1); color: var(--orange);">&#x1F3AC;</div>
-        <div class="metric-label">Top Format</div>
-        <div class="metric-value" style="font-size:22px;">Reels</div>
-        <div class="metric-change up">BEST PERFORMING</div>
-      </div>
-    </div>
-
-    <div class="section-label">Follower Growth</div>
-    <div class="charts-grid">
-      <div class="chart-card">
-        <div class="chart-header">
-          <div class="chart-title">Growth Over Time</div>
-          <div class="chart-period">
-            <button class="active">30D</button>
-            <button>90D</button>
-            <button>12M</button>
-          </div>
-        </div>
-        <div class="chart-container">
-          <canvas id="followerChart"></canvas>
-        </div>
-      </div>
-      <div class="chart-card">
-        <div class="chart-header">
-          <div class="chart-title">Platform Split</div>
-        </div>
-        <div class="chart-container">
-          <canvas id="platformSplitChart"></canvas>
-        </div>
-      </div>
-    </div>
-
-    <div class="section-label">Content Strategy Thoughts &mdash; April 2026</div>
-    <div class="platform-card" style="margin-bottom:14px;">
-      <div class="platform-header">
-        <div class="platform-name">
-          <div class="platform-dot" style="background: var(--green);"></div>
-          <span>Prioritize UGC & "iPhone Footage"</span>
-        </div>
-        <div class="platform-badge">APRIL 2026</div>
-      </div>
-      <div style="padding:8px 0;font-size:13px;color:var(--text-mid);line-height:1.7;">Reels are the top performer and engagement is climbing. Lean into raw, authentic content &mdash; gym floor clips, member transformations shot on phone, behind-the-scenes of classes. Polished content stops the scroll less than real moments do. Ask members to tag @bootybabeztampa and repost their stories/clips.</div>
-    </div>
-    <div class="platform-card" style="margin-bottom:14px;">
-      <div class="platform-header">
-        <div class="platform-name">
-          <div class="platform-dot" style="background: var(--pink);"></div>
-          <span>Hook-First Reels</span>
-        </div>
-      </div>
-      <div style="padding:8px 0;font-size:13px;color:var(--text-mid);line-height:1.7;">Static posts with no hook underperformed &mdash; apply the same lesson to Reels. Lead with a bold text overlay or provocative question: "Nobody talks about this part of glute training" or "POV: your first BBZ class." The algorithm rewards watch-through rate, so the hook is everything.</div>
-    </div>
-    <div class="platform-card" style="margin-bottom:14px;">
-      <div class="platform-header">
-        <div class="platform-name">
-          <div class="platform-dot" style="background: var(--orange);"></div>
-          <span>Carousel Education Posts</span>
-        </div>
-      </div>
-      <div style="padding:8px 0;font-size:13px;color:var(--text-mid);line-height:1.7;">Instead of dropping static posts entirely, convert them to carousel slides with tips, myths vs. facts, or "3 moves you're doing wrong." Carousels get saved and shared, which boosts reach without needing video.</div>
-    </div>
-    <div class="platform-card" style="margin-bottom:32px;">
-      <div class="platform-header">
-        <div class="platform-name">
-          <div class="platform-dot" style="background: var(--blue);"></div>
-          <span>Leverage Community & Location</span>
-        </div>
-      </div>
-      <div style="padding:8px 0;font-size:13px;color:var(--text-mid);line-height:1.7;">BBZ is strong in Tampa with a loyal female audience. Create content that ties into the local scene &mdash; "Best post-workout acai in Channelside," collabs with nearby Tampa businesses, or a "Tampa girls who lift" series. This builds community and hits local search terms already ranking on Google.</div>
-    </div>
-
-  </div>
-
-  <!-- ==================== SOCIAL TAB ==================== -->
-  <div class="section" id="tab-social">
-
-    <div style="display:flex;gap:6px;margin-bottom:16px;">
-      <button class="nav-tab active" onclick="switchMonth('aug',this)" style="padding:7px 18px;font-size:10px;font-weight:600;border-radius:50px;cursor:pointer;letter-spacing:0.6px;">AUGUST</button>
-      <button class="nav-tab" onclick="switchMonth('jul',this)" style="padding:7px 18px;font-size:10px;font-weight:600;border-radius:50px;cursor:pointer;letter-spacing:0.6px;">JULY</button>
-      <button class="nav-tab" onclick="switchMonth('jun',this)" style="padding:7px 18px;font-size:10px;font-weight:600;border-radius:50px;cursor:pointer;letter-spacing:0.6px;">JUNE</button>
-      <button class="nav-tab" onclick="switchMonth('may',this)" style="padding:7px 18px;font-size:10px;font-weight:600;border-radius:50px;cursor:pointer;letter-spacing:0.6px;">MAY</button>
-      <button class="nav-tab" onclick="switchMonth('apr',this)" style="padding:7px 18px;font-size:10px;font-weight:600;border-radius:50px;cursor:pointer;letter-spacing:0.6px;">APRIL</button>
-      <button class="nav-tab" onclick="switchMonth('mar',this)" style="padding:7px 18px;font-size:10px;font-weight:600;border-radius:50px;cursor:pointer;letter-spacing:0.6px;">MARCH</button>
-      <button class="nav-tab" onclick="switchMonth('feb',this)" style="padding:7px 18px;font-size:10px;font-weight:600;border-radius:50px;cursor:pointer;letter-spacing:0.6px;">FEBRUARY</button>
-      <button class="nav-tab" onclick="switchMonth('jan',this)" style="padding:7px 18px;font-size:10px;font-weight:600;border-radius:50px;cursor:pointer;letter-spacing:0.6px;">JANUARY</button>
-    </div>
-
-    <div class="section-label">Platform Performance</div>
-    <div class="platforms-grid">
-
-      <!-- Instagram -->
-      <div class="platform-card">
-        <div class="platform-header">
-          <div class="platform-name">
-            <div class="platform-dot" style="background: var(--instagram);"></div>
-            <span>Instagram</span>
-          </div>
-          <div class="platform-badge">@bootybabeztampa</div>
-        </div>
-        <div class="platform-stats">
-          <div>
-            <div class="platform-stat-label">Followers</div>
-            <div class="platform-stat-value">5,002</div>
-            <div class="platform-stat-change" style="color: var(--green);">&uarr; +299</div>
-          </div>
-          <div>
-            <div class="platform-stat-label">Engagement Rate</div>
-            <div class="platform-stat-value" id="ig-engagement">29.40%</div>
-            <div class="platform-stat-change" id="ig-eng-change" style="color: var(--green);">+299 New Followers</div>
-          </div>
-          <div>
-            <div class="platform-stat-label">Total Views</div>
-            <div class="platform-stat-value" id="ig-views">24.8K</div>
-            <div class="platform-stat-change" id="ig-views-sub" style="color: var(--green);">INSTAGRAM</div>
-          </div>
-          <div>
-            <div class="platform-stat-label">Posts Published</div>
-            <div class="platform-stat-value" id="ig-posts">16</div>
-            <div class="platform-stat-change" id="ig-posts-label" style="color: var(--green);">AUG 2026</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- TikTok -->
-      <div class="platform-card">
-        <div class="platform-header">
-          <div class="platform-name">
-            <div class="platform-dot" style="background: var(--tiktok);"></div>
-            <span>TikTok</span>
-          </div>
-          <div class="platform-badge">@bootybabez</div>
-        </div>
-        <div class="platform-stats">
-          <div>
-            <div class="platform-stat-label">Followers</div>
-            <div class="platform-stat-value">&mdash;</div>
-            <div class="platform-stat-change" style="color: var(--green);">&uarr; &mdash;%</div>
-          </div>
-          <div>
-            <div class="platform-stat-label">Engagement Rate</div>
-            <div class="platform-stat-value">&mdash;%</div>
-            <div class="platform-stat-change" style="color: var(--green);">&uarr; &mdash;%</div>
-          </div>
-          <div>
-            <div class="platform-stat-label">Video Views</div>
-            <div class="platform-stat-value">&mdash;</div>
-            <div class="platform-stat-change" style="color: var(--green);">&uarr; &mdash;%</div>
-          </div>
-          <div>
-            <div class="platform-stat-label">Avg Watch Time</div>
-            <div class="platform-stat-value">&mdash;s</div>
-            <div class="platform-stat-change" style="color: var(--green);">&uarr; &mdash;%</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Facebook -->
-      <div class="platform-card">
-        <div class="platform-header">
-          <div class="platform-name">
-            <div class="platform-dot" style="background: var(--facebook);"></div>
-            <span>Facebook</span>
-          </div>
-          <div class="platform-badge">@Biome Fit</div>
-        </div>
-        <div class="platform-stats">
-          <div>
-            <div class="platform-stat-label">Followers</div>
-            <div class="platform-stat-value">84</div>
-            <div class="platform-stat-change" style="color: var(--text-dim);">+0 Growth</div>
-          </div>
-          <div>
-            <div class="platform-stat-label">Engagement Rate</div>
-            <div class="platform-stat-value">9.1%</div>
-            <div class="platform-stat-change" style="color: var(--text-dim);">&mdash;</div>
-          </div>
-          <div>
-            <div class="platform-stat-label">Views</div>
-            <div class="platform-stat-value">59</div>
-            <div class="platform-stat-change" style="color: var(--text-dim);">MAY 2026</div>
-          </div>
-          <div>
-            <div class="platform-stat-label">Posts</div>
-            <div class="platform-stat-value">18</div>
-            <div class="platform-stat-change" style="color: var(--text-dim);">MAY 2026</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="section-label">Views by Content Type</div>
-    <div class="metrics-row">
-      <div class="metric-card">
-        <div class="metric-icon" style="background: var(--pink-dim); color: var(--pink);">&#x1F4F1;</div>
-        <div class="metric-label">Stories</div>
-        <div class="metric-value" id="ig-stories">&mdash;</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-icon" style="background: rgba(68,138,255,0.1); color: var(--blue);">&#x1F4F8;</div>
-        <div class="metric-label">Posts</div>
-        <div class="metric-value" id="ig-posts-pct">&mdash;</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-icon" style="background: rgba(0,230,118,0.1); color: var(--green);">&#x1F3AC;</div>
-        <div class="metric-label">Reels</div>
-        <div class="metric-value" id="ig-reels">&mdash;</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-icon" style="background: rgba(255,145,0,0.1); color: var(--orange);">&#x1F4F9;</div>
-        <div class="metric-label">Live Videos</div>
-        <div class="metric-value" id="ig-live">&mdash;</div>
-      </div>
-    </div>
-
-    <div class="section-label">Profile Activity</div>
-    <div class="metrics-row">
-      <div class="metric-card">
-        <div class="metric-icon" style="background: var(--pink-dim); color: var(--pink);">&#x1F4CA;</div>
-        <div class="metric-label">Total Activity</div>
-        <div class="metric-value" id="ig-activity">&mdash;</div>
-        <div class="metric-change up" id="ig-activity-change">&mdash;</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-icon" style="background: rgba(68,138,255,0.1); color: var(--blue);">&#x1F464;</div>
-        <div class="metric-label">Profile Visits</div>
-        <div class="metric-value" id="ig-profile-visits">&mdash;</div>
-        <div class="metric-change up" id="ig-profile-visits-change">&mdash;</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-icon" style="background: rgba(0,230,118,0.1); color: var(--green);">&#x1F517;</div>
-        <div class="metric-label">External Link Taps</div>
-        <div class="metric-value" id="ig-link-taps">&mdash;</div>
-        <div class="metric-change" id="ig-link-taps-change" style="color: var(--text-dim);">&mdash;</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-icon" style="background: rgba(255,145,0,0.1); color: var(--orange);">&#x1F441;</div>
-        <div class="metric-label">Accounts Reached</div>
-        <div class="metric-value" id="ig-reach">&mdash;</div>
-        <div class="metric-change up" id="ig-reach-change">&mdash;</div>
-      </div>
-    </div>
-
-    <div class="section-label">Content Insights &mdash; August 2026</div>
-    <div class="platforms-grid">
-      <div class="platform-card">
-        <div class="platform-header">
-          <div class="platform-name">
-            <div class="platform-dot" style="background: var(--green);"></div>
-            <span>What Worked</span>
-          </div>
-          <div class="platform-badge">TOP FORMAT: REELS</div>
-        </div>
-        <div style="padding:4px 0;font-size:13px;color:var(--text-mid);line-height:1.6;">Reels and carousels carried the month. The Aug 24 Reel hit 83% engagement with 18 shares. Both formats give people something to do (swipe or share), driving a 58% jump in profile views and more than doubled follower growth.</div>
-      </div>
-      <div class="platform-card">
-        <div class="platform-header">
-          <div class="platform-name">
-            <div class="platform-dot" style="background: var(--red);"></div>
-            <span>What Didn't Work</span>
-          </div>
-        </div>
-        <div style="padding:4px 0;font-size:13px;color:var(--text-mid);line-height:1.6;">Static images fell flat, filling all 3 bottom spots (9&ndash;12% engagement, zero comments). They got decent reach but converted almost none of it into action.</div>
-      </div>
-      <div class="platform-card">
-        <div class="platform-header">
-          <div class="platform-name">
-            <div class="platform-dot" style="background: var(--pink);"></div>
-            <span>Improvements</span>
-          </div>
-        </div>
-        <div style="padding:4px 0;font-size:13px;color:var(--text-mid);line-height:1.6;">Cut back on standalone images or pair with a stronger hook/CTA. Lean into Reels and carousels on Saturdays and Mondays. Replicate the Aug 24 Reel&rsquo;s shareability &mdash; create content people want to send to a friend.</div>
-      </div>
-    </div>
-
-    <div class="section-label">Audience</div>
-    <div class="metrics-row">
-      <div class="metric-card">
-        <div class="metric-icon" style="background: var(--pink-dim); color: var(--pink);">&#x1F469;</div>
-        <div class="metric-label">Gender</div>
-        <div class="metric-value" style="font-size:16px;">87.6% Women</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-icon" style="background: rgba(0,230,118,0.1); color: var(--green);">&#x1F4CD;</div>
-        <div class="metric-label">Location</div>
-        <div class="metric-value" style="font-size:16px;">Tampa</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-icon" style="background: rgba(68,138,255,0.1); color: var(--blue);">&#x1F382;</div>
-        <div class="metric-label">Age Range</div>
-        <div class="metric-value" style="font-size:16px;">25-34</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-icon" style="background: rgba(255,145,0,0.1); color: var(--orange);">&#x1F3AC;</div>
-        <div class="metric-label">Top Format</div>
-        <div class="metric-value" style="font-size:16px;">Reels</div>
-      </div>
-    </div>
-
-    <div class="section-label">Engagement Trends</div>
-    <div class="charts-grid">
-      <div class="chart-card">
-        <div class="chart-header">
-          <div class="chart-title">Engagement by Platform</div>
-          <div class="chart-period">
-            <button class="active">30D</button>
-            <button>90D</button>
-          </div>
-        </div>
-        <div class="chart-container">
-          <canvas id="engagementChart"></canvas>
-        </div>
-      </div>
-      <div class="chart-card">
-        <div class="chart-header">
-          <div class="chart-title">Audience Demographics</div>
-        </div>
-        <div class="chart-container">
-          <canvas id="demographicsChart"></canvas>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- ==================== ADS TAB ==================== -->
-  <div class="section" id="tab-ads">
-
-    <div class="section-label">Paid Ad Performance</div>
-    <div class="ads-grid">
-
-      <!-- Meta Ads -->
-      <div class="ad-card">
-        <div class="ad-card-header">
-          <div class="ad-platform">
-            <div class="ad-platform-icon" style="background: rgba(24,119,242,0.15); color: var(--facebook);">M</div>
-            <div class="ad-platform-name">Meta Ads</div>
-          </div>
-          <div class="ad-status"><div class="ad-status-dot" style="background: var(--text-dim);"></div> Completed</div>
-        </div>
-        <div class="ad-metrics">
-          <div class="ad-metric">
-            <div class="ad-metric-label">Spend</div>
-            <div class="ad-metric-value">$149.53</div>
-          </div>
-          <div class="ad-metric">
-            <div class="ad-metric-label">Duration</div>
-            <div class="ad-metric-value">5 Days</div>
-          </div>
-          <div class="ad-metric">
-            <div class="ad-metric-label">Views</div>
-            <div class="ad-metric-value">17,201</div>
-          </div>
-          <div class="ad-metric">
-            <div class="ad-metric-label">Reach</div>
-            <div class="ad-metric-value">9,283</div>
-          </div>
-          <div class="ad-metric">
-            <div class="ad-metric-label">Profile Visits</div>
-            <div class="ad-metric-value">520</div>
-          </div>
-          <div class="ad-metric">
-            <div class="ad-metric-label">Cost / Visit</div>
-            <div class="ad-metric-value">$0.29</div>
-          </div>
-        </div>
-        <div style="border-top:1px solid var(--card-border);margin-top:12px;padding-top:12px;">
-          <div class="ad-metrics">
-            <div class="ad-metric">
-              <div class="ad-metric-label">New Follows</div>
-              <div class="ad-metric-value">100</div>
-            </div>
-            <div class="ad-metric">
-              <div class="ad-metric-label">Link Taps</div>
-              <div class="ad-metric-value">58</div>
-            </div>
-            <div class="ad-metric">
-              <div class="ad-metric-label">Likes</div>
-              <div class="ad-metric-value">61</div>
-            </div>
-            <div class="ad-metric">
-              <div class="ad-metric-label">Saves</div>
-              <div class="ad-metric-value">26</div>
-            </div>
-            <div class="ad-metric">
-              <div class="ad-metric-label">Shares</div>
-              <div class="ad-metric-value">25</div>
-            </div>
-            <div class="ad-metric">
-              <div class="ad-metric-label">Audience</div>
-              <div class="ad-metric-value" style="font-size:13px;">78.5% W</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Google Ads -->
-      <div class="ad-card">
-        <div class="ad-card-header">
-          <div class="ad-platform">
-            <div class="ad-platform-icon" style="background: rgba(66,133,244,0.15); color: var(--google);">G</div>
-            <div class="ad-platform-name">Google Ads</div>
-          </div>
-          <div class="ad-status"><div class="ad-status-dot"></div> Active</div>
-        </div>
-        <div class="ad-metrics">
-          <div class="ad-metric">
-            <div class="ad-metric-label">Spend</div>
-            <div class="ad-metric-value">$&mdash;</div>
-          </div>
-          <div class="ad-metric">
-            <div class="ad-metric-label">ROAS</div>
-            <div class="ad-metric-value">&mdash;x</div>
-          </div>
-          <div class="ad-metric">
-            <div class="ad-metric-label">Impressions</div>
-            <div class="ad-metric-value">&mdash;</div>
-          </div>
-          <div class="ad-metric">
-            <div class="ad-metric-label">Clicks</div>
-            <div class="ad-metric-value">&mdash;</div>
-          </div>
-          <div class="ad-metric">
-            <div class="ad-metric-label">CTR</div>
-            <div class="ad-metric-value">&mdash;%</div>
-          </div>
-          <div class="ad-metric">
-            <div class="ad-metric-label">Conversions</div>
-            <div class="ad-metric-value">&mdash;</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- TikTok Ads -->
-      <div class="ad-card">
-        <div class="ad-card-header">
-          <div class="ad-platform">
-            <div class="ad-platform-icon" style="background: rgba(0,242,234,0.15); color: var(--tiktok);">T</div>
-            <div class="ad-platform-name">TikTok Ads</div>
-          </div>
-          <div class="ad-status"><div class="ad-status-dot"></div> Active</div>
-        </div>
-        <div class="ad-metrics">
-          <div class="ad-metric">
-            <div class="ad-metric-label">Spend</div>
-            <div class="ad-metric-value">$&mdash;</div>
-          </div>
-          <div class="ad-metric">
-            <div class="ad-metric-label">ROAS</div>
-            <div class="ad-metric-value">&mdash;x</div>
-          </div>
-          <div class="ad-metric">
-            <div class="ad-metric-label">Impressions</div>
-            <div class="ad-metric-value">&mdash;</div>
-          </div>
-          <div class="ad-metric">
-            <div class="ad-metric-label">Clicks</div>
-            <div class="ad-metric-value">&mdash;</div>
-          </div>
-          <div class="ad-metric">
-            <div class="ad-metric-label">CTR</div>
-            <div class="ad-metric-value">&mdash;%</div>
-          </div>
-          <div class="ad-metric">
-            <div class="ad-metric-label">Conversions</div>
-            <div class="ad-metric-value">&mdash;</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="section-label">Spend & Performance</div>
-    <div class="charts-grid">
-      <div class="chart-card">
-        <div class="chart-header">
-          <div class="chart-title">Ad Spend Over Time</div>
-          <div class="chart-period">
-            <button class="active">30D</button>
-            <button>90D</button>
-          </div>
-        </div>
-        <div class="chart-container">
-          <canvas id="adSpendChart"></canvas>
-        </div>
-      </div>
-      <div class="chart-card">
-        <div class="chart-header">
-          <div class="chart-title">Spend by Platform</div>
-        </div>
-        <div class="chart-container">
-          <canvas id="adSplitChart"></canvas>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- ==================== CONTENT TAB ==================== -->
-  <div class="section" id="tab-content">
-
-    <div class="section-label">Top Performing Content</div>
-
-    <!-- Month Toggle for Top Content -->
-    <div class="nav-tabs" style="margin-bottom:16px;">
-      <button class="nav-tab active" onclick="switchContentMonth('aug',this)">AUGUST</button>
-      <button class="nav-tab" onclick="switchContentMonth('jul',this)">JULY</button>
-      <button class="nav-tab" onclick="switchContentMonth('jun',this)">JUNE</button>
-      <button class="nav-tab" onclick="switchContentMonth('may',this)">MAY</button>
-    </div>
-
-    <!-- AUGUST 2026 Content -->
-    <div id="content-aug" class="content-month-section">
-      <div class="table-card">
-        <div class="chart-header">
-          <div class="chart-title">August 2026 Posts</div>
-        </div>
-        <div class="table-wrapper">
-          <table>
-            <thead>
-              <tr>
-                <th>Post</th>
-                <th>Platform</th>
-                <th>Type</th>
-                <th>Reach</th>
-                <th>Engagement</th>
-                <th>Likes</th>
-                <th>Comments</th>
-                <th>Shares</th>
-                <th>Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr style="border-bottom:2px solid var(--pink);">
-                <td colspan="9" style="color: var(--pink); font-weight: 700; font-size:12px; letter-spacing:1px; padding:10px 8px 6px;">TOP PERFORMING</td>
-              </tr>
-              <tr>
-                <td style="color: var(--text); font-weight: 500;"><a href="https://www.instagram.com/reels/DccLOOeNmqk/" target="_blank" style="color:var(--text);text-decoration:none;border-bottom:1px solid var(--pink);">Aug 24 Reel</a></td>
-                <td><span style="color:var(--instagram);">Instagram</span></td>
-                <td><span class="post-type-badge reel">Reel</span></td>
-                <td>1,483</td>
-                <td>83%</td>
-                <td>49</td>
-                <td>5</td>
-                <td>18</td>
-                <td>Aug 24</td>
-              </tr>
-              <tr>
-                <td style="color: var(--text); font-weight: 500;"><a href="https://www.instagram.com/p/DcteVTImdS-/" target="_blank" style="color:var(--text);text-decoration:none;border-bottom:1px solid var(--pink);">Top Post #2</a></td>
-                <td><span style="color:var(--instagram);">Instagram</span></td>
-                <td><span class="post-type-badge reel">Carousel</span></td>
-                <td>489</td>
-                <td>55%</td>
-                <td>42</td>
-                <td>7</td>
-                <td>2</td>
-                <td>Aug 2026</td>
-              </tr>
-              <tr>
-                <td style="color: var(--text); font-weight: 500;"><a href="https://www.instagram.com/p/DbyByskjeLd/" target="_blank" style="color:var(--text);text-decoration:none;border-bottom:1px solid var(--pink);">Top Post #3</a></td>
-                <td><span style="color:var(--instagram);">Instagram</span></td>
-                <td><span class="post-type-badge reel">Carousel</span></td>
-                <td>827</td>
-                <td>44%</td>
-                <td>35</td>
-                <td>5</td>
-                <td>1</td>
-                <td>Aug 2026</td>
-              </tr>
-              <tr style="border-bottom:2px solid var(--red);">
-                <td colspan="9" style="color: var(--red); font-weight: 700; font-size:12px; letter-spacing:1px; padding:16px 8px 6px;">LOWEST PERFORMING</td>
-              </tr>
-              <tr>
-                <td style="color: var(--text); font-weight: 500;"><a href="https://www.instagram.com/p/DbqhOlfGf4D/" target="_blank" style="color:var(--text);text-decoration:none;border-bottom:1px solid var(--text-dim);">Low Post #1</a></td>
-                <td><span style="color:var(--instagram);">Instagram</span></td>
-                <td><span class="post-type-badge reel">Image</span></td>
-                <td>838</td>
-                <td>12%</td>
-                <td>11</td>
-                <td>0</td>
-                <td>0</td>
-                <td>Aug 2026</td>
-              </tr>
-              <tr>
-                <td style="color: var(--text); font-weight: 500;"><a href="https://www.instagram.com/p/DblXlvODo9q/" target="_blank" style="color:var(--text);text-decoration:none;border-bottom:1px solid var(--text-dim);">Low Post #2</a></td>
-                <td><span style="color:var(--instagram);">Instagram</span></td>
-                <td><span class="post-type-badge reel">Image</span></td>
-                <td>287</td>
-                <td>12%</td>
-                <td>11</td>
-                <td>0</td>
-                <td>0</td>
-                <td>Aug 2026</td>
-              </tr>
-              <tr>
-                <td style="color: var(--text); font-weight: 500;"><a href="https://www.instagram.com/p/DcgmGxFlqni/" target="_blank" style="color:var(--text);text-decoration:none;border-bottom:1px solid var(--text-dim);">Low Post #3</a></td>
-                <td><span style="color:var(--instagram);">Instagram</span></td>
-                <td><span class="post-type-badge reel">Image</span></td>
-                <td>773</td>
-                <td>9%</td>
-                <td>8</td>
-                <td>0</td>
-                <td>0</td>
-                <td>Aug 2026</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- AUGUST NOTES FROM US -->
-      <div class="section-label" style="margin-top:20px;">Notes &amp; Recommendations &mdash; August 2026</div>
-      <div class="platforms-grid">
-        <div class="platform-card">
-          <div class="platform-header">
-            <div class="platform-name">
-              <div class="platform-dot" style="background: var(--green);"></div>
-              <span>What Worked</span>
-            </div>
-            <div class="platform-badge">TOP FORMAT: REELS</div>
-          </div>
-          <div style="padding:4px 0;font-size:13px;color:var(--text-mid);line-height:1.6;">Reels and carousels carried the month. The Aug 24 Reel hit 83% engagement on the back of 18 shares, and carousels stayed consistently strong across 8 posts. Both formats give people something to do (swipe or share), which drove a 58% jump in profile views and more than doubled follower growth.</div>
-        </div>
-        <div class="platform-card">
-          <div class="platform-header">
-            <div class="platform-name">
-              <div class="platform-dot" style="background: var(--red);"></div>
-              <span>What Didn't Work</span>
-            </div>
-          </div>
-          <div style="padding:4px 0;font-size:13px;color:var(--text-mid);line-height:1.6;">Static images fell flat, filling all 3 bottom spots (9&ndash;12% engagement, zero comments). They got decent reach but converted almost none of it into action.</div>
-        </div>
-        <div class="platform-card">
-          <div class="platform-header">
-            <div class="platform-name">
-              <div class="platform-dot" style="background: var(--pink);"></div>
-              <span>Recommendations for September</span>
-            </div>
-          </div>
-          <div style="padding:4px 0;font-size:13px;color:var(--text-mid);line-height:1.6;">
-            <strong style="color:var(--text);">1.</strong> Cut back on standalone images, or at least pair them with a stronger hook or CTA.<br>
-            <strong style="color:var(--text);">2.</strong> Lean into Reels and carousels on Saturdays and Mondays &mdash; your strongest days.<br>
-            <strong style="color:var(--text);">3.</strong> Try to repeat whatever made that Aug 24 Reel so shareable (18 shares!).<br>
-            <strong style="color:var(--text);">4.</strong> This audience responds to content that&rsquo;s shareable, not just visible &mdash; the share spike on the top Reel points to people finding this account through friends passing content along.<br>
-            <strong style="color:var(--text);">5.</strong> That discovery engine is worth leaning into further &mdash; create content people want to send to a friend.<br>
-            <strong style="color:var(--text);">6.</strong> +299 new followers &amp; 5K milestone crossed &mdash; momentum is building fast.
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- JULY 2026 Content -->
-    <div id="content-jul" class="content-month-section" style="display:none;">
-      <div class="table-card">
-        <div class="chart-header">
-          <div class="chart-title">July 2026 Posts</div>
-        </div>
-        <div class="table-wrapper">
-          <table>
-            <thead>
-              <tr>
-                <th>Post</th>
-                <th>Platform</th>
-                <th>Type</th>
-                <th>Reach</th>
-                <th>Engagement</th>
-                <th>Likes</th>
-                <th>Comments</th>
-                <th>Shares</th>
-                <th>Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr style="border-bottom:2px solid var(--pink);">
-                <td colspan="9" style="color: var(--pink); font-weight: 700; font-size:12px; letter-spacing:1px; padding:10px 8px 6px;">TOP PERFORMING</td>
-              </tr>
-              <tr>
-                <td style="color: var(--text); font-weight: 500;"><a href="https://www.instagram.com/p/Daf9C1DEmoO/" target="_blank" style="color:var(--text);text-decoration:none;border-bottom:1px solid var(--pink);">BABE OF THE MONTH - Meet Hannah!</a></td>
-                <td><span style="color:var(--instagram);">Instagram</span></td>
-                <td><span class="post-type-badge reel">Carousel</span></td>
-                <td>1,150</td>
-                <td>4.70%</td>
-                <td>42</td>
-                <td>5</td>
-                <td>2</td>
-                <td>Jul 7</td>
-              </tr>
-              <tr>
-                <td style="color: var(--text); font-weight: 500;"><a href="https://www.instagram.com/p/DbV6044Geb6/" target="_blank" style="color:var(--text);text-decoration:none;border-bottom:1px solid var(--pink);">Community is the Secret to Success</a></td>
-                <td><span style="color:var(--instagram);">Instagram</span></td>
-                <td><span class="post-type-badge reel">Carousel</span></td>
-                <td>914</td>
-                <td>4.81%</td>
-                <td>35</td>
-                <td>4</td>
-                <td>1</td>
-                <td>Jul 28</td>
-              </tr>
-              <tr>
-                <td style="color: var(--text); font-weight: 500;"><a href="https://www.instagram.com/p/DaivhqAlLy2/" target="_blank" style="color:var(--text);text-decoration:none;border-bottom:1px solid var(--pink);">Your First Class FREE</a></td>
-                <td><span style="color:var(--instagram);">Instagram</span></td>
-                <td><span class="post-type-badge reel">Carousel</span></td>
-                <td>1,837</td>
-                <td>2.34%</td>
-                <td>16</td>
-                <td>1</td>
-                <td>19</td>
-                <td>Jul 8</td>
-              </tr>
-              <tr style="border-bottom:2px solid var(--red);">
-                <td colspan="9" style="color: var(--red); font-weight: 700; font-size:12px; letter-spacing:1px; padding:16px 8px 6px;">LOWEST PERFORMING</td>
-              </tr>
-              <tr>
-                <td style="color: var(--text); font-weight: 500;"><a href="https://www.instagram.com/p/DbGeExcmXn_/" target="_blank" style="color:var(--text);text-decoration:none;border-bottom:1px solid var(--text-dim);">Sorry Can't, I'm Booked and Busy</a></td>
-                <td><span style="color:var(--instagram);">Instagram</span></td>
-                <td><span class="post-type-badge reel">Image</span></td>
-                <td>441</td>
-                <td>1.59%</td>
-                <td>7</td>
-                <td>0</td>
-                <td>0</td>
-                <td>Jul 22</td>
-              </tr>
-              <tr>
-                <td style="color: var(--text); font-weight: 500;"><a href="https://www.instagram.com/p/DbYfszdEmm-/" target="_blank" style="color:var(--text);text-decoration:none;border-bottom:1px solid var(--text-dim);">Friday Night Lift</a></td>
-                <td><span style="color:var(--instagram);">Instagram</span></td>
-                <td><span class="post-type-badge reel">Carousel</span></td>
-                <td>353</td>
-                <td>1.98%</td>
-                <td>7</td>
-                <td>0</td>
-                <td>0</td>
-                <td>Jul 29</td>
-              </tr>
-              <tr>
-                <td style="color: var(--text); font-weight: 500;"><a href="https://www.instagram.com/p/DbBUcZbEheE/" target="_blank" style="color:var(--text);text-decoration:none;border-bottom:1px solid var(--text-dim);">Confidence Isn't Something Found</a></td>
-                <td><span style="color:var(--instagram);">Instagram</span></td>
-                <td><span class="post-type-badge reel">Image</span></td>
-                <td>643</td>
-                <td>1.56%</td>
-                <td>9</td>
-                <td>0</td>
-                <td>1</td>
-                <td>Jul 20</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- JULY NOTES FROM US -->
-      <div class="section-label" style="margin-top:20px;">Notes &amp; Recommendations &mdash; July 2026</div>
-      <div class="platforms-grid">
-        <div class="platform-card">
-          <div class="platform-header">
-            <div class="platform-name">
-              <div class="platform-dot" style="background: var(--green);"></div>
-              <span>What Worked</span>
-            </div>
-            <div class="platform-badge">TOP FORMAT: CAROUSELS</div>
-          </div>
-          <div style="padding:4px 0;font-size:13px;color:var(--text-mid);line-height:1.6;">Member spotlights create social proof without feeling like an ad. Relatable, identity-based captions drove the highest engagement. Carousels dominated across the board. High-share content (like the free first class post with 19 shares) reaches beyond existing followers &mdash; people send it to friends who might benefit.</div>
-        </div>
-        <div class="platform-card">
-          <div class="platform-header">
-            <div class="platform-name">
-              <div class="platform-dot" style="background: var(--red);"></div>
-              <span>What Didn't Work</span>
-            </div>
-          </div>
-          <div style="padding:4px 0;font-size:13px;color:var(--text-mid);line-height:1.6;">Single images consistently underperformed. Event/promotional posts fell flat &mdash; content with a lot of logistical detail reads as an announcement rather than a conversation, and the audience scrolls past it. Motivational quotes without a hook &mdash; captions aren&rsquo;t consistently ending with a question or prompt that invites a response.</div>
-        </div>
-        <div class="platform-card">
-          <div class="platform-header">
-            <div class="platform-name">
-              <div class="platform-dot" style="background: var(--pink);"></div>
-              <span>Recommendations for August</span>
-            </div>
-          </div>
-          <div style="padding:4px 0;font-size:13px;color:var(--text-mid);line-height:1.6;">
-            <strong style="color:var(--text);">1.</strong> Add a CTA or question to every caption &mdash; no post should end without inviting a response.<br>
-            <strong style="color:var(--text);">2.</strong> More member spotlights &mdash; these are the top engagement drivers month over month.<br>
-            <strong style="color:var(--text);">3.</strong> Lean harder into carousels &mdash; they dominated top performing content this month.<br>
-            <strong style="color:var(--text);">4.</strong> Repurpose high-share content &mdash; the free class post got 19 shares; create variations of clear-value-prop content.<br>
-            <strong style="color:var(--text);">5.</strong> Avoid single-image event announcements &mdash; turn them into carousels with a hook on slide 1.<br>
-            <strong style="color:var(--text);">6.</strong> +207 new followers is strong growth &mdash; keep feeding the funnel with shareable, community-first content.
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- JUNE 2026 Content -->
-    <div id="content-jun" class="content-month-section" style="display:none;">
-      <div class="table-card">
-        <div class="chart-header">
-          <div class="chart-title">June 2026 Posts</div>
-        </div>
-        <div class="table-wrapper">
-          <table>
-            <thead>
-              <tr>
-                <th>Post</th>
-                <th>Platform</th>
-                <th>Type</th>
-                <th>Reach</th>
-                <th>Engagement</th>
-                <th>Likes</th>
-                <th>Comments</th>
-                <th>Shares</th>
-                <th>Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr style="border-bottom:2px solid var(--pink);">
-                <td colspan="9" style="color: var(--pink); font-weight: 700; font-size:12px; letter-spacing:1px; padding:10px 8px 6px;">TOP PERFORMING</td>
-              </tr>
-              <tr>
-                <td style="color: var(--text); font-weight: 500;"><a href="https://www.instagram.com/p/DZoALP8FkOu/" target="_blank" style="color:var(--text);text-decoration:none;border-bottom:1px solid var(--pink);">Top Post #1</a></td>
-                <td><span style="color:var(--instagram);">Instagram</span></td>
-                <td><span class="post-type-badge reel">Reel</span></td>
-                <td>&mdash;</td>
-                <td>&mdash;</td>
-                <td>&mdash;</td>
-                <td>&mdash;</td>
-                <td>&mdash;</td>
-                <td>Jun 2026</td>
-              </tr>
-              <tr>
-                <td style="color: var(--text); font-weight: 500;"><a href="https://www.instagram.com/p/DZpjvXTDYwH/" target="_blank" style="color:var(--text);text-decoration:none;border-bottom:1px solid var(--pink);">Top Post #2</a></td>
-                <td><span style="color:var(--instagram);">Instagram</span></td>
-                <td><span class="post-type-badge reel">Reel</span></td>
-                <td>&mdash;</td>
-                <td>&mdash;</td>
-                <td>&mdash;</td>
-                <td>&mdash;</td>
-                <td>&mdash;</td>
-                <td>Jun 2026</td>
-              </tr>
-              <tr>
-                <td style="color: var(--text); font-weight: 500;"><a href="https://www.instagram.com/p/DZTb_0JDRx3/" target="_blank" style="color:var(--text);text-decoration:none;border-bottom:1px solid var(--pink);">Top Post #3</a></td>
-                <td><span style="color:var(--instagram);">Instagram</span></td>
-                <td><span class="post-type-badge reel">Reel</span></td>
-                <td>&mdash;</td>
-                <td>&mdash;</td>
-                <td>&mdash;</td>
-                <td>&mdash;</td>
-                <td>&mdash;</td>
-                <td>Jun 2026</td>
-              </tr>
-              <tr style="border-bottom:2px solid var(--red);">
-                <td colspan="9" style="color: var(--red); font-weight: 700; font-size:12px; letter-spacing:1px; padding:16px 8px 6px;">LOWEST PERFORMING</td>
-              </tr>
-              <tr>
-                <td style="color: var(--text); font-weight: 500;"><a href="https://www.instagram.com/p/DaLQCkgFsIU/" target="_blank" style="color:var(--text);text-decoration:none;border-bottom:1px solid var(--text-dim);">Low Post #1</a></td>
-                <td><span style="color:var(--instagram);">Instagram</span></td>
-                <td><span class="post-type-badge reel">&mdash;</span></td>
-                <td>&mdash;</td>
-                <td>&mdash;</td>
-                <td>&mdash;</td>
-                <td>&mdash;</td>
-                <td>&mdash;</td>
-                <td>Jun 2026</td>
-              </tr>
-              <tr>
-                <td style="color: var(--text); font-weight: 500;"><a href="https://www.instagram.com/p/DZup61Xlrhq/" target="_blank" style="color:var(--text);text-decoration:none;border-bottom:1px solid var(--text-dim);">Low Post #2</a></td>
-                <td><span style="color:var(--instagram);">Instagram</span></td>
-                <td><span class="post-type-badge reel">&mdash;</span></td>
-                <td>&mdash;</td>
-                <td>&mdash;</td>
-                <td>&mdash;</td>
-                <td>&mdash;</td>
-                <td>&mdash;</td>
-                <td>Jun 2026</td>
-              </tr>
-              <tr>
-                <td style="color: var(--text); font-weight: 500;"><a href="https://www.instagram.com/p/DZ8OcxhoKQB/" target="_blank" style="color:var(--text);text-decoration:none;border-bottom:1px solid var(--text-dim);">Low Post #3</a></td>
-                <td><span style="color:var(--instagram);">Instagram</span></td>
-                <td><span class="post-type-badge reel">&mdash;</span></td>
-                <td>&mdash;</td>
-                <td>&mdash;</td>
-                <td>&mdash;</td>
-                <td>&mdash;</td>
-                <td>&mdash;</td>
-                <td>Jun 2026</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- JUNE NOTES FROM US -->
-      <div class="section-label" style="margin-top:20px;">Notes &amp; Recommendations &mdash; June 2026</div>
-      <div class="platforms-grid">
-        <div class="platform-card">
-          <div class="platform-header">
-            <div class="platform-name">
-              <div class="platform-dot" style="background: var(--green);"></div>
-              <span>What Worked</span>
-            </div>
-            <div class="platform-badge">TOP FORMAT: REELS</div>
-          </div>
-          <div style="padding:4px 0;font-size:13px;color:var(--text-mid);line-height:1.6;">Collab &amp; group photos continue to be the top drivers &mdash; community-driven content with real members outperforms polished graphics every time. Reels with strong opening hooks get the best reach. Engagement rate hit 24.32%, the highest we&rsquo;ve seen.</div>
-        </div>
-        <div class="platform-card">
-          <div class="platform-header">
-            <div class="platform-name">
-              <div class="platform-dot" style="background: var(--red);"></div>
-              <span>What Didn't Work</span>
-            </div>
-          </div>
-          <div style="padding:4px 0;font-size:13px;color:var(--text-mid);line-height:1.6;">Static single-image posts without a hook or CTA underperformed again. Posts that don&rsquo;t invite conversation or reaction get buried by the algorithm. Posting volume dropped to 11 (from 20 in May) &mdash; fewer touchpoints means fewer chances to reach new audience.</div>
-        </div>
-        <div class="platform-card">
-          <div class="platform-header">
-            <div class="platform-name">
-              <div class="platform-dot" style="background: var(--pink);"></div>
-              <span>Recommendations for July</span>
-            </div>
-          </div>
-          <div style="padding:4px 0;font-size:13px;color:var(--text-mid);line-height:1.6;">
-            <strong style="color:var(--text);">1.</strong> Increase posting frequency back to 15&ndash;18 posts while maintaining quality.<br>
-            <strong style="color:var(--text);">2.</strong> Make 50%+ of content Reels &mdash; short-form video is outperforming everything else.<br>
-            <strong style="color:var(--text);">3.</strong> Every static post needs a hook in the first line or a direct CTA.<br>
-            <strong style="color:var(--text);">4.</strong> Double down on member spotlights &amp; &ldquo;Babe of the Month&rdquo; &mdash; these consistently get 2&ndash;3x engagement.<br>
-            <strong style="color:var(--text);">5.</strong> Test a few trending audio Reels to capture discover-page reach.<br>
-            <strong style="color:var(--text);">6.</strong> Google directions are up 90% &mdash; lean into local content and location tags to keep that momentum.
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- MAY 2026 Content -->
-    <div id="content-may" class="content-month-section" style="display:none;">
-      <div class="table-card">
-        <div class="chart-header">
-          <div class="chart-title">May 2026 Posts</div>
-        </div>
-        <div class="table-wrapper">
-          <table>
-            <thead>
-              <tr>
-                <th>Post</th>
-                <th>Platform</th>
-                <th>Type</th>
-                <th>Reach</th>
-                <th>Engagement</th>
-                <th>Likes</th>
-                <th>Comments</th>
-                <th>Shares</th>
-                <th>Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td style="color: var(--text); font-weight: 500;">BABE OF THE MONTH - Meet Sydney!</td>
-                <td><span style="color:var(--instagram);">Instagram</span></td>
-                <td><span class="post-type-badge reel">Carousel</span></td>
-                <td>7K</td>
-                <td>5.6%</td>
-                <td>110</td>
-                <td>20</td>
-                <td>&mdash;</td>
-                <td>May 2026</td>
-              </tr>
-              <tr>
-                <td style="color: var(--text); font-weight: 500;">Celebrate Mother's Day with the Babez</td>
-                <td><span style="color:var(--instagram);">Instagram</span></td>
-                <td><span class="post-type-badge reel">Carousel</span></td>
-                <td>1.8K</td>
-                <td>8.4%</td>
-                <td>24</td>
-                <td>4</td>
-                <td>&mdash;</td>
-                <td>May 2026</td>
-              </tr>
-              <tr>
-                <td style="color: var(--text); font-weight: 500;">April Showers Bring May Powers</td>
-                <td><span style="color:var(--instagram);">Instagram</span></td>
-                <td><span class="post-type-badge reel">Carousel</span></td>
-                <td>1.8K</td>
-                <td>4.2%</td>
-                <td>24</td>
-                <td>0</td>
-                <td>&mdash;</td>
-                <td>May 2026</td>
-              </tr>
-              <tr>
-                <td style="color: var(--text); font-weight: 500;">Our First Fundraising Class!</td>
-                <td><span style="color:var(--instagram);">Instagram</span></td>
-                <td><span class="post-type-badge reel">Carousel</span></td>
-                <td>1.6K</td>
-                <td>4.6%</td>
-                <td>25</td>
-                <td>0</td>
-                <td>&mdash;</td>
-                <td>May 2026</td>
-              </tr>
-              <tr>
-                <td style="color: var(--text); font-weight: 500;">Point to the Reason Sitting Down Was Humbling</td>
-                <td><span style="color:var(--instagram);">Instagram</span></td>
-                <td><span class="post-type-badge reel">Image</span></td>
-                <td>1.5K</td>
-                <td>3.0%</td>
-                <td>22</td>
-                <td>1</td>
-                <td>&mdash;</td>
-                <td>May 2026</td>
-              </tr>
-              <tr>
-                <td style="color: var(--text); font-weight: 500;">The Weather's Heating Up</td>
-                <td><span style="color:var(--instagram);">Instagram</span></td>
-                <td><span class="post-type-badge reel">Image</span></td>
-                <td>1.3K</td>
-                <td>3.4%</td>
-                <td>23</td>
-                <td>0</td>
-                <td>&mdash;</td>
-                <td>May 2026</td>
-              </tr>
-              <tr>
-                <td style="color: var(--text); font-weight: 500;">Lock Into Summer Special</td>
-                <td><span style="color:var(--instagram);">Instagram</span></td>
-                <td><span class="post-type-badge reel">Image</span></td>
-                <td>1.3K</td>
-                <td>2.4%</td>
-                <td>14</td>
-                <td>0</td>
-                <td>&mdash;</td>
-                <td>May 2026</td>
-              </tr>
-              <tr>
-                <td style="color: var(--text); font-weight: 500;">May Vendor List is HERE!</td>
-                <td><span style="color:var(--instagram);">Instagram</span></td>
-                <td><span class="post-type-badge reel">Carousel</span></td>
-                <td>1.3K</td>
-                <td>3.8%</td>
-                <td>17</td>
-                <td>2</td>
-                <td>&mdash;</td>
-                <td>May 2026</td>
-              </tr>
-              <tr>
-                <td style="color: var(--text); font-weight: 500;">Mat Sculpt Classes Now LIVE</td>
-                <td><span style="color:var(--instagram);">Instagram</span></td>
-                <td><span class="post-type-badge reel">Image</span></td>
-                <td>1.3K</td>
-                <td>3.6%</td>
-                <td>20</td>
-                <td>1</td>
-                <td>&mdash;</td>
-                <td>May 2026</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- ==================== GOOGLE BUSINESS TAB ==================== -->
-  <div class="section" id="tab-google">
-
-    <div class="section-label">Google Business Profile &mdash; July 2026</div>
-    <div class="metrics-row">
-      <div class="metric-card">
-        <div class="metric-icon" style="background: rgba(66,133,244,0.1); color: var(--google);">&#x1F4CA;</div>
-        <div class="metric-label">Total Interactions</div>
-        <div class="metric-value">238</div>
-        <div class="metric-change up">&uarr; 7% vs Jun</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-icon" style="background: rgba(66,133,244,0.1); color: var(--google);">&#x1F441;</div>
-        <div class="metric-label">Profile Views</div>
-        <div class="metric-value">640</div>
-        <div class="metric-change up">&uarr; 2% vs Jun</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-icon" style="background: rgba(66,133,244,0.1); color: var(--google);">&#x1F50D;</div>
-        <div class="metric-label">Searches</div>
-        <div class="metric-value">203</div>
-        <div class="metric-change up">&uarr; 10% vs Jun</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-icon" style="background: var(--pink-dim); color: var(--pink);">&#x1F3E2;</div>
-        <div class="metric-label">Location</div>
-        <div class="metric-value" style="font-size:14px;">615 Channelside Dr</div>
-        <div class="metric-change up">TAMPA, FL 33602</div>
-      </div>
-    </div>
-
-    <div class="metrics-row">
-      <div class="metric-card">
-        <div class="metric-icon" style="background: rgba(0,230,118,0.1); color: var(--green);">&#x1F310;</div>
-        <div class="metric-label">Website Visits</div>
-        <div class="metric-value">130</div>
-        <div class="metric-change up">&uarr; 2% vs Jun</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-icon" style="background: rgba(66,133,244,0.1); color: var(--google);">&#x1F4DE;</div>
-        <div class="metric-label">Calls</div>
-        <div class="metric-value">11</div>
-        <div class="metric-change up">No change vs Jun</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-icon" style="background: rgba(255,145,0,0.1); color: var(--orange);">&#x1F4CD;</div>
-        <div class="metric-label">Direction Requests</div>
-        <div class="metric-value">95</div>
-        <div class="metric-change up">&uarr; 13% vs Jun</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-icon" style="background: rgba(66,133,244,0.1); color: var(--google);">&#x1F4AC;</div>
-        <div class="metric-label">Chat Clicks</div>
-        <div class="metric-value">2</div>
-        <div class="metric-change up">NEW</div>
-      </div>
-    </div>
-
-    <div class="section-label">Top Search Terms</div>
+function renderTopPostsTable(month) {
+  const posts = getTopPosts(month);
+  if (posts.length === 0) return '';
+  return `
+    <div class="section-label">Top Performing Posts &mdash; ${MONTHS.find(m=>m.id===month)?.label || month}</div>
     <div class="table-card">
-      <div class="chart-header">
-        <div class="chart-title">Searches Breakdown</div>
-      </div>
+      <div class="chart-header"><div class="chart-title">All Posts Ranked by Views</div></div>
       <div class="table-wrapper">
         <table>
-          <thead>
-            <tr>
-              <th>Rank</th>
-              <th>Search Term</th>
-              <th>Count</th>
-            </tr>
-          </thead>
+          <thead><tr>
+            <th>#</th><th>Platform</th><th>Type</th><th>Location</th><th>Caption</th><th>Views</th><th>Likes</th><th>Comments</th><th>Engagement</th><th></th>
+          </tr></thead>
           <tbody>
-            <tr><td style="color:var(--text);font-weight:700;">1</td><td style="color:var(--text);">gym</td><td style="color:var(--text);font-weight:600;">88</td></tr>
-            <tr><td style="color:var(--text);font-weight:700;">2</td><td style="color:var(--text);">biome</td><td style="color:var(--text);font-weight:600;">36</td></tr>
-            <tr><td style="color:var(--text);font-weight:700;">3</td><td style="color:var(--text);">gyms</td><td style="color:var(--text);font-weight:600;">25</td></tr>
+            ${posts.map((p,i) => `<tr>
+              <td style="font-weight:700;color:var(--text);">${i+1}</td>
+              <td><span style="display:inline-flex;align-items:center;gap:6px;">${platformIcon(p.platform)} ${p.platform}</span></td>
+              <td><span class="post-type-badge" style="${typeBadgeColor(p.type)}">${p.type}</span></td>
+              <td style="color:${p.locColor};font-weight:600;">${p.locName}</td>
+              <td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${p.caption}</td>
+              <td style="font-weight:600;color:var(--text);">${p.views > 0 ? formatNum(p.views) : '&mdash;'}</td>
+              <td>${p.likes > 0 ? p.likes : '&mdash;'}</td>
+              <td>${p.comments > 0 ? p.comments : '&mdash;'}</td>
+              <td style="font-weight:700;color:var(--pink);">${p.engagement > 0 ? p.engagement+'%' : '&mdash;'}</td>
+              <td>${p.url ? '<a href="'+p.url+'" target="_blank" style="color:var(--pink);text-decoration:none;font-size:11px;font-weight:600;white-space:nowrap;">View Post &#x2197;</a>' : ''}</td>
+            </tr>`).join('')}
           </tbody>
         </table>
       </div>
     </div>
+  `;
+}
 
-  </div>
+function getLowPosts(month) {
+  const mp = LOW_POSTS[month];
+  if (!mp) return [];
+  let all = [];
+  LOCATIONS.forEach(loc => {
+    if (mp[loc.id]) {
+      mp[loc.id].forEach(p => all.push({...p, locId:loc.id, locName:loc.name, locColor:loc.color}));
+    }
+  });
+  return all;
+}
 
-</div>
+function renderLowPostsTable(month) {
+  const posts = getLowPosts(month);
+  if (posts.length === 0) return '';
+  return `
+    <div class="section-label" style="margin-top:12px;">Lowest Performing Posts &mdash; ${MONTHS.find(m=>m.id===month)?.label || month}</div>
+    <div class="table-card">
+      <div class="chart-header"><div class="chart-title" style="color:var(--red);">Lowest Performing on Instagram</div></div>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr>
+            <th>#</th><th>Platform</th><th>Type</th><th>Location</th><th></th>
+          </tr></thead>
+          <tbody>
+            ${posts.map((p,i) => `<tr>
+              <td style="font-weight:700;color:var(--text);">${i+1}</td>
+              <td><span style="display:inline-flex;align-items:center;gap:6px;">${platformIcon(p.platform)} ${p.platform}</span></td>
+              <td><span class="post-type-badge" style="${typeBadgeColor(p.type)}">${p.type}</span></td>
+              <td style="color:${p.locColor};font-weight:600;">${p.locName}</td>
+              <td>${p.url ? '<a href="'+p.url+'" target="_blank" style="color:var(--red);text-decoration:none;font-size:11px;font-weight:600;white-space:nowrap;">View Post &#x2197;</a>' : ''}</td>
+            </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  `;
+}
 
-<!-- FOOTER -->
-<div class="footer">
-  <div class="footer-left">BBz Digital Dashboard &mdash; Booty Babez &copy; 2026</div>
-  <div class="footer-brand">
-    Powered by <a href="https://mybiomefit.com" target="_blank">MyBiomeFit</a>
-  </div>
-</div>
+// === RENDER ===
+function render() {
+  const main = document.getElementById('mainContent');
+  const md = DATA[currentMonth];
+  const monthLabel = MONTHS.find(m=>m.id===currentMonth)?.label || currentMonth;
 
-<script>
-  // === DATE ===
-  const now = new Date();
-  document.getElementById('currentDate').textContent = now.toLocaleDateString('en-US', {
-    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+  // Month selector HTML
+  const monthHTML = `<div class="month-tabs">${MONTHS.map(m =>
+    `<button class="month-tab ${m.id===currentMonth?'active':''}" onclick="setMonth('${m.id}',this)">${m.label}</button>`
+  ).join('')}</div>`;
+
+  if (currentTab === 'overview') {
+    const totalReach = md ? totalMetric(currentMonth,'reachNum') : 0;
+    const totalInt = md ? totalMetric(currentMonth,'intNum') : 0;
+    const totalFollowers = md ? totalMetric(currentMonth,'newFollowers') : 0;
+    const totalPosts = md ? totalMetric(currentMonth,'posts') : 0;
+    const bestReach = bestLoc(currentMonth,'reachNum');
+    const bestEng = bestLoc(currentMonth,'engNum');
+    const bestGrowth = bestLoc(currentMonth,'newFollowers');
+
+    main.innerHTML = `
+      ${monthHTML}
+      <div class="section-label">Aggregate &mdash; All Locations</div>
+      <div class="metrics-row metrics-row-4">
+        <div class="metric-card">
+          <div class="metric-icon" style="background:var(--pink-dim);color:var(--pink);">&#x1F4F1;</div>
+          <div class="metric-label">Total Posts</div>
+          <div class="metric-value">${md ? totalPosts : '&mdash;'}</div>
+          <div class="metric-change neutral">6 LOCATIONS</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon" style="background:rgba(68,138,255,0.1);color:var(--blue);">&#x1F441;</div>
+          <div class="metric-label">Total Reach</div>
+          <div class="metric-value">${md ? formatNum(totalReach) : '&mdash;'}</div>
+          <div class="metric-change neutral">${monthLabel}</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon" style="background:rgba(0,230,118,0.1);color:var(--green);">&#x1F4CA;</div>
+          <div class="metric-label">Total Interactions</div>
+          <div class="metric-value">${md ? formatNum(totalInt) : '&mdash;'}</div>
+          <div class="metric-change neutral">${monthLabel}</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon" style="background:rgba(255,145,0,0.1);color:var(--orange);">&#x2728;</div>
+          <div class="metric-label">New Followers</div>
+          <div class="metric-value">${md ? formatNum(totalFollowers) : '&mdash;'}</div>
+          <div class="metric-change up">ALL LOCATIONS</div>
+        </div>
+      </div>
+
+      <div class="section-label">By Location &mdash; ${monthLabel}</div>
+      <div class="loc-grid">
+        ${LOCATIONS.map(loc => {
+          const d = md ? md[loc.id] : null;
+          const isBestReach = loc.id === bestReach;
+          const isBestEng = loc.id === bestEng;
+          const isBestGrowth = loc.id === bestGrowth;
+          return `<div class="loc-card">
+            <div style="position:absolute;top:0;left:0;right:0;height:3px;background:${loc.color};opacity:0.8;border-radius:var(--radius) var(--radius) 0 0;"></div>
+            <div class="loc-card-header">
+              <div class="loc-dot" style="background:${loc.color};"></div>
+              <div class="loc-card-name">${loc.name}</div>
+              <div class="loc-card-city">${loc.city}</div>
+            </div>
+            <div class="loc-stat">
+              <div class="loc-stat-label">Posts</div>
+              <div class="loc-stat-value">${d ? d.posts : '&mdash;'}</div>
+            </div>
+            <div class="loc-stat">
+              <div class="loc-stat-label">Profile Reach</div>
+              <div class="loc-stat-value ${isBestReach?'best':''}">${d ? d.reach : '&mdash;'}</div>
+              ${isBestReach?'<div class="loc-stat-sub" style="color:var(--green);">&#9733; HIGHEST</div>':''}
+            </div>
+            <div class="loc-stat">
+              <div class="loc-stat-label">Interactions</div>
+              <div class="loc-stat-value">${d ? d.interactions : '&mdash;'}</div>
+            </div>
+            <div class="loc-stat">
+              <div class="loc-stat-label">Engagement</div>
+              <div class="loc-stat-value ${isBestEng?'best':''}">${d ? d.engagement : '&mdash;'}</div>
+              ${isBestEng?'<div class="loc-stat-sub" style="color:var(--green);">&#9733; HIGHEST</div>':''}
+            </div>
+            <div class="loc-stat">
+              <div class="loc-stat-label">New Followers</div>
+              <div class="loc-stat-value ${isBestGrowth?'best':''}">${d ? d.newFollowers : '&mdash;'}</div>
+              ${isBestGrowth?'<div class="loc-stat-sub" style="color:var(--green);">&#9733; HIGHEST</div>':''}
+            </div>
+          </div>`;
+        }).join('')}
+      </div>
+
+      <div class="section-label">Engagement Rate Trends &mdash; Jan&ndash;Apr 2026</div>
+      <div class="chart-card" style="margin-bottom:32px;">
+        <div class="chart-header"><div class="chart-title">Engagement Rate Over Time (All Locations)</div></div>
+        <div class="chart-container" style="height:320px;"><canvas id="engTrendChart"></canvas></div>
+      </div>
+
+      <div class="section-label">Comparison &mdash; ${monthLabel}</div>
+      <div class="charts-grid">
+        <div class="chart-card">
+          <div class="chart-header"><div class="chart-title">Profile Reach by Location</div></div>
+          <div class="chart-container"><canvas id="reachChart"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-header"><div class="chart-title">Engagement Rate</div></div>
+          <div class="chart-container"><canvas id="engChart"></canvas></div>
+        </div>
+      </div>
+
+      ${renderTopPostsCards(currentMonth)}
+    `;
+    initOverviewCharts();
+
+  } else if (currentTab === 'social') {
+    main.innerHTML = `
+      ${monthHTML}
+      <div class="section-label">Location Performance &mdash; ${monthLabel}</div>
+      <div class="table-card">
+        <div class="chart-header"><div class="chart-title">All Locations Comparison</div></div>
+        <div class="table-wrapper">
+          <table>
+            <thead><tr>
+              <th>Location</th><th>City</th><th>Posts</th><th>Reach</th><th>Interactions</th><th>Engagement</th><th>New Followers</th>
+            </tr></thead>
+            <tbody>
+              ${LOCATIONS.map(loc => {
+                const d = md ? md[loc.id] : null;
+                return `<tr>
+                  <td style="color:var(--text);font-weight:600;"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${loc.color};margin-right:8px;"></span>${loc.name}</td>
+                  <td>${loc.city}</td>
+                  <td>${d ? d.posts : '&mdash;'}</td>
+                  <td style="font-weight:600;color:var(--text);">${d ? d.reach : '&mdash;'}</td>
+                  <td>${d ? d.interactions : '&mdash;'}</td>
+                  <td style="font-weight:600;color:var(--text);">${d ? d.engagement : '&mdash;'}</td>
+                  <td>${d ? d.newFollowers : '&mdash;'}</td>
+                </tr>`;
+              }).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="section-label">Follower Growth by Location</div>
+      <div class="charts-grid">
+        <div class="chart-card">
+          <div class="chart-header"><div class="chart-title">New Followers</div></div>
+          <div class="chart-container"><canvas id="followersChart"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-header"><div class="chart-title">Reach Distribution</div></div>
+          <div class="chart-container"><canvas id="reachDoughnut"></canvas></div>
+        </div>
+      </div>
+
+      ${renderTopPostsTable(currentMonth)}
+      ${renderLowPostsTable(currentMonth)}
+    `;
+    initSocialCharts();
+
+  } else if (currentTab === 'insights') {
+    // Location tabs for insights
+    const locTabsHTML = `<div class="loc-tabs">${LOCATIONS.map(loc =>
+      `<button class="loc-tab ${loc.id===currentInsightLoc?'active':''}" style="${loc.id===currentInsightLoc?'background:'+loc.color+';border-color:'+loc.color+';':''}color:${loc.id===currentInsightLoc?'#000':'var(--text-dim)'};" onclick="setInsightLoc('${loc.id}')">${loc.name}</button>`
+    ).join('')}</div>`;
+
+    const loc = LOCATIONS.find(l=>l.id===currentInsightLoc);
+    const d = md ? md[currentInsightLoc] : null;
+    const ins = d ? d.insights : null;
+    const hasContentInsights = ins && (ins.worked || ins.didntWork || ins.improvements || ins.audienceInsight);
+    const wn = d && d.workingNow ? d.workingNow : [];
+    const na = d && d.needsAttention ? d.needsAttention : [];
+    const bnm = d && d.bestNextMove ? d.bestNextMove : '';
+
+    const hasAnalysis = wn.length > 0 || na.length > 0 || bnm;
+
+    main.innerHTML = `
+      ${monthHTML}
+      ${locTabsHTML}
+
+      ${hasAnalysis ? `
+      <div class="section-label">Performance Analysis &mdash; ${loc.name} &mdash; ${monthLabel}</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;">
+        <div class="platform-card" style="border-top:3px solid var(--green);">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+            <div style="font-size:20px;">&#x1F4C8;</div>
+            <div>
+              <div style="font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;font-family:var(--font-heading);color:var(--green);">Working Now</div>
+              <div style="font-size:10px;color:var(--text-dim);margin-top:2px;">Signals in this report that are helping performance.</div>
+            </div>
+          </div>
+          ${wn.length > 0 ? wn.map(item => `
+            <div style="margin-bottom:16px;padding-left:14px;border-left:2px solid var(--green);">
+              <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;">${item.title}</div>
+              <div style="font-size:12px;color:var(--text-mid);line-height:1.6;">${item.detail}</div>
+            </div>
+          `).join('') : '<div style="font-size:12px;color:var(--text-dim);padding:8px 0;">No data yet.</div>'}
+        </div>
+        <div class="platform-card" style="border-top:3px solid var(--orange);">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+            <div style="font-size:20px;">&#x26A0;</div>
+            <div>
+              <div style="font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;font-family:var(--font-heading);color:var(--orange);">Needs Attention</div>
+              <div style="font-size:10px;color:var(--text-dim);margin-top:2px;">Patterns worth adjusting before the next reporting cycle.</div>
+            </div>
+          </div>
+          ${na.length > 0 ? na.map(item => `
+            <div style="margin-bottom:16px;padding-left:14px;border-left:2px solid var(--orange);">
+              <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;">${item.title}</div>
+              <div style="font-size:12px;color:var(--text-mid);line-height:1.6;">${item.detail}</div>
+            </div>
+          `).join('') : '<div style="font-size:12px;color:var(--text-dim);padding:8px 0;">No data yet.</div>'}
+        </div>
+      </div>
+      ${bnm ? `
+      <div class="platform-card" style="margin-bottom:20px;border-top:3px solid var(--pink);">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+          <div style="font-size:20px;">&#x1F3AF;</div>
+          <div>
+            <div style="font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;font-family:var(--font-heading);color:var(--pink);">Best Next Move</div>
+            <div style="font-size:10px;color:var(--text-dim);margin-top:2px;">The clearest action to take from this report.</div>
+          </div>
+        </div>
+        <div style="font-size:13px;color:var(--text-mid);line-height:1.7;padding-left:14px;border-left:2px solid var(--pink);">${bnm}</div>
+      </div>` : ''}
+      ` : ''}
+
+      <div class="section-label">Content Insights &mdash; ${loc.name} &mdash; ${monthLabel}</div>
+      <div class="platform-card" style="margin-bottom:14px;">
+        <div class="platform-header">
+          <div class="platform-name">
+            <div class="platform-dot" style="background:${loc.color};"></div>
+            <span>${loc.name}</span>
+          </div>
+          <div class="platform-badge">${loc.city}</div>
+        </div>
+        ${hasContentInsights ? `
+          <div class="insights-grid">
+            <div>
+              <div style="font-size:10px;color:var(--green);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;font-weight:700;">What Worked</div>
+              <div style="font-size:13px;color:var(--text-mid);line-height:1.6;">${ins.worked || '&mdash;'}</div>
+            </div>
+            <div>
+              <div style="font-size:10px;color:var(--red);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;font-weight:700;">What Didn't Work</div>
+              <div style="font-size:13px;color:var(--text-mid);line-height:1.6;">${ins.didntWork || '&mdash;'}</div>
+            </div>
+            <div>
+              <div style="font-size:10px;color:var(--pink);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;font-weight:700;">Improvements</div>
+              <div style="font-size:13px;color:var(--text-mid);line-height:1.6;">${ins.improvements || '&mdash;'}</div>
+            </div>
+            <div>
+              <div style="font-size:10px;color:var(--blue);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;font-weight:700;">Audience Insight</div>
+              <div style="font-size:13px;color:var(--text-mid);line-height:1.6;">${ins.audienceInsight || '&mdash;'}</div>
+            </div>
+          </div>
+        ` : `<div style="padding:8px 0;font-size:13px;color:var(--text-dim);line-height:1.7;">Insights pending &mdash; data to be added.</div>`}
+      </div>
+    `;
+
+  } else if (currentTab === 'audience') {
+    main.innerHTML = `
+      ${monthHTML}
+      <div class="section-label">Audience Deep Dive &mdash; ${monthLabel}</div>
+      <div class="audience-grid">
+        ${LOCATIONS.map(loc => {
+          const d = md ? md[loc.id] : null;
+          const aud = d ? d.audience : null;
+          return `<div class="audience-card">
+            <div style="height:3px;background:${loc.color};border-radius:4px;margin-bottom:16px;"></div>
+            <div class="audience-card-name" style="color:${loc.color};">${loc.name}</div>
+            <div class="audience-row"><span class="audience-row-label">Gender</span><span class="audience-row-value">${aud ? aud.gender : '&mdash;'}</span></div>
+            <div class="audience-row"><span class="audience-row-label">Location</span><span class="audience-row-value">${aud ? aud.location : '&mdash;'}</span></div>
+            <div class="audience-row"><span class="audience-row-label">Age</span><span class="audience-row-value">${aud ? aud.age : '&mdash;'}</span></div>
+          </div>`;
+        }).join('')}
+      </div>
+
+      <div class="section-label">Demographics Chart</div>
+      <div class="charts-grid">
+        <div class="chart-card">
+          <div class="chart-header"><div class="chart-title">Engagement by Location</div></div>
+          <div class="chart-container"><canvas id="audEngChart"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-header"><div class="chart-title">Followers Split</div></div>
+          <div class="chart-container"><canvas id="audSplitChart"></canvas></div>
+        </div>
+      </div>
+    `;
+    initAudienceCharts();
+  }
+}
+
+// === CHART SETUP ===
+Chart.defaults.color = 'rgba(255,255,255,0.45)';
+Chart.defaults.borderColor = 'rgba(255,255,255,0.06)';
+Chart.defaults.font.family = "'Avenir','Avenir Next','Inter',sans-serif";
+let charts = {};
+function destroyChart(id) { if(charts[id]){charts[id].destroy();delete charts[id];} }
+function getLocColors() { return LOCATIONS.map(l=>l.color); }
+function getLocNames() { return LOCATIONS.map(l=>l.name); }
+function getMetricArray(key) { const md=DATA[currentMonth]; return LOCATIONS.map(l=> md&&md[l.id] ? md[l.id][key] : 0); }
+
+function initOverviewCharts() {
+  destroyChart('reachChart'); destroyChart('engChart'); destroyChart('engTrendChart');
+
+  // Engagement trend line chart
+  const ctxTrend = document.getElementById('engTrendChart')?.getContext('2d');
+  if(ctxTrend) charts['engTrendChart'] = new Chart(ctxTrend, {
+    type:'line',
+    data:{
+      labels: TREND_LABELS,
+      datasets: LOCATIONS.map(loc => ({
+        label: loc.name,
+        data: ENG_TREND[loc.id],
+        borderColor: loc.color,
+        backgroundColor: 'transparent',
+        tension: 0.4,
+        borderWidth: 2.5,
+        pointRadius: 5,
+        pointBackgroundColor: loc.color,
+        pointBorderColor: '#0B0B12',
+        pointBorderWidth: 2
+      }))
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{ position:'top', labels:{ usePointStyle:true, pointStyle:'circle', padding:20, font:{size:11} } } },
+      scales:{
+        y:{ grid:{color:'rgba(255,255,255,0.04)'}, ticks:{callback:v=>v+'%'} },
+        x:{ grid:{display:false} }
+      }
+    }
   });
 
-  // === MONTHLY DATA ===
-  const monthlyData = {
-    aug: { engagement: '29.40%', engChange: '+299 New Followers', posts: '16', postsLabel: 'AUG 2026',
-           views: '24.8K', viewsSub: 'INSTAGRAM', reach: '12.3K', reachChange: 'PROFILE REACH',
-           stories: '—', postsPct: '—', reels: '—', live: '—',
-           activity: '426', activityChange: 'ENGAGEMENTS', profileVisits: '—', profileVisitsChange: '—',
-           linkTaps: '0', linkTapsChange: 'EXTERNAL', linkTapsColor: 'var(--text-dim)' },
-    jul: { engagement: '2.76%', engChange: '+207 New Followers', posts: '14', postsLabel: 'JUL 2026',
-           views: '24.3K', viewsSub: 'INSTAGRAM', reach: '11.2K', reachChange: 'PROFILE REACH',
-           stories: '—', postsPct: '—', reels: '—', live: '—',
-           activity: '321', activityChange: 'ENGAGEMENTS', profileVisits: '—', profileVisitsChange: '—',
-           linkTaps: '0', linkTapsChange: 'EXTERNAL', linkTapsColor: 'var(--text-dim)' },
-    jun: { engagement: '24.32%', engChange: '+157 New Followers', posts: '11', postsLabel: 'JUN 2026',
-           views: '124.5K', viewsSub: 'INSTAGRAM', reach: '10.8K', reachChange: 'PROFILE REACH',
-           stories: '—', postsPct: '—', reels: '—', live: '—',
-           activity: '—', activityChange: '—', profileVisits: '—', profileVisitsChange: '—',
-           linkTaps: '35', linkTapsChange: 'EXTERNAL', linkTapsColor: 'var(--text-dim)' },
-    may: { engagement: '22.9%', engChange: '-18 Growth', posts: '20', postsLabel: 'MAY 2026',
-           views: '158.3K', viewsSub: 'IG: 158,273 • FB: 59', reach: '—', reachChange: '—',
-           stories: '—', postsPct: '—', reels: '—', live: '—',
-           activity: '—', activityChange: '—', profileVisits: '—', profileVisitsChange: '—',
-           linkTaps: '—', linkTapsChange: '—', linkTapsColor: 'var(--text-dim)' },
-    apr: { engagement: '4.6%', engChange: '+323 Growth', posts: '14', postsLabel: 'APR 2026',
-           views: '148.2K', viewsSub: '42.9% Followers • 57.1% Non', reach: '34,294', reachChange: '↑ 63.1%',
-           stories: '61.2%', postsPct: '22.0%', reels: '16.7%', live: '0.0%',
-           activity: '4,452', activityChange: '↑ 42.9%', profileVisits: '4,057', profileVisitsChange: '↑ 41.4%',
-           linkTaps: '395', linkTapsChange: '↑ 60.6%', linkTapsColor: 'var(--green)' },
-    mar: { engagement: '8.02%', engChange: '↑ 0.48%', posts: '18', postsLabel: 'MAR 2026',
-           views: '142.4K', viewsSub: '52.1% Followers • 47.9% Non', reach: '21,029', reachChange: '↑ 44.4%',
-           stories: '50.7%', postsPct: '26.4%', reels: '22.9%', live: '0.0%',
-           activity: '3,115', activityChange: '↑ 7.1%', profileVisits: '2,869', profileVisitsChange: '↑ 9.6%',
-           linkTaps: '246', linkTapsChange: '↓ 15.5%', linkTapsColor: 'var(--red)' },
-    feb: { engagement: '7.54%', engChange: '↑ 1.53%', posts: '18', postsLabel: 'FEB 2026',
-           views: '—', viewsSub: '—', reach: '—', reachChange: '—',
-           stories: '—', postsPct: '—', reels: '—', live: '—',
-           activity: '—', activityChange: '—', profileVisits: '—', profileVisitsChange: '—',
-           linkTaps: '—', linkTapsChange: '—', linkTapsColor: 'var(--text-dim)' },
-    jan: { engagement: '6.01%', engChange: '—', posts: '15', postsLabel: 'JAN 2026',
-           views: '—', viewsSub: '—', reach: '—', reachChange: '—',
-           stories: '—', postsPct: '—', reels: '—', live: '—',
-           activity: '—', activityChange: '—', profileVisits: '—', profileVisitsChange: '—',
-           linkTaps: '—', linkTapsChange: '—', linkTapsColor: 'var(--text-dim)' }
-  };
+  const ctx1 = document.getElementById('reachChart')?.getContext('2d');
+  if(ctx1) charts['reachChart'] = new Chart(ctx1, {
+    type:'bar', data:{ labels:getLocNames(), datasets:[{ label:'Reach', data:getMetricArray('reachNum'), backgroundColor:getLocColors().map(c=>c+'CC'), borderRadius:10, barPercentage:0.6 }] },
+    options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>formatNum(v)}},x:{grid:{display:false}}} }
+  });
+  const ctx2 = document.getElementById('engChart')?.getContext('2d');
+  if(ctx2) charts['engChart'] = new Chart(ctx2, {
+    type:'doughnut', data:{ labels:getLocNames(), datasets:[{ data:getMetricArray('engNum'), backgroundColor:getLocColors(), borderWidth:0, spacing:4 }] },
+    options:{ responsive:true, maintainAspectRatio:false, cutout:'70%', plugins:{legend:{position:'bottom',labels:{usePointStyle:true,pointStyle:'circle',padding:12,font:{size:10}}}} }
+  });
+}
 
-  function switchMonth(month, btn) {
-    btn.parentElement.querySelectorAll('.nav-tab').forEach(function(t) { t.classList.remove('active'); });
-    btn.classList.add('active');
-    var d = monthlyData[month];
-    document.getElementById('ig-engagement').textContent = d.engagement;
-    document.getElementById('ig-eng-change').textContent = d.engChange;
-    document.getElementById('ig-posts').textContent = d.posts;
-    document.getElementById('ig-posts-label').textContent = d.postsLabel;
-    document.getElementById('ig-views').textContent = d.views;
-    document.getElementById('ig-views-sub').textContent = d.viewsSub;
-    document.getElementById('ig-reach').textContent = d.reach;
-    document.getElementById('ig-reach-change').textContent = d.reachChange;
-    document.getElementById('ig-stories').textContent = d.stories;
-    document.getElementById('ig-posts-pct').textContent = d.postsPct;
-    document.getElementById('ig-reels').textContent = d.reels;
-    document.getElementById('ig-live').textContent = d.live;
-    document.getElementById('ig-activity').textContent = d.activity;
-    document.getElementById('ig-activity-change').textContent = d.activityChange;
-    document.getElementById('ig-profile-visits').textContent = d.profileVisits;
-    document.getElementById('ig-profile-visits-change').textContent = d.profileVisitsChange;
-    document.getElementById('ig-link-taps').textContent = d.linkTaps;
-    document.getElementById('ig-link-taps-change').textContent = d.linkTapsChange;
-    document.getElementById('ig-link-taps-change').style.color = d.linkTapsColor;
-  }
+function initSocialCharts() {
+  destroyChart('followersChart'); destroyChart('reachDoughnut');
+  const ctx1 = document.getElementById('followersChart')?.getContext('2d');
+  if(ctx1) charts['followersChart'] = new Chart(ctx1, {
+    type:'bar', data:{ labels:getLocNames(), datasets:[{ label:'New Followers', data:getMetricArray('newFollowers'), backgroundColor:getLocColors().map(c=>c+'CC'), borderRadius:10, barPercentage:0.6 }] },
+    options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{y:{grid:{color:'rgba(255,255,255,0.04)'}},x:{grid:{display:false}}} }
+  });
+  const ctx2 = document.getElementById('reachDoughnut')?.getContext('2d');
+  if(ctx2) charts['reachDoughnut'] = new Chart(ctx2, {
+    type:'doughnut', data:{ labels:getLocNames(), datasets:[{ data:getMetricArray('reachNum'), backgroundColor:getLocColors(), borderWidth:0, spacing:4 }] },
+    options:{ responsive:true, maintainAspectRatio:false, cutout:'70%', plugins:{legend:{position:'bottom',labels:{usePointStyle:true,pointStyle:'circle',padding:12,font:{size:10}}}} }
+  });
+}
 
-  // === TOP CONTENT MONTH SWITCHING ===
-  function switchContentMonth(month, btn) {
-    btn.parentElement.querySelectorAll('.nav-tab').forEach(function(t) { t.classList.remove('active'); });
-    btn.classList.add('active');
-    document.querySelectorAll('.content-month-section').forEach(function(s) { s.style.display = 'none'; });
-    document.getElementById('content-' + month).style.display = 'block';
-  }
+function initAudienceCharts() {
+  destroyChart('audEngChart'); destroyChart('audSplitChart');
+  const ctx1 = document.getElementById('audEngChart')?.getContext('2d');
+  if(ctx1) charts['audEngChart'] = new Chart(ctx1, {
+    type:'bar', data:{ labels:getLocNames(), datasets:[{ label:'Engagement %', data:getMetricArray('engNum'), backgroundColor:getLocColors().map(c=>c+'CC'), borderRadius:10, barPercentage:0.6 }] },
+    options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v+'%'}},x:{grid:{display:false}}} }
+  });
+  const ctx2 = document.getElementById('audSplitChart')?.getContext('2d');
+  if(ctx2) charts['audSplitChart'] = new Chart(ctx2, {
+    type:'doughnut', data:{ labels:getLocNames(), datasets:[{ data:getMetricArray('newFollowers'), backgroundColor:getLocColors(), borderWidth:0, spacing:4 }] },
+    options:{ responsive:true, maintainAspectRatio:false, cutout:'70%', plugins:{legend:{position:'bottom',labels:{usePointStyle:true,pointStyle:'circle',padding:12,font:{size:10}}}} }
+  });
+}
 
-  // === TAB SWITCHING ===
-  function switchTab(tab, btn) {
-    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-    document.getElementById('tab-' + tab).classList.add('active');
-    btn.classList.add('active');
-    initCharts(tab);
-  }
+// === NAV ===
+function switchTab(tab, btn) {
+  document.querySelectorAll('.nav-tabs .nav-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  currentTab = tab;
+  render();
+}
+function setMonth(month) {
+  currentMonth = month;
+  render();
+}
+function setInsightLoc(locId) {
+  currentInsightLoc = locId;
+  render();
+}
 
-  // === CHART DEFAULTS ===
-  Chart.defaults.color = 'rgba(255,255,255,0.45)';
-  Chart.defaults.borderColor = 'rgba(255,255,255,0.06)';
-  Chart.defaults.font.family = "'Avenir', 'Avenir Next', 'Inter', sans-serif";
-
-  const pink = '#F43CE2';
-  const pinkAlpha = 'rgba(244, 60, 226, 0.15)';
-  const tiktokColor = '#00F2EA';
-  const fbColor = '#1877F2';
-  const igColor = '#E1306C';
-  const googleColor = '#4285F4';
-
-  const monthLabels = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  const placeholderData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-
-  let charts = {};
-
-  function destroyChart(id) {
-    if (charts[id]) { charts[id].destroy(); delete charts[id]; }
-  }
-
-  function initCharts(tab) {
-    if (tab === 'overview' || tab === undefined) {
-      destroyChart('followerChart');
-      const ctx1 = document.getElementById('followerChart').getContext('2d');
-      charts['followerChart'] = new Chart(ctx1, {
-        type: 'line',
-        data: {
-          labels: monthLabels,
-          datasets: [
-            { label: 'Instagram', data: placeholderData, borderColor: igColor, backgroundColor: 'transparent', tension: 0.4, borderWidth: 2.5, pointRadius: 0 },
-            { label: 'TikTok', data: placeholderData, borderColor: tiktokColor, backgroundColor: 'transparent', tension: 0.4, borderWidth: 2.5, pointRadius: 0 },
-            { label: 'Facebook', data: placeholderData, borderColor: fbColor, backgroundColor: 'transparent', tension: 0.4, borderWidth: 2.5, pointRadius: 0 }
-          ]
-        },
-        options: {
-          responsive: true, maintainAspectRatio: false,
-          plugins: { legend: { position: 'top', labels: { usePointStyle: true, pointStyle: 'circle', padding: 20, font: { size: 11 } } } },
-          scales: { y: { grid: { color: 'rgba(255,255,255,0.04)' } }, x: { grid: { display: false } } }
-        }
-      });
-
-      destroyChart('platformSplitChart');
-      const ctx2 = document.getElementById('platformSplitChart').getContext('2d');
-      charts['platformSplitChart'] = new Chart(ctx2, {
-        type: 'doughnut',
-        data: {
-          labels: ['Instagram', 'TikTok', 'Facebook'],
-          datasets: [{ data: [1, 1, 1], backgroundColor: [igColor, tiktokColor, fbColor], borderWidth: 0, spacing: 4 }]
-        },
-        options: {
-          responsive: true, maintainAspectRatio: false, cutout: '74%',
-          plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, pointStyle: 'circle', padding: 16, font: { size: 11 } } } }
-        }
-      });
-    }
-
-    if (tab === 'social') {
-      destroyChart('engagementChart');
-      const ctx3 = document.getElementById('engagementChart').getContext('2d');
-      charts['engagementChart'] = new Chart(ctx3, {
-        type: 'bar',
-        data: {
-          labels: monthLabels,
-          datasets: [
-            { label: 'Instagram', data: [6.01, 7.54, 8.02, 0, 0, 0, 0, 0, 0, 0, 0, 0], backgroundColor: igColor + '99', borderRadius: 8, barPercentage: 0.6 },
-            { label: 'TikTok', data: placeholderData, backgroundColor: tiktokColor + '99', borderRadius: 8, barPercentage: 0.6 },
-            { label: 'Facebook', data: placeholderData, backgroundColor: fbColor + '99', borderRadius: 8, barPercentage: 0.6 }
-          ]
-        },
-        options: {
-          responsive: true, maintainAspectRatio: false,
-          plugins: { legend: { position: 'top', labels: { usePointStyle: true, pointStyle: 'circle', padding: 20, font: { size: 11 } } } },
-          scales: { y: { grid: { color: 'rgba(255,255,255,0.04)' } }, x: { grid: { display: false } } }
-        }
-      });
-
-      destroyChart('demographicsChart');
-      const ctx4 = document.getElementById('demographicsChart').getContext('2d');
-      charts['demographicsChart'] = new Chart(ctx4, {
-        type: 'doughnut',
-        data: {
-          labels: ['18-24', '25-34', '35-44', '45+'],
-          datasets: [{ data: [1, 1, 1, 1], backgroundColor: [pink, tiktokColor, fbColor, '#FF9100'], borderWidth: 0, spacing: 4 }]
-        },
-        options: {
-          responsive: true, maintainAspectRatio: false, cutout: '74%',
-          plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, pointStyle: 'circle', padding: 16, font: { size: 11 } } } }
-        }
-      });
-    }
-
-    if (tab === 'ads') {
-      destroyChart('adSpendChart');
-      const ctx5 = document.getElementById('adSpendChart').getContext('2d');
-      charts['adSpendChart'] = new Chart(ctx5, {
-        type: 'line',
-        data: {
-          labels: monthLabels,
-          datasets: [
-            { label: 'Meta', data: placeholderData, borderColor: fbColor, backgroundColor: fbColor + '15', fill: true, tension: 0.4, borderWidth: 2.5, pointRadius: 0 },
-            { label: 'Google', data: placeholderData, borderColor: googleColor, backgroundColor: googleColor + '15', fill: true, tension: 0.4, borderWidth: 2.5, pointRadius: 0 },
-            { label: 'TikTok', data: placeholderData, borderColor: tiktokColor, backgroundColor: tiktokColor + '15', fill: true, tension: 0.4, borderWidth: 2.5, pointRadius: 0 }
-          ]
-        },
-        options: {
-          responsive: true, maintainAspectRatio: false,
-          plugins: { legend: { position: 'top', labels: { usePointStyle: true, pointStyle: 'circle', padding: 20, font: { size: 11 } } } },
-          scales: { y: { grid: { color: 'rgba(255,255,255,0.04)' } }, x: { grid: { display: false } } }
-        }
-      });
-
-      destroyChart('adSplitChart');
-      const ctx6 = document.getElementById('adSplitChart').getContext('2d');
-      charts['adSplitChart'] = new Chart(ctx6, {
-        type: 'doughnut',
-        data: {
-          labels: ['Meta Ads', 'Google Ads', 'TikTok Ads'],
-          datasets: [{ data: [1, 1, 1], backgroundColor: [fbColor, googleColor, tiktokColor], borderWidth: 0, spacing: 4 }]
-        },
-        options: {
-          responsive: true, maintainAspectRatio: false, cutout: '74%',
-          plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, pointStyle: 'circle', padding: 16, font: { size: 11 } } } }
-        }
-      });
-    }
-  }
-
-  // Init overview charts on load
-  initCharts('overview');
+// Init
+render();
 </script>
-
 </body>
 </html>
