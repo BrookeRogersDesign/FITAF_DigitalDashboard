@@ -252,9 +252,12 @@ const DATA = {
                         improvements:'Lean harder into Reels over static posts, put the boldest line of copy in the first 1-2 seconds of video and on-screen text, and tighten posting to the Tuesday/Thursday afternoon and Monday windows where reach-to-engagement efficiency was highest. Also worth testing a midweek UGC or member-transformation story since "warm and community-centric" is a core trait that wasn\'t fully leveraged in September\'s top performers.',
                         audienceInsight:'Your audience is young and hyper-local to Tampa Bay. That combination means content should keep skewing toward relatable, slightly irreverent humor over polished fitness-influencer aesthetics, and local callouts (studio names, Tampa landmarks, "South Tampa" expansion teasers) will resonate more than generic fitness messaging.' },
              workingNow:[], needsAttention:[], bestNextMove:'' },
-    'corp': { posts:0, reach:'—', reachNum:0, interactions:'—', intNum:0, engagement:'—', engNum:0, newFollowers:0,
-              audience:{ gender:'—', location:'—', age:'—' },
-              insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' },
+    'corp': { posts:12, reach:'13.2K', reachNum:13232, interactions:'1.1K', intNum:1085, engagement:'8.20%', engNum:8.20, newFollowers:175,
+              audience:{ gender:'Women', location:'Tallahassee', age:"18-20's" },
+              insights:{ worked:'Single images and Wednesday posting drove the month. Images averaged the highest rank score and claimed the top 2 of 3 spots, while Wednesday posts dramatically outperformed every other day, including the month\'s single best post. The Sept 2 reel also broke through with strong comment volume, suggesting storytelling-style reels still resonate when they land.',
+                         didntWork:'Reels underperformed as a format overall, averaging the lowest rank score of the three types, with the Sept 11 reel posting zero comments and the lowest engagement rate of the month. Carousels were mixed, solid reach but middling engagement, suggesting they\'re not pulling their weight relative to the effort of producing them.',
+                         improvements:'Lean harder into single-image posts on Wednesdays, that\'s your proven combination this month. For reels, the low comment counts point to weak hooks or CTAs, consider opening with a direct question or bold claim to prompt replies rather than just passive views. Worth testing whether reels perform better earlier or later in the week to see if it\'s a timing issue rather than a format issue.',
+                         audienceInsight:'Your audience is overwhelmingly young, female, and hyper-local to Florida. Geographically it\'s Tallahassee (18%) and Lake Butler/Jacksonville (11% each) leading the pack, confirming this is a tightly-clustered regional community rather than a broad national audience, which should keep content grounded in local, in-studio culture rather than generic national fitness trends.' },
               workingNow:[], needsAttention:[], bestNextMove:'' }
   },
   aug26: {
@@ -512,7 +515,7 @@ const ENG_TREND = {
   'jax': [0.62, 7.34, 17.02, 16.96, 5.31, 2.80, 5.34, 5.53, 40.60],
   '850': [2.51, 5.59, 8.90, 6.83, 6.55, 5.03, 3.88, 2.60, 3.78],
   'af':  [0.91, 0.71, 1.73, 1.29, 13.11, 1.55, 4.44, 2.97, 5.74],
-  'corp': [0, 0, 0, 12.10, 0, 7.35, 0, 6.28, 0]
+  'corp': [0, 0, 0, 12.10, 0, 7.35, 0, 6.28, 8.20]
 };
 const TREND_LABELS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep'];
 
@@ -543,6 +546,11 @@ const TOP_POSTS = {
       { platform:'Instagram', type:'POST', caption:'Top Performing Post #1 — FIT AF', views:9613, likes:416, comments:12, engagement:7.41, url:'https://www.instagram.com/p/DdU7A1mD2yn/' },
       { platform:'Instagram', type:'POST', caption:'Top Performing Post #2 — FIT AF', views:8261, likes:269, comments:66, engagement:4.56, url:'https://www.instagram.com/p/Dc1D_c3oN2B/' },
       { platform:'Instagram', type:'POST', caption:'Top Performing Post #3 — FIT AF', views:2950, likes:109, comments:5, engagement:1.69, url:'https://www.instagram.com/p/DdZBy6tlwmu/' }
+    ],
+    'corp': [
+      { platform:'Instagram', type:'POST', caption:'Top Performing Post #1 — @FITasFIRE', views:1855, likes:162, comments:4, engagement:9.65, url:'https://www.instagram.com/p/DdpZYftDNtW/' },
+      { platform:'Instagram', type:'REEL', caption:'Top Performing Post #2 — @FITasFIRE', views:1196, likes:104, comments:11, engagement:10.79, url:'https://www.instagram.com/reels/DcyoDTHCFd0/' },
+      { platform:'Instagram', type:'POST', caption:'Top Performing Post #3 — @FITasFIRE', views:1102, likes:100, comments:0, engagement:9.62, url:'https://www.instagram.com/p/DdWrHZWj5pO/' }
     ]
   },
   aug26: {
@@ -706,6 +714,11 @@ const LOW_POSTS = {
       { platform:'Instagram', type:'POST', caption:'Lowest Performing #1 — FIT AF', views:348, likes:11, comments:2, engagement:0.13, url:'https://www.instagram.com/p/Dd7JkDQF-Ul/' },
       { platform:'Instagram', type:'POST', caption:'Lowest Performing #2 — FIT AF', views:470, likes:14, comments:1, engagement:0.15, url:'https://www.instagram.com/p/Dd1_8xUF-Yy/' },
       { platform:'Instagram', type:'REEL', caption:'Lowest Performing #3 — FIT AF', views:850, likes:12, comments:0, engagement:0.13, url:'https://www.instagram.com/reels/Dcyu5OuiBGI/' }
+    ],
+    'corp': [
+      { platform:'Instagram', type:'REEL', caption:'Lowest Performing #1 — @FITasFIRE', views:816, likes:47, comments:0, engagement:6.25, url:'https://www.instagram.com/reels/DdJzO4xEdb4/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #2 — @FITasFIRE', views:600, likes:61, comments:1, engagement:10.67, url:'https://www.instagram.com/p/Dd2NgquF0Uh/' },
+      { platform:'Instagram', type:'REEL', caption:'Lowest Performing #3 — @FITasFIRE', views:1058, likes:56, comments:1, engagement:6.33, url:'https://www.instagram.com/reels/Dc3xi3-gauP/' }
     ]
   },
   aug26: {
