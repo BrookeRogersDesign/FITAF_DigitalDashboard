@@ -204,6 +204,7 @@ const LOCATIONS = [
 ];
 
 const MONTHS = [
+  { id:'oct26', label:'October 2026' },
   { id:'sep26', label:'September 2026' },
   { id:'aug26', label:'August 2026' },
   { id:'jul26', label:'July 2026' },
@@ -216,6 +217,46 @@ const MONTHS = [
 ];
 
 const DATA = {
+  oct26: {
+    '407': { posts:10, reach:'44.9K', reachNum:44942, interactions:'2.3K', intNum:2262, engagement:'5.03%', engNum:5.03, newFollowers:223,
+             audience:{ gender:'Women', location:'Orlando', age:"20's-30's (IG) 40's (FB)" },
+             insights:{ worked:'Themed, culturally-tied takeover content and promo-driven carousels/reels dominated the month, the Pitbull & Pilates collab reel (19,165 views, 10,332 reach) and its recap reel, plus the FIT BOO Week carousel (18,357 views, 164 shares, 8.47% engagement rate) all topped the leaderboard. These worked because they paired high-energy, pop-culture-flavored event hooks with a clear, shareable payoff (either "you had to be there" FOMO or a tangible redeemable perk), which is exactly the differentiator in this brand\'s DNA.',
+                        didntWork:'The three underperformers, the FIT x Kerstie testimonial reel, the FIT BOO Week reel reminder, and the private event rental carousel, all landed below their format\'s baseline for the month (46-69% of expected reach/views for their post type). They were well-produced but lacked either a strong visual hook in the first 2 seconds (Kerstie reel) or a fresh angle on a message already delivered elsewhere in the month (the Boo reel repeated the carousel\'s offer almost verbatim, and the rental carousel is evergreen info without urgency).',
+                        improvements:'Avoid duplicating the same promo message across formats back-to-back (the FIT BOO carousel and reel ran 4 days apart with near-identical copy, splitting engagement instead of compounding it); stagger promo formats instead. For testimonial/member-spotlight content like the Kerstie reel, open with the result or energy rather than a voiceover-style intro, and consider pairing evergreen asks (private events) with a timely hook or limited-time incentive to create urgency.',
+                        audienceInsight:'The audience remains firmly millennial/Gen-Z women (81.9% female, 64.5% aged 25-44) concentrated in Central Florida, Orlando leads at 14.5% of engaged accounts, with Lake Butler, Celebration, Narcoossee, and Winter Garden rounding out the next tier, confirming the brand\'s hyper-local "407" positioning is reaching exactly who it\'s built for. The near-total absence of male engagement (4.1%) and strong female skew reinforces that community/celebration-style content (bachelorettes, FIT FAM callouts) will keep outperforming generic fitness messaging for this specific base.' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    'gnv': { posts:10, reach:'31.9K', reachNum:31870, interactions:'1.2K', intNum:1234, engagement:'3.87%', engNum:3.87, newFollowers:148,
+             audience:{ gender:'Women', location:'Gainesville', age:"18-20's" },
+             insights:{ worked:'Images and Tuesdays carried the month, Tuesday posts averaged a 12,225 rank score (more than double any other day) thanks almost entirely to the Oct 13 image, which pulled 26,377 views and 12,874 reach by far the widest distribution of the month, while Reels delivered the most dependable mid-tier performance (4 posts, avg. 5,325) with the best engagement-to-view ratios (up to 3.5%), meaning your video content converts viewers into likes/comments more efficiently even when it doesn\'t win on raw reach.',
+                        didntWork:'The weakest posts were single static images with no caption hook or CTA (Oct 5 and Oct 7), both pulling under 1,400 reach and in one case literally zero comments and zero shares, essentially dead-end content that gave followers nothing to react to.',
+                        improvements:'Lean harder into Tuesday publishing and figure out what made the Oct 13 image an outlier (likely a shareable or saveable moment) so you can replicate that hook intentionally, pair your Reels\' strong engagement rate with bigger distribution pushes (trending audio, stronger opening frame) to combine their conversion strength with the Oct 13 post\'s reach, and give every single-image post a caption question or CTA since the flat performers all lacked one.',
+                        audienceInsight:'Your audience is overwhelmingly local and young, 81% in Gainesville, 59% aged 18-24, and 72% female, confirming this is a hyper-local student/young-adult crowd that responds to community-driven, relatable content over broad brand messaging, so localized, FIT FAM-flavored posts will consistently outperform generic fitness content.' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    'jax': { posts:9, reach:'13.7K', reachNum:13695, interactions:'683', intNum:683, engagement:'4.99%', engNum:4.99, newFollowers:173,
+             audience:{ gender:'Women', location:'Jacksonville', age:"18-20's" },
+             insights:{ worked:'Static images and carousels outperformed overall engagement rate this month, with the San Marco grand-opening announcement pulling the highest raw engagement (197 interactions, 3,732 reach) because it tapped into local community excitement and a real-world event tied to the brand\'s "community-driven" identity. The FIT BOO Week carousel posted the best engagement rate of the month (7.34%) despite modest reach, proving that smaller, highly-targeted audiences are far more likely to interact with multi-slide, info-dense content. The Jessi collaboration reel also performed strongly (123 engagements, 2,270 reach), showing that creator partnerships extend reach into new, adjacent audiences while still converting at a high rate.',
+                        didntWork:'The three lowest-performing posts were all single-image or reel posts published mid-month (Oct 7, 12, 19) with little to no comment activity and the smallest reach of the period, several had zero comments and minimal shares, suggesting these captions lacked a strong hook or clear call-to-action to prompt conversation.',
+                        improvements:'Lean further into carousels and real-event/community posts (grand openings, challenges, promos) since they\'re driving both reach and the strongest engagement rates; add explicit CTAs or questions to static image captions to push past passive likes into comments; and scale up collab/influencer content given how efficiently the Jessi reel converted reach into engagement.',
+                        audienceInsight:'The FIT JAX audience (82.6% female, concentrated 18-34, Jacksonville metro) engages most with content that feels local and communal rather than generic fitness content, posts tied to specific neighborhoods (San Marco) or named community members (Jessi) outperformed generic workout or studio-vibe posts, reinforcing that this audience is motivated by belonging and local identity as much as the workout itself.' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    '850': { posts:10, reach:'20.9K', reachNum:20919, interactions:'1.1K', intNum:1051, engagement:'5.00%', engNum:5.00, newFollowers:64,
+             audience:{ gender:'Women', location:'Tallahassee', age:"18-20's" },
+             insights:{ worked:'Carousels were the clear winner, averaging a rank score of 8,806 (more than double images at 3,637 and reels at 3,001). The Oct 15 and Oct 9 carousels drove the bulk of the month\'s reach and shares, likely because multi-slide promos give your heated-Pilates offers and FIT 850 app CTAs room to breathe across several frames instead of cramming everything into one caption, exactly the pattern your top-post data has shown for months. Thursday posts also spiked (avg score 8,326), suggesting that\'s a live window worth protecting.',
+                        didntWork:'Standalone images were the weakest format, and your two officially flagged underperformers were the Oct 29 carousel and Oct 19 reel, both landing well below their own format\'s baseline despite the format usually working. Static images in general pulled thin engagement (1.8-2.4%) with almost zero comments, meaning they\'re getting seen but not sparking conversation.',
+                        improvements:'Shift image-only posts into carousels wherever you can, even a 2-3 slide version of a single photo outperforms a solo static post here. For the two underperforming posts, revisit whether they lacked a clear local CTA (Market St/Midtown or app promo code) since that\'s consistently what separates your top carousels from the flops. Also worth testing a second Thursday slot this month to double down on your best-performing day.',
+                        audienceInsight:'Your audience rewards content that feels like a local event or perk (the 161 shares on the Oct 15 carousel is a big tell) over passive scroll-by content. They\'re not big commenters (most posts had 0-2 comments) but they\'ll reshare and reach for an app code when the offer is concrete, reinforcing that your FIT FAM responds to action, not just inspiration.' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    'af': { posts:11, reach:'29.7K', reachNum:29728, interactions:'1.6K', intNum:1568, engagement:'5.27%', engNum:5.27, newFollowers:160,
+             audience:{ gender:'Women', location:'Tampa', age:"20's-30's" },
+             insights:{ worked:'Carousels and Reels tied to the Hot Mat Studio soft launch drove the month, especially the October 25th carousel announcing free launch-week classes (16,166 reach, 666 engagements, 7.01% engagement rate), which outperformed everything else by a wide margin. Reels also consistently over-indexed on engagement relative to their reach (the Oct 28 and Oct 27 reels pulled 2.93% and 1.75% engagement rates on comparatively modest reach), suggesting video content paired with a clear, actionable hook (free classes, booking steps, location) is what\'s pulling people in versus just views.',
+                        didntWork:'Static images were the weakest format across the board, occupying the bottom of the engagement rankings (Oct 19, Oct 5, Oct 7 posts all under 0.3% engagement rate with little to no comments). These posts lacked a timely hook or urgency, they read more like generic brand filler than news or value, which likely explains the flat response.',
+                        improvements:'Shift the content mix away from standalone static images toward more Reels and carousels, and when posting images, pair them with a stronger CTA or urgency element (limited spots, deadline, promo) similar to what made the soft launch carousel work. Also worth testing whether comments are being actively prompted, your best posts had real comment volume (96, 66, 17) while your worst had zero to one, indicating a missed opportunity to ask questions or invite replies.',
+                        audienceInsight:'Your audience (mostly women 18-34 in Tampa) responds strongly to real, actionable studio news, not just aesthetic content, they want to know what\'s happening, how to book, and why it matters to them right now. The soft launch carousel\'s performance signals this crowd is primed for community/event-driven content over passive brand posts, which should shape how you frame November\'s content.' },
+             workingNow:[], needsAttention:[], bestNextMove:'' },
+    'corp': { posts:0, reach:'—', reachNum:0, interactions:'—', intNum:0, engagement:'—', engNum:0, newFollowers:0,
+              audience:{ gender:'—', location:'—', age:'—' }, insights:{ worked:'', didntWork:'', improvements:'', audienceInsight:'' },
+              workingNow:[], needsAttention:[], bestNextMove:'' }
+  },
   sep26: {
     '407': { posts:21, reach:'91.1K', reachNum:91129, interactions:'5.7K', intNum:5698, engagement:'6.25%', engNum:6.25, newFollowers:277,
              audience:{ gender:'Women', location:'Orlando', age:"20's-30's (IG) 40's (FB)" },
@@ -231,7 +272,7 @@ const DATA = {
                         improvements:'Lean into carousels as the default format instead of a once-in-a-while choice, and actively pursue more collab posts since the one you ran this month single-handedly tripled your total reach for the period. For reels, the content needs a stronger hook in the first second. Right now they\'re not earning the swipe-through or rewatch behavior that drives IG\'s distribution.',
                         audienceInsight:'Your audience is hyper-local, 79.9% of engaged accounts are in Gainesville itself, with small secondary pockets in Tampa, Jacksonville, Tallahassee, and New York (likely alumni). This isn\'t a broad-reach brand, it\'s a neighborhood one, so content that feels like "come see us this week" will consistently outperform generic fitness content aimed at a national audience.' },
              workingNow:[], needsAttention:[], bestNextMove:'' },
-    'jax': { posts:16, reach:'16.6K', reachNum:16611, interactions:'631', intNum:631, engagement:'40.60%', engNum:40.60, newFollowers:371,
+    'jax': { posts:16, reach:'16.6K', reachNum:16611, interactions:'631', intNum:631, engagement:'3.80%', engNum:3.80, newFollowers:371,
              audience:{ gender:'Women', location:'Tampa', age:"18-20's" },
              insights:{ worked:'Static images and carousels outperformed reels this month, with the top 3 posts all pulling 70+ engagements and sitting well above the 40-engagement median. These leaned on two things that align with the brand\'s voice: community-first language ("YOUR space," "FIT FAM") and genuine news/milestones (a new studio opening), which gives followers a concrete reason to comment, save, or share rather than just scroll past. The Grand Opening carousel\'s 10 shares (way above any other post) shows informational, multi-slide content travels when it\'s framed as something worth passing along to a friend.',
                         didntWork:'The lowest performers were softer, more introspective posts that lacked a clear hook or call-to-action, and all landed in the back half of the month when reach also dipped. Comments were nearly non-existent across the board, meaning even high-like posts aren\'t sparking conversation. The brand\'s own caption style, direct prompts like "Comment below" and "Tag your Pilates crew", wasn\'t used consistently; the posts with legitimate comment-bait phrasing in the caption still got zero replies, suggesting the CTA placement or follow-through needs work.',
@@ -510,17 +551,44 @@ const DATA = {
 
 // Engagement trend data (all months)
 const ENG_TREND = {
-  '407': [1.20, 1.77, 1.51, 1.53, 1.84, 1.77, 4.52, 5.10, 6.25],
-  'gnv': [9.65, 11.61, 16.90, 27.57, 11.82, 4.37, 3.00, 1.90, 3.02],
-  'jax': [0.62, 7.34, 17.02, 16.96, 5.31, 2.80, 5.34, 5.53, 40.60],
-  '850': [2.51, 5.59, 8.90, 6.83, 6.55, 5.03, 3.88, 2.60, 3.78],
-  'af':  [0.91, 0.71, 1.73, 1.29, 13.11, 1.55, 4.44, 2.97, 5.74],
-  'corp': [0, 0, 0, 12.10, 0, 7.35, 0, 6.28, 8.20]
+  '407': [1.20, 1.77, 1.51, 1.53, 1.84, 1.77, 4.52, 5.10, 6.25, 5.03],
+  'gnv': [9.65, 11.61, 16.90, 27.57, 11.82, 4.37, 3.00, 1.90, 3.02, 3.87],
+  'jax': [0.62, 7.34, 17.02, 16.96, 5.31, 2.80, 5.34, 5.53, 3.80, 4.99],
+  '850': [2.51, 5.59, 8.90, 6.83, 6.55, 5.03, 3.88, 2.60, 3.78, 5.00],
+  'af':  [0.91, 0.71, 1.73, 1.29, 13.11, 1.55, 4.44, 2.97, 5.74, 5.27],
+  'corp': [0, 0, 0, 12.10, 0, 7.35, 0, 6.28, 8.20, 0]
 };
-const TREND_LABELS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep'];
+const TREND_LABELS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct'];
 
 // Top performing posts by location and month
 const TOP_POSTS = {
+  oct26: {
+    '407': [
+      { platform:'Instagram', type:'POST', caption:'Top Performing Post #1 — FIT 407', views:6173, likes:355, comments:4, engagement:8.47, url:'https://www.instagram.com/p/Deh4JDqlwO1/' },
+      { platform:'Instagram', type:'REEL', caption:'Top Performing Post #2 — FIT 407', views:10332, likes:359, comments:30, engagement:4.27, url:'https://www.instagram.com/reels/Dezy0LaIVbp/' },
+      { platform:'Instagram', type:'REEL', caption:'Top Performing Post #3 — FIT 407', views:5492, likes:163, comments:7, engagement:4.41, url:'https://www.instagram.com/reels/DfDnmK6Dgwo/' }
+    ],
+    'gnv': [
+      { platform:'Instagram', type:'POST', caption:'Top Performing Post #1 — FIT Gainesville', views:26377, likes:139, comments:47, engagement:1.81, url:'https://www.instagram.com/p/DecEQ3gRHlt/' },
+      { platform:'Instagram', type:'POST', caption:'Top Performing Post #2 — FIT Gainesville', views:7420, likes:93, comments:2, engagement:5.91, url:'https://www.instagram.com/p/DeNfYyEkTKU/' },
+      { platform:'Instagram', type:'REEL', caption:'Top Performing Post #3 — FIT Gainesville', views:7101, likes:215, comments:22, engagement:5.48, url:'https://www.instagram.com/reels/DejnuquxFW6/' }
+    ],
+    'jax': [
+      { platform:'Instagram', type:'POST', caption:'Top Performing Post #1 — FIT JAX', views:3732, likes:150, comments:10, engagement:5.28, url:'https://www.instagram.com/p/De-TtzDjJJ9/' },
+      { platform:'Instagram', type:'REEL', caption:'Top Performing Post #2 — FIT JAX', views:2270, likes:114, comments:3, engagement:5.42, url:'https://www.instagram.com/reels/DfAq8E9jT0y/' },
+      { platform:'Instagram', type:'POST', caption:'Top Performing Post #3 — FIT JAX', views:1472, likes:82, comments:0, engagement:7.34, url:'https://www.instagram.com/p/Deh4FFjlwlf/' }
+    ],
+    '850': [
+      { platform:'Instagram', type:'POST', caption:'Top Performing Post #1 — FIT 850', views:4417, likes:193, comments:1, engagement:8.04, url:'https://www.instagram.com/p/Dehczl8Drnb/' },
+      { platform:'Instagram', type:'POST', caption:'Top Performing Post #2 — FIT 850', views:3407, likes:230, comments:2, engagement:7.01, url:'https://www.instagram.com/p/DeSUh1NjMJE/' },
+      { platform:'Instagram', type:'REEL', caption:'Top Performing Post #3 — FIT 850', views:2366, likes:74, comments:5, engagement:3.80, url:'https://www.instagram.com/reels/DfDnksovQ8n/' }
+    ],
+    'af': [
+      { platform:'Instagram', type:'POST', caption:'Top Performing Post #1 — FIT AF', views:16166, likes:323, comments:96, engagement:7.01, url:'https://www.instagram.com/p/De8KS5PDWn0/' },
+      { platform:'Instagram', type:'REEL', caption:'Top Performing Post #2 — FIT AF', views:2338, likes:205, comments:66, engagement:2.93, url:'https://www.instagram.com/reels/DfDzQZ2tT39/' },
+      { platform:'Instagram', type:'REEL', caption:'Top Performing Post #3 — FIT AF', views:1716, likes:140, comments:17, engagement:1.75, url:'https://www.instagram.com/reels/DfAUfTmRe_5/' }
+    ]
+  },
   sep26: {
     '407': [
       { platform:'Instagram', type:'POST', caption:'Top Performing Post #1 — FIT 407', views:11323, likes:1038, comments:41, engagement:10.19, url:'https://www.instagram.com/p/DdKd6H2mb4R/' },
@@ -689,6 +757,33 @@ const TOP_POSTS = {
 
 // Lowest performing posts by location and month
 const LOW_POSTS = {
+  oct26: {
+    '407': [
+      { platform:'Instagram', type:'REEL', caption:'Lowest Performing #1 — FIT 407', views:2912, likes:94, comments:4, engagement:3.54, url:'https://www.instagram.com/reels/DeupPDgkdSR/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #2 — FIT 407', views:3572, likes:101, comments:2, engagement:3.02, url:'https://www.instagram.com/p/DeNK39SjMa7/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #3 — FIT 407', views:2908, likes:124, comments:1, engagement:4.33, url:'https://www.instagram.com/p/DeIBSS8DAF5/' }
+    ],
+    'gnv': [
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #1 — FIT Gainesville', views:2859, likes:24, comments:0, engagement:2.12, url:'https://www.instagram.com/p/DeNK3D4DHII/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #2 — FIT Gainesville', views:3555, likes:54, comments:2, engagement:4.05, url:'https://www.instagram.com/p/DeIBbmcDMp_/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #3 — FIT Gainesville', views:3672, likes:57, comments:0, engagement:5.48, url:'https://www.instagram.com/p/DfF3wKAF36R/' }
+    ],
+    'jax': [
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #1 — FIT JAX', views:813, likes:21, comments:0, engagement:2.58, url:'https://www.instagram.com/p/DeaC9sEDTEu/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #2 — FIT JAX', views:1000, likes:28, comments:0, engagement:3.10, url:'https://www.instagram.com/p/DeNK5a6Fyap/' },
+      { platform:'Instagram', type:'REEL', caption:'Lowest Performing #3 — FIT JAX', views:901, likes:25, comments:0, engagement:3.55, url:'https://www.instagram.com/reels/Der2vsRFiIp/' }
+    ],
+    '850': [
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #1 — FIT 850', views:1343, likes:23, comments:0, engagement:1.79, url:'https://www.instagram.com/p/DeaC9fZjNxZ/' },
+      { platform:'Instagram', type:'REEL', caption:'Lowest Performing #2 — FIT 850', views:1166, likes:24, comments:0, engagement:2.40, url:'https://www.instagram.com/reels/Der27MhiaQa/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #3 — FIT 850', views:1772, likes:29, comments:2, engagement:1.81, url:'https://www.instagram.com/p/DeNK4RTDBlX/' }
+    ],
+    'af': [
+      { platform:'Instagram', type:'REEL', caption:'Lowest Performing #1 — FIT AF', views:925, likes:26, comments:1, engagement:0.30, url:'https://www.instagram.com/reels/Der22qEDOQs/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #2 — FIT AF', views:696, likes:23, comments:0, engagement:0.23, url:'https://www.instagram.com/p/DeIBSu4l0xC/' },
+      { platform:'Instagram', type:'POST', caption:'Lowest Performing #3 — FIT AF', views:635, likes:20, comments:3, engagement:0.24, url:'https://www.instagram.com/p/DeNK3KbjLUJ/' }
+    ]
+  },
   sep26: {
     '407': [
       { platform:'Instagram', type:'POST', caption:'Lowest Performing #1 — FIT 407', views:1345, likes:33, comments:1, engagement:2.68, url:'https://www.instagram.com/p/Dd7JQ7yl_6x/' },
@@ -841,7 +936,7 @@ const LOW_POSTS = {
   }
 };
 
-let currentMonth = 'sep26';
+let currentMonth = 'oct26';
 let currentTab = 'overview';
 let currentInsightLoc = '407';
 
