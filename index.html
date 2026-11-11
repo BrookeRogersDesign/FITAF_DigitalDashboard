@@ -1191,7 +1191,7 @@ function render() {
       <div class="section-label">By Location &mdash; ${monthLabel}</div>
       <div class="loc-grid">
         ${LOCATIONS.map(loc => {
-          const d = md ? md[loc.id] : null;
+          const d = md && md[loc.id] && md[loc.id].posts ? md[loc.id] : null;
           const isBestReach = loc.id === bestReach;
           const isBestEng = loc.id === bestEng;
           const isBestGrowth = loc.id === bestGrowth;
@@ -1229,7 +1229,7 @@ function render() {
         }).join('')}
       </div>
 
-      <div class="section-label">Engagement Rate Trends &mdash; Jan&ndash;Apr 2026</div>
+      <div class="section-label">Engagement Rate Trends &mdash; ${TREND_LABELS[0]}&ndash;${TREND_LABELS[TREND_LABELS.length-1]} 2026</div>
       <div class="chart-card" style="margin-bottom:32px;">
         <div class="chart-header"><div class="chart-title">Engagement Rate Over Time (All Locations)</div></div>
         <div class="chart-container" style="height:320px;"><canvas id="engTrendChart"></canvas></div>
@@ -1264,7 +1264,7 @@ function render() {
             </tr></thead>
             <tbody>
               ${LOCATIONS.map(loc => {
-                const d = md ? md[loc.id] : null;
+                const d = md && md[loc.id] && md[loc.id].posts ? md[loc.id] : null;
                 return `<tr>
                   <td style="color:var(--text);font-weight:600;"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${loc.color};margin-right:8px;"></span>${loc.name}</td>
                   <td>${loc.city}</td>
@@ -1402,7 +1402,7 @@ function render() {
       <div class="section-label">Audience Deep Dive &mdash; ${monthLabel}</div>
       <div class="audience-grid">
         ${LOCATIONS.map(loc => {
-          const d = md ? md[loc.id] : null;
+          const d = md && md[loc.id] && md[loc.id].posts ? md[loc.id] : null;
           const aud = d ? d.audience : null;
           return `<div class="audience-card">
             <div style="height:3px;background:${loc.color};border-radius:4px;margin-bottom:16px;"></div>
@@ -1451,7 +1451,7 @@ function initOverviewCharts() {
       labels: TREND_LABELS,
       datasets: LOCATIONS.map(loc => ({
         label: loc.name,
-        data: ENG_TREND[loc.id],
+        data: ENG_TREND[loc.id].map(v => v || null),
         borderColor: loc.color,
         backgroundColor: 'transparent',
         tension: 0.4,
